@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        baseUrl = "http://localhost:8765/";
+        baseUrl = "http://10.0.2.2:8765/user/login.json";
 
         editText_login_username = (EditText) findViewById(R.id.editText_login_username);
         editText_login_password = (EditText) findViewById(R.id.editText_login_password);
@@ -91,18 +91,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
             // Hide the progress bar.
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-
-            // Login Success
-            if (isValidCredentials.equals("true")) {
-                goToSecondActivity();
-            }
-            // Login Failure
-            else {
-                Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show();
-            }
+            Toast.makeText(getApplicationContext(), isValidCredentials, Toast.LENGTH_LONG).show();
         }
     }
 

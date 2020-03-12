@@ -61,9 +61,6 @@ import java.util.Map;
          */
         public ApiAuthenticationClient setBaseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
-            if (!baseUrl.substring(baseUrl.length() - 1).equals("/")) {
-                this.baseUrl += "/";
-            }
             return this;
         }
 
