@@ -29,14 +29,13 @@ public class MainActivity extends AppCompatActivity {
     private String password;
     private String baseUrl;
 
-    public User userRegistered;
+    private User userRegistered;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        View parentLayout = findViewById(android.R.id.content);
 
         baseUrl = "http://10.0.2.2:8765/user/loginPaciente.json";
 

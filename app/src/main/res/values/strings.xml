@@ -16,4 +16,13 @@
     <string name="logout">Cerrar Sesión</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="registrarse">Registrarse</string>
+    <string name="dni">DNI</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="email">email</string>
+    <string name="nombre">nombre</string>
+    <string name="apellidos">apellidos</string>
+    <string name="telefono">telefono</string>
+    <string name="poblacion">poblacion</string>
+    <string name="fecha_de_nacimiento">Fecha de Nacimiento</string>
 </resources>
