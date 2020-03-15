@@ -15,12 +15,14 @@ import android.widget.Toast;
 
 import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private Button button_login_login;
+    private Button button_register;
     private EditText editText_login_username;
     private EditText editText_login_password;
     private String username;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        View parentLayout = findViewById(android.R.id.content);
 
         baseUrl = "http://10.0.2.2:8765/user/loginPaciente.json";
 
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         editText_login_password = (EditText) findViewById(R.id.editText_login_password);
 
         button_login_login = (Button) findViewById(R.id.button_login_login);
+        button_register = (Button) findViewById(R.id.button_register);
 
         button_login_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
                     execute.execute();
                 } catch (Exception ex) {
                 }
+            }
+        });
+
+        button_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToActivityRegister();
             }
         });
     }
@@ -104,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 userRegistered = new Gson().fromJson(isValidCredentials, User.class);
 
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), isValidCredentials, Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getApplicationContext(), "Inicio de Sesión del usuario: "+userRegistered.getUsername(), Toast.LENGTH_LONG).show();
                 goToSecondActivity();
             }else{
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
@@ -140,6 +150,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, activityInicio.class);
         intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    private void goToActivityRegister() {
+        Intent intent = new Intent(this, registerActivity.class);
         startActivity(intent);
     }
 
