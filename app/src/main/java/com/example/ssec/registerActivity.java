@@ -2,9 +2,11 @@ package com.example.ssec;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.ssec.aux.DatePickerFragment;
@@ -20,7 +22,7 @@ public class registerActivity extends AppCompatActivity {
     private EditText editText_apellidos;
     private EditText editText_telefono;
     private EditText editText_poblacion;
-    private EditText editText_nacimiento;
+    public EditText editText_nacimiento;
 
 
     @Override
@@ -51,7 +53,15 @@ public class registerActivity extends AppCompatActivity {
 
 
     private void showDatePickerDialog() {
-        DatePickerFragment newFragment = new DatePickerFragment();
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                // +1 because January is zero
+                final String selectedDate = day + " / " + (month+1) + " / " + year;
+                editText_nacimiento.setText(selectedDate);
+            }
+        });
+
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
