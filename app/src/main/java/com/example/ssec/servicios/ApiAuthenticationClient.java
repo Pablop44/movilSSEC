@@ -236,6 +236,7 @@ import java.util.Map;
                     urlString.append("?" + payload);
                 }
 
+
                 URL url = new URL(urlString.toString());
 
                 String text = username + ":" + password;
@@ -251,7 +252,7 @@ import java.util.Map;
                 connection.setRequestProperty("Content-Type", "text/plain");
 
                 // Make the network connection and retrieve the output from the server.
-                if (httpMethod.equals("POST") || httpMethod.equals("PUT")) {
+                if (httpMethod.equals("POST")) {
 
                     payload = getPayloadAsString();
 

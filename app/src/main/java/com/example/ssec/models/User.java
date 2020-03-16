@@ -17,10 +17,11 @@ public class User {
     private String telefono;
     private String poblacion;
     private String genero;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String rol;
+    private String ficha;
 
-    public User(String id, String dni, String username, String email, String nombre, String apellidos, String telefono, String poblacion, String genero, Date fechaNacimiento, String rol) {
+    public User(String id, String dni, String username, String email, String nombre, String apellidos, String telefono, String poblacion, String genero, String fechaNacimiento, String rol, String ficha) {
         this.id = id;
         this.dni = dni;
         this.username = username;
@@ -32,6 +33,7 @@ public class User {
         this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
         this.rol = rol;
+        this.ficha = ficha;
     }
 
     public String getId() {
@@ -106,11 +108,11 @@ public class User {
         this.genero = genero;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return this.fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -120,5 +122,13 @@ public class User {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getFicha() {
+        return ficha;
+    }
+
+    public void setFicha(String ficha) {
+        this.ficha = ficha;
     }
 }

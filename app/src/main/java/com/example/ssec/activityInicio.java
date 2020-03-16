@@ -1,17 +1,19 @@
 package com.example.ssec;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
+import com.example.ssec.ui.Consultas.ConsultasFragment;
+import com.example.ssec.ui.Consultas.ConsultasViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,12 +25,15 @@ import androidx.appcompat.widget.Toolbar;
 public class activityInicio extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private Intent user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_inicio);
+
+        user = getIntent();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -45,7 +50,7 @@ public class activityInicio extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.logout)
+                R.id.nav_home, R.id.nav_consultas, R.id.nav_slideshow, R.id.logout)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -98,6 +103,7 @@ public class activityInicio extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        Bundle bundle = user.getExtras();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();

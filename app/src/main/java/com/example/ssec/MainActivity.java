@@ -143,9 +143,17 @@ public class MainActivity extends AppCompatActivity {
      */
     private void goToSecondActivity() {
         Bundle bundle = new Bundle();
-        bundle.putString("username", userRegistered.getUsername());
-        bundle.putString("password", userRegistered.getEmail());
-        bundle.putString("baseUrl", baseUrl);
+        bundle.putString("usuario", userRegistered.getUsername());
+        bundle.putString("id", userRegistered.getId());
+        bundle.putString("dni", userRegistered.getDni());
+        bundle.putString("nombre", userRegistered.getNombre());
+        bundle.putString("apellidos", userRegistered.getApellidos());
+        bundle.putString("telefono", userRegistered.getTelefono());
+        bundle.putString("poblacion", userRegistered.getPoblacion());
+        bundle.putString("genero", userRegistered.getGenero());
+        bundle.putString("naciemiento", userRegistered.getFechaNacimiento());
+        bundle.putString("rol", userRegistered.getRol());
+        bundle.putString("ficha", userRegistered.getFicha());
 
         Intent intent = new Intent(this, activityInicio.class);
         intent.putExtras(bundle);

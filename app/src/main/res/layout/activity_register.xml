@@ -138,6 +138,20 @@
             android:hint="@string/poblacion"
             android:inputType="text" />
 
+
+        <Spinner
+            android:id="@+id/spinner_genero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText_poblacion"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:ems="10"
+            android:hint="Género"
+            android:entries="@array/genero" />
+
         <EditText
             android:id="@+id/editText_nacimiento"
             android:hint="@string/fecha_de_nacimiento"
@@ -145,7 +159,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="27dp"
             android:layout_marginRight="27dp"
-            android:layout_below="@+id/editText_poblacion"
+            android:layout_below="@+id/spinner_genero"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:inputType="date"
