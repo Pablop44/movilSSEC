@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,15 @@ import com.example.ssec.aux.DatePickerFragment;
 import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.HashMap;
 
 public class registerActivity extends AppCompatActivity {
 
@@ -71,6 +81,7 @@ public class registerActivity extends AppCompatActivity {
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String dni = editText_dni.getText().toString();
                 String username = editText_username.getText().toString();
                 String password = editText_password.getText().toString();
@@ -82,11 +93,29 @@ public class registerActivity extends AppCompatActivity {
                 String nacimiento = editText_nacimiento.getText().toString();
 
                 String[] valores = nacimiento.split("-");
-                String nacimientoFinal = valores[2] + "-" + valores[1] + "-" + valores[0];
+                String nacimientoFinal = valores[2] + "-" + valores[1] + "-" + valores[0] + " 00:00:00";
 
                 String genero = spGenero.getSelectedItem().toString();
 
-                try {
+                if(genero == "Hombre"){
+                    genero = "Male";
+                }else if(genero == "Mujer"){
+                    genero = "Female";
+                }
+
+                HashMap<String, String> atributos = new HashMap<String, String>();
+                atributos.put("dni", dni);
+                atributos.put("username", username);
+                atributos.put("password", password);
+                atributos.put("email", email);
+                atributos.put("nombre", nombre);
+                atributos.put("apellidos", apellidos);
+                atributos.put("telefono", telefono);
+                atributos.put("poblacion", poblacion);
+                atributos.put("nacimiento", nacimientoFinal);
+                atributos.put("genero", genero);
+
+                try{
 
                     ApiAuthenticationClient apiAuthenticationClient =
                             new ApiAuthenticationClient(
@@ -95,23 +124,15 @@ public class registerActivity extends AppCompatActivity {
                                     , password
                             );
 
-                    apiAuthenticationClient.setHttpMethod("post");
+                    apiAuthenticationClient.setHttpMethod("POST");
+                    apiAuthenticationClient.setParameters(atributos);
 
-                    apiAuthenticationClient.setParameter("dni", dni);
-                    apiAuthenticationClient.setParameter("username", username);
-                    apiAuthenticationClient.setParameter("password", password);
-                    apiAuthenticationClient.setParameter("email", email);
-                    apiAuthenticationClient.setParameter("nombre", nombre);
-                    apiAuthenticationClient.setParameter("apellidos", apellidos);
-                    apiAuthenticationClient.setParameter("poblacion", poblacion);
-                    apiAuthenticationClient.setParameter("telefono", telefono);
-                    apiAuthenticationClient.setParameter("nacimiento", nacimientoFinal);
-                    apiAuthenticationClient.setParameter("genero", genero);
-
-                    AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
+                    AsyncTask<Void, Void, String> execute = new registerActivity.ExecuteNetworkOperation(apiAuthenticationClient);
                     execute.execute();
-
-                } catch (Exception ex) {
+                }
+                catch(Exception ex)
+                {
+                    Toast.makeText(getApplicationContext(), "Fallo al registrarse", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -182,11 +203,33 @@ public class registerActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
+            if(isValidCredentials != ""){
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), isValidCredentials, Toast.LENGTH_LONG).show();
+                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(registerActivity.this);
 
+                dlgAlert.setMessage("Vaya a su correo electrónico y active su cuenta");
+                dlgAlert.setTitle("Éxito");
+                dlgAlert.setPositiveButton("OK", null);
+                dlgAlert.setCancelable(true);
+                dlgAlert.create().show();
+
+                dlgAlert.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finalizarActividad();
+                            }
+                        });
+            }else {
+                Toast.makeText(getApplicationContext(), "Error al crear el usuario", Toast.LENGTH_LONG).show();
+                findViewById(R.id.loadingPanel).setVisibility(View.INVISIBLE);
+            }
         }
     }
+
+    public void finalizarActividad(){
+        finish();
+    }
+
 }
 
 

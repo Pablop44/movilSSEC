@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
 import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -198,22 +199,18 @@ import java.util.Map;
          * Get the payload as a string from the existing parameters.
          * @return String
          */
-        private String getPayloadAsString() {
+        private String getPayloadAsString() throws JSONException {
             // Cycle through the parameters.
-            StringBuilder stringBuffer = new StringBuilder();
+            JSONObject jsonParam = new JSONObject();
             Iterator it = parameters.entrySet().iterator();
-            int count = 0;
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
-                if (count > 0) {
-                    stringBuffer.append("&");
-                }
-                stringBuffer.append(pair.getKey()).append("=").append(pair.getValue());
+
+                jsonParam.put((String) pair.getKey(), pair.getValue());
 
                 it.remove(); // avoids a ConcurrentModificationException
-                count++;
             }
-            return stringBuffer.toString();
+            return jsonParam.toString();
         }
 
         /**
@@ -252,7 +249,9 @@ import java.util.Map;
                 connection.setRequestProperty("Content-Type", "text/plain");
 
                 // Make the network connection and retrieve the output from the server.
-                if (httpMethod.equals("POST")) {
+                if (httpMethod.equals("POST") || httpMethod.equals("PUT")) {
+
+                    connection.setRequestProperty("Content-Type", "application/json");
 
                     payload = getPayloadAsString();
 
@@ -260,8 +259,8 @@ import java.util.Map;
                     connection.setDoOutput(true);
 
                     try {
-                        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
-                        writer.write(payload);
+                        DataOutputStream writer = new DataOutputStream(connection.getOutputStream());
+                        writer.writeBytes(payload);
 
                         headerFields = connection.getHeaderFields();
 
