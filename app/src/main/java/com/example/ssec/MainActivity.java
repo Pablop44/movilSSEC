@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
                     execute.execute();
                 } catch (Exception ex) {
+                    Toast.makeText(getApplicationContext(), "Error en el Login", Toast.LENGTH_LONG).show();
                 }
             }
         });

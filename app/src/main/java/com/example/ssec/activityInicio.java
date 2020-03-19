@@ -1,16 +1,25 @@
 package com.example.ssec;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
+import com.example.ssec.models.User;
+import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.example.ssec.ui.Consultas.ConsultasFragment;
 import com.example.ssec.ui.Consultas.ConsultasViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
@@ -26,6 +35,8 @@ public class activityInicio extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private Intent user;
+    private String username;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +45,8 @@ public class activityInicio extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
 
         user = getIntent();
+        username = user.getStringExtra("username");
+        password = user.getStringExtra("password");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -102,10 +115,109 @@ public class activityInicio extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                logout();
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         Bundle bundle = user.getExtras();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void logout(){
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(activityInicio.this);
+
+        dlgAlert.setTitle("¿Quiere cerrar Sesión?");
+        dlgAlert.setPositiveButton("SI", null);
+        dlgAlert.setNegativeButton("NO", null);
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+
+        dlgAlert.setPositiveButton("SI",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        requestLogout();
+                        activityInicio.this.finish();
+                    }
+                });
+
+        dlgAlert.setNegativeButton("NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+    }
+
+    public void requestLogout(){
+
+        try {
+
+            ApiAuthenticationClient apiAuthenticationClient =
+                    new ApiAuthenticationClient(
+                            "http://10.0.2.2:8765/user/logout.json"
+                            , username
+                            , password
+                    );
+
+            AsyncTask<Void, Void, String> execute = new activityInicio.ExecuteNetworkOperation(apiAuthenticationClient);
+            execute.execute();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), "Error en el cierre de sesión", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
+
+        private ApiAuthenticationClient apiAuthenticationClient;
+        private String isValidCredentials;
+
+        /**
+         * Overload the constructor to pass objects to this class.
+         */
+        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
+            this.apiAuthenticationClient = apiAuthenticationClient;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // Display the progress bar.
+            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                isValidCredentials = apiAuthenticationClient.execute();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            Toast.makeText(getApplicationContext(), "Cierre de Sesión", Toast.LENGTH_LONG).show();
+
+            // Hide the progress bar.
+
+        }
     }
 }
