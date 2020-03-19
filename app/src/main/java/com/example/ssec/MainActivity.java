@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
             if(isValidCredentials != ""){
                 userRegistered = new Gson().fromJson(isValidCredentials, User.class);
-
+                userRegistered.setPassword(password);
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Inicio de Sesión del usuario: "+userRegistered.getUsername(), Toast.LENGTH_LONG).show();
                 goToSecondActivity();
@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
     private void goToSecondActivity() {
         Bundle bundle = new Bundle();
         bundle.putString("usuario", userRegistered.getUsername());
+        bundle.putString("password", userRegistered.getPassword());
         bundle.putString("id", userRegistered.getId());
         bundle.putString("dni", userRegistered.getDni());
         bundle.putString("nombre", userRegistered.getNombre());

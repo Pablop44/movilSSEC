@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ssec.models.User;
@@ -34,7 +35,6 @@ import androidx.appcompat.widget.Toolbar;
 public class activityInicio extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private Intent user;
     private String username;
     private String password;
 
@@ -44,9 +44,10 @@ public class activityInicio extends AppCompatActivity {
 
         setContentView(R.layout.activity_inicio);
 
-        user = getIntent();
-        username = user.getStringExtra("username");
-        password = user.getStringExtra("password");
+        Bundle b = getIntent().getExtras();
+        username = b.getString("usuario");
+        password = b.getString("password");
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +61,11 @@ public class activityInicio extends AppCompatActivity {
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.nombreUsuario);
+        navUsername.setText(username);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -69,41 +75,6 @@ public class activityInicio extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-
-        /*
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    int id = item.getItemId();
-                    if(id == R.id.logout) {
-                        AlertDialog.Builder dlgAlert = new AlertDialog.Builder(activityInicio.this);
-                        dlgAlert.setTitle("¿Quieres cerrar Sesión?");
-                        dlgAlert.setPositiveButton("SI", null);
-                        dlgAlert.setNegativeButton("NO", null);
-                        dlgAlert.setCancelable(true);
-                        dlgAlert.create().show();
-
-                        dlgAlert.setPositiveButton("Ok",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                });
-
-                        dlgAlert.setNegativeButton("NO",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                });
-                    }
-                return true;
-            }
-        });
-
-         */
 
     }
 
@@ -128,7 +99,6 @@ public class activityInicio extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        Bundle bundle = user.getExtras();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();

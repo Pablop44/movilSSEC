@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <group android:id="@+id/personal" android:checkableBehavior="single">
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_perm_identity_black_24dp"
+            android:title="@string/perfil_del_usuario" />
+    </group>
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
@@ -20,5 +27,21 @@
             android:id="@+id/nav_notas"
             android:icon="@drawable/ic_note_black_24dp"
             android:title="@string/notas" />
+    </group>
+
+    <group android:id="@+id/diseases" android:checkableBehavior="single">
+        <item
+            android:id="@+id/report_diabetes"
+            android:icon="@drawable/ic_local_pharmacy_black_24dp"
+            android:title="@string/informes_de_diabetes" />
+        <item
+            android:id="@+id/report_asma"
+            android:icon="@drawable/ic_local_pharmacy_black_24dp"
+            android:title="@string/informes_de_asma" />
+        <item
+            android:id="@+id/report_migranas"
+            android:icon="@drawable/ic_local_pharmacy_black_24dp"
+            android:title="@string/informes_de_migranas" />
+
     </group>
 </menu>

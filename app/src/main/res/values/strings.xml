@@ -28,4 +28,8 @@
     <string name="fecha_de_nacimiento">Fecha de Nacimiento</string>
     <string name="tratamientos">Tratamientos</string>
     <string name="notas">Notas</string>
+    <string name="informes_de_migranas">Informes de Migrañas</string>
+    <string name="informes_de_asma">Informes de Asma</string>
+    <string name="informes_de_diabetes">Informes de Diabetes</string>
+    <string name="perfil_del_usuario">Perfil del Usuario</string>
 </resources>
