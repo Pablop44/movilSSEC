@@ -10,7 +10,8 @@
 
     <string name="menu_home">Página Principal</string>
     <string name="menu_consultas">Consultas</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tratamientos">Tratamientos</string>
+    <string name="menu_notas">Notas</string>
 
     <string name="home_second">Home Second</string>
     <string name="logout">Cerrar Sesión</string>
@@ -25,4 +26,6 @@
     <string name="telefono">telefono</string>
     <string name="poblacion">poblacion</string>
     <string name="fecha_de_nacimiento">Fecha de Nacimiento</string>
+    <string name="tratamientos">Tratamientos</string>
+    <string name="notas">Notas</string>
 </resources>

@@ -1,16 +1,16 @@
-package com.example.ssec.ui.slideshow;
+package com.example.ssec.ui.Tratamiento;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class TratamientoViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public TratamientoViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is tratamiento fragment");
     }
 
     public LiveData<String> getText() {

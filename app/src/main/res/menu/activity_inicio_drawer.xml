@@ -13,14 +13,12 @@
             android:icon="@drawable/ic_date_range_black_24dp"
             android:title="@string/menu_consultas" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
-    </group>
-    <group android:id="@+id/logout" android:checkableBehavior="single">
+            android:id="@+id/nav_tratamientos"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="@string/tratamientos" />
         <item
-            android:id="@+id/nav_logOut"
-            android:icon="@drawable/ic_exit_app"
-            android:title="@string/logout" />
+            android:id="@+id/nav_notas"
+            android:icon="@drawable/ic_note_black_24dp"
+            android:title="@string/notas" />
     </group>
 </menu>
