@@ -53,7 +53,11 @@ public class CustomAdapterConsulta extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.custom_listview_consultas, parent, false);
             mViewHolder = new ViewHolder();
+
+            mViewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.post_thumbnail);
             mViewHolder.author = (TextView) convertView.findViewById(R.id.post_author);
+            mViewHolder.title = (TextView) convertView.findViewById(R.id.post_title);
+            mViewHolder.date = (TextView) convertView.findViewById(R.id.post_date);
 
             convertView.setTag(mViewHolder);
 
@@ -64,11 +68,16 @@ public class CustomAdapterConsulta extends BaseAdapter {
         consulta = (Consulta) consultas.get(position);
 
         mViewHolder.author.setText(consulta.getLugar());
+        mViewHolder.title.setText(consulta.getMotivo());
+        mViewHolder.date.setText(consulta.getFecha());
 
         return convertView;
     }
 
     private static class ViewHolder {
+        ImageView thumbnail;
+        TextView title;
         TextView author;
+        TextView date;
     }
 }

@@ -1,11 +1,13 @@
 package com.example.ssec.ui.Consultas;
 
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,12 +30,14 @@ import java.util.List;
 public class ConsultasFragment extends Fragment {
 
     private String baseUrl;
-    private String pageSize = "15";
+    private String pageSize = "8";
     private String currentPage = "0";
     private String idFicha = "1";
     private ListView listview;
     private ArrayList<String> names;
     private CustomAdapterConsulta mAdapter;
+    private ImageButton previous;
+    private ImageButton forward;
 
 
 
@@ -46,6 +50,29 @@ public class ConsultasFragment extends Fragment {
         final TextView textView = root.findViewById(R.id.text_home);
         listview = (ListView) root.findViewById(R.id.listaConsultas);
 
+        previous = (ImageButton) root.findViewById(R.id.previous);
+
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = Integer.parseInt(currentPage);
+                i -= 1;
+
+                currentPage = Integer.toString(i);
+            }
+        });
+
+        forward = (ImageButton) root.findViewById(R.id.forward);
+
+        forward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = Integer.parseInt(currentPage);
+                i += 1;
+
+                currentPage = Integer.toString(i);
+            }
+        });
 
         HashMap<String, String> atributos = new HashMap<String, String>();
         atributos.put("id", idFicha);
@@ -71,16 +98,10 @@ public class ConsultasFragment extends Fragment {
         }
 
 
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(getActivity().getBaseContext(), "Has pulsado: "+ names.get(position), Toast.LENGTH_LONG).show();
-            }
-        });
-
         return root;
 
     }
+
 
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
@@ -116,14 +137,14 @@ public class ConsultasFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            
+
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<Consulta>>(){}.getType();
             List<Consulta> listaConsultas = new Gson().fromJson(consultas, listType);
 
             mAdapter = new CustomAdapterConsulta(getActivity(), listaConsultas);
             listview.setAdapter(mAdapter);
-            Toast.makeText(getActivity(), consultas, Toast.LENGTH_LONG).show();
+
         }
     }
 }

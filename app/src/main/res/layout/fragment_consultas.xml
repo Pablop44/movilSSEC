@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,22 +13,56 @@
         android:layout_height="match_parent"
         android:background="@color/dimBackgroundColor"
         android:elevation="2dp"
-        android:visibility="gone"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="gone">
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:elevation="10dp"
             android:background="@drawable/rounded_corners"
+            android:elevation="10dp"
             android:indeterminate="true" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/listaConsultas"
+
+    <RelativeLayout
+        android:layout_weight=".1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <ListView
+                android:id="@+id/listaConsultas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_weight=".9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/previous"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/forward"
+            android:background="@null"
+            android:clickable="true"
+            android:src="@drawable/ic_chevron_left_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/forward"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:clickable="true"
+            android:src="@drawable/ic_chevron_right_black_24dp" />
+    </RelativeLayout>
+
+
+</LinearLayout>
