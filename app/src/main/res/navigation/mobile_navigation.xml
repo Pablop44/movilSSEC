@@ -41,6 +41,11 @@
         android:label="@string/menu_notas"
         tools:layout="@layout/fragment_notas" />
     <fragment
+        android:id="@+id/nav_perfiles"
+        android:name="com.example.ssec.ui.Perfil.PerfilFragment"
+        android:label="@string/menu_perfil"
+        tools:layout="@layout/fragment_perfil"/>
+    <fragment
         android:id="@+id/nav_tratamientos"
         android:name="com.example.ssec.ui.Tratamiento.TratamientoFragment"
         android:label="@string/menu_tratamientos"
