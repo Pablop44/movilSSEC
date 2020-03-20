@@ -37,11 +37,59 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_weight=".9"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_weight=".9">
 
+        <TextView
+            android:id="@+id/min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/separator"
+            android:textSize="25sp"
+            android:layout_marginTop="10dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_toLeftOf="@+id/max"
+            android:textSize="25sp"
+            android:layout_marginTop="10dp"
+            android:text=" - " />
+
+        <TextView
+            android:id="@+id/max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="0dp"
+            android:layout_toLeftOf="@+id/of"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/of"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="0dp"
+            android:layout_toLeftOf="@+id/total"
+            android:layout_marginTop="10dp"
+            android:text=" of "
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="0dp"
+            android:layout_toLeftOf="@+id/previous"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textSize="25sp" />
 
         <ImageButton
             android:id="@+id/previous"
@@ -51,7 +99,8 @@
             android:layout_toLeftOf="@+id/forward"
             android:background="@null"
             android:clickable="true"
-            android:src="@drawable/ic_chevron_left_black_24dp" />
+            android:src="@drawable/ic_chevron_left_black_24dp"
+            android:tint="#000000" />
 
         <ImageButton
             android:id="@+id/forward"
@@ -62,6 +111,7 @@
             android:background="@null"
             android:clickable="true"
             android:src="@drawable/ic_chevron_right_black_24dp" />
+
     </RelativeLayout>
 
 

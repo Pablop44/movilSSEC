@@ -1,5 +1,7 @@
 package com.example.ssec.ui.Consultas;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,9 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.ssec.R;
+import com.example.ssec.activityInicio;
 import com.example.ssec.models.Consulta;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
@@ -33,22 +39,30 @@ public class ConsultasFragment extends Fragment {
     private String pageSize = "8";
     private String currentPage = "0";
     private String idFicha = "1";
+    private String totalNumero = "25";
     private ListView listview;
     private ArrayList<String> names;
     private CustomAdapterConsulta mAdapter;
     private ImageButton previous;
     private ImageButton forward;
-
+    private TextView max;
+    private TextView min;
+    private TextView total;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        baseUrl = "http://10.0.2.2:8765/consulta/consultaFicha.json";
-
         View root = inflater.inflate(R.layout.fragment_consultas, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
         listview = (ListView) root.findViewById(R.id.listaConsultas);
+
+        max = (TextView) root.findViewById(R.id.max);
+
+        min = (TextView) root.findViewById(R.id.min);
+
+        total = (TextView) root.findViewById(R.id.total);
+        total.setText(totalNumero);
 
         previous = (ImageButton) root.findViewById(R.id.previous);
 
@@ -59,6 +73,8 @@ public class ConsultasFragment extends Fragment {
                 i -= 1;
 
                 currentPage = Integer.toString(i);
+                getConsultas();
+                actualizarIndices();
             }
         });
 
@@ -71,9 +87,19 @@ public class ConsultasFragment extends Fragment {
                 i += 1;
 
                 currentPage = Integer.toString(i);
+                getConsultas();
+                actualizarIndices();
             }
         });
 
+
+        getConsultas();
+        actualizarIndices();
+
+        return root;
+    }
+
+    public void getConsultas(){
         HashMap<String, String> atributos = new HashMap<String, String>();
         atributos.put("id", idFicha);
         atributos.put("page", currentPage);
@@ -83,7 +109,7 @@ public class ConsultasFragment extends Fragment {
 
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
-                            baseUrl
+                            "http://10.0.2.2:8765/consulta/consultaFicha.json"
                             , "pablo"
                             , "pablo"
                     );
@@ -96,12 +122,41 @@ public class ConsultasFragment extends Fragment {
 
         } catch (Exception ex) {
         }
-
-
-        return root;
-
     }
 
+    public void actualizarIndices(){
+
+        int i = 0;
+        i = (Integer.parseInt(currentPage)+1) * Integer.parseInt(pageSize);
+        max.setText(Integer.toString(i));
+
+        Drawable drawableForward = forward.getDrawable();
+        Drawable drawableForward2 = DrawableCompat.wrap(drawableForward);
+
+        Drawable drawablePrevious = previous.getDrawable();
+        Drawable drawablePrevious2 = DrawableCompat.wrap(drawablePrevious);
+
+        if( Integer.parseInt(totalNumero) < i+8){
+            DrawableCompat.setTint(drawableForward2, Color.rgb(203,203,203));
+            forward.setEnabled(false);
+        }else{
+            DrawableCompat.setTint(drawableForward2, Color.BLACK);
+            forward.setEnabled(true);
+        }
+
+        int j = 0;
+        j = (Integer.parseInt(currentPage) * Integer.parseInt(pageSize))+1;
+        min.setText(Integer.toString(j));
+
+        if( 0 > j-8){
+            DrawableCompat.setTint(drawablePrevious2, Color.rgb(203,203,203));
+            previous.setEnabled(false);
+        }else{
+            DrawableCompat.setTint(drawablePrevious2, Color.BLACK);
+            previous.setEnabled(true);
+        }
+
+    }
 
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
