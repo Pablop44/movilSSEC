@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.example.ssec.R;
 import com.example.ssec.activityInicio;
 import com.example.ssec.models.Consulta;
+import com.example.ssec.models.Numero;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
 import com.example.ssec.adapters.CustomAdapterConsulta;
@@ -39,7 +40,7 @@ public class ConsultasFragment extends Fragment {
     private String pageSize = "8";
     private String currentPage = "0";
     private String idFicha = "1";
-    private String totalNumero = "25";
+    private String totalNumero = "0";
     private ListView listview;
     private ArrayList<String> names;
     private CustomAdapterConsulta mAdapter;
@@ -48,11 +49,13 @@ public class ConsultasFragment extends Fragment {
     private TextView max;
     private TextView min;
     private TextView total;
+    private Gson gson;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+        gson = new Gson();
         View root = inflater.inflate(R.layout.fragment_consultas, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
         listview = (ListView) root.findViewById(R.id.listaConsultas);
@@ -92,7 +95,7 @@ public class ConsultasFragment extends Fragment {
             }
         });
 
-
+        getNumeroConsultas();
         getConsultas();
         actualizarIndices();
 
@@ -118,6 +121,29 @@ public class ConsultasFragment extends Fragment {
             apiAuthenticationClient.setParameters(atributos);
 
             AsyncTask<Void, Void, String> execute = new ConsultasFragment.ExecuteNetworkOperation(apiAuthenticationClient);
+            execute.execute();
+
+        } catch (Exception ex) {
+        }
+    }
+
+    public void getNumeroConsultas(){
+        HashMap<String, String> atributos = new HashMap<String, String>();
+        atributos.put("id", idFicha);
+
+        try {
+
+            ApiAuthenticationClient apiAuthenticationClient =
+                    new ApiAuthenticationClient(
+                            "http://10.0.2.2:8765/consulta/numeroConsultas.json"
+                            , "pablo"
+                            , "pablo"
+                    );
+
+            apiAuthenticationClient.setHttpMethod("POST");
+            apiAuthenticationClient.setParameters(atributos);
+
+            AsyncTask<Void, Void, String> execute = new ConsultasFragment.ExecuteNetworkOperationNumeros(apiAuthenticationClient);
             execute.execute();
 
         } catch (Exception ex) {
@@ -155,7 +181,6 @@ public class ConsultasFragment extends Fragment {
             DrawableCompat.setTint(drawablePrevious2, Color.BLACK);
             previous.setEnabled(true);
         }
-
     }
 
 
@@ -193,13 +218,54 @@ public class ConsultasFragment extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Gson gson = new Gson();
+
             Type listType = new TypeToken<ArrayList<Consulta>>(){}.getType();
             List<Consulta> listaConsultas = new Gson().fromJson(consultas, listType);
 
             mAdapter = new CustomAdapterConsulta(getActivity(), listaConsultas);
             listview.setAdapter(mAdapter);
 
+        }
+    }
+
+    public class ExecuteNetworkOperationNumeros extends AsyncTask<Void, Void, String> {
+
+        private ApiAuthenticationClient apiAuthenticationClient;
+        private String numeroConsultas;
+
+        /**
+         * Overload the constructor to pass objects to this class.
+         */
+        public ExecuteNetworkOperationNumeros(ApiAuthenticationClient apiAuthenticationClient) {
+            this.apiAuthenticationClient = apiAuthenticationClient;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+
+                numeroConsultas = apiAuthenticationClient.execute();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Numero numero = new Gson().fromJson(numeroConsultas, Numero.class);
+            totalNumero = numero.getNumero();
+            total.setText(totalNumero);
+            Toast.makeText(getContext(), numeroConsultas, Toast.LENGTH_LONG).show();
         }
     }
 }
