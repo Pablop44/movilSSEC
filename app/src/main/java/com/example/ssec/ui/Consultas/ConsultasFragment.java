@@ -1,5 +1,6 @@
 package com.example.ssec.ui.Consultas;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -24,6 +25,7 @@ import com.example.ssec.R;
 import com.example.ssec.activityInicio;
 import com.example.ssec.models.Consulta;
 import com.example.ssec.models.Numero;
+import com.example.ssec.registerActivity;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
 import com.example.ssec.adapters.CustomAdapterConsulta;
@@ -46,6 +48,7 @@ public class ConsultasFragment extends Fragment {
     private CustomAdapterConsulta mAdapter;
     private ImageButton previous;
     private ImageButton forward;
+    private ImageButton add;
     private TextView max;
     private TextView min;
     private TextView total;
@@ -65,6 +68,7 @@ public class ConsultasFragment extends Fragment {
         min = (TextView) root.findViewById(R.id.min);
 
         total = (TextView) root.findViewById(R.id.total);
+
         total.setText(totalNumero);
 
         previous = (ImageButton) root.findViewById(R.id.previous);
@@ -95,9 +99,17 @@ public class ConsultasFragment extends Fragment {
             }
         });
 
+        add = (ImageButton) root.findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddConsulta.class);
+                startActivity(intent);
+            }
+        });
+
         getNumeroConsultas();
         getConsultas();
-        actualizarIndices();
 
         return root;
     }
@@ -165,6 +177,7 @@ public class ConsultasFragment extends Fragment {
         if( Integer.parseInt(totalNumero) < i+8){
             DrawableCompat.setTint(drawableForward2, Color.rgb(203,203,203));
             forward.setEnabled(false);
+            max.setText(totalNumero);
         }else{
             DrawableCompat.setTint(drawableForward2, Color.BLACK);
             forward.setEnabled(true);
@@ -265,7 +278,7 @@ public class ConsultasFragment extends Fragment {
             Numero numero = new Gson().fromJson(numeroConsultas, Numero.class);
             totalNumero = numero.getNumero();
             total.setText(totalNumero);
-            Toast.makeText(getContext(), numeroConsultas, Toast.LENGTH_LONG).show();
+            actualizarIndices();
         }
     }
 }

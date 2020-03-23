@@ -17,33 +17,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ssec.R;
 import com.example.ssec.models.Consulta;
+import com.example.ssec.models.Hora;
 
 import java.util.List;
 
-public class CustomAdapterConsulta extends BaseAdapter {
+public class CustomAdapterHoras extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<Consulta> consultas;
+    private List<Hora> horas;
     private ViewHolder mViewHolder;
 
     private Bitmap mBitmap;
-    private Consulta consulta;
+    private Hora hora;
     private Activity mActivity;
 
-    public CustomAdapterConsulta(Activity activity, List<Consulta> consultas) {
+    public CustomAdapterHoras(Activity activity, List<Hora> horas) {
         mInflater = (LayoutInflater) activity.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
-        this.consultas = consultas;
+        this.horas = horas;
         mActivity = activity;
     }
 
     @Override
     public int getCount() {
-        return consultas.size();
+        return horas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return consultas.get(position);
+        return horas.get(position);
     }
 
     @Override
@@ -51,36 +52,36 @@ public class CustomAdapterConsulta extends BaseAdapter {
         return position;
     }
 
-    @Override
+        @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.custom_listview_consultas, parent, false);
+            convertView = mInflater.inflate(R.layout.custom_listview_horas, parent, false);
             mViewHolder = new ViewHolder();
-
-            mViewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.post_thumbnail);
-            mViewHolder.author = (TextView) convertView.findViewById(R.id.post_author);
-            mViewHolder.title = (TextView) convertView.findViewById(R.id.post_title);
-            mViewHolder.date = (TextView) convertView.findViewById(R.id.post_date);
-
+            mViewHolder.textViewDisponibilidad = (TextView) convertView.findViewById(R.id.disponibilidad);
+            mViewHolder.textViewHora = (TextView) convertView.findViewById(R.id.hora);
             convertView.setTag(mViewHolder);
 
         } else {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
 
-        consulta = (Consulta) consultas.get(position);
+        hora = (Hora) horas.get(position);
 
-        mViewHolder.author.setText(consulta.getLugar());
-        mViewHolder.title.setText(consulta.getMotivo());
-        mViewHolder.date.setText(consulta.getFecha());
+        mViewHolder.textViewHora.setText(hora.getHora());
+        if(hora.getDisponible().equals("true")){
+            mViewHolder.textViewDisponibilidad.setText("Ocupada");
+            convertView.setBackgroundColor(Color.rgb(255, 223, 223));
+        }else{
+            mViewHolder.textViewDisponibilidad.setText("Disponible");
+            convertView.setBackgroundColor(Color.rgb(219, 255, 210));
+        }
+
 
         return convertView;
     }
 
     private static class ViewHolder {
-        ImageView thumbnail;
-        TextView title;
-        TextView author;
-        TextView date;
+        TextView textViewDisponibilidad;
+        TextView textViewHora;
     }
 }

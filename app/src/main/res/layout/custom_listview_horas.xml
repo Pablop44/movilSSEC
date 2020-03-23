@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="21sp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:id="@+id/hora"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8dp"
+        android:textAlignment="center"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Author Name"
+        android:layout_weight="1"
+        android:id="@+id/disponibilidad"
+        android:textSize="21sp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@+id/hora"
+        android:textAlignment="center"
+        />
+
+</LinearLayout>

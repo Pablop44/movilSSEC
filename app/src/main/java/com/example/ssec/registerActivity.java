@@ -174,6 +174,8 @@ public class registerActivity extends AppCompatActivity {
                 // +1 because January is zero
                 final String selectedDate = separador + day + separador1 + (month + 1) + "-" + year;
                 editText_nacimiento.setText(selectedDate);
+
+
             }
         });
 

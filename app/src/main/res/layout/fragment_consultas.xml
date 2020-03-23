@@ -39,7 +39,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_weight=".9">
 
         <TextView
@@ -47,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/separator"
-            android:textSize="25sp"
-            android:layout_marginTop="10dp"
+            android:textSize="22sp"
+            android:layout_marginTop="12dp"
             android:text="" />
 
         <TextView
@@ -57,8 +58,8 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_toLeftOf="@+id/max"
-            android:textSize="25sp"
-            android:layout_marginTop="10dp"
+            android:textSize="22sp"
+            android:layout_marginTop="12dp"
             android:text=" - " />
 
         <TextView
@@ -67,9 +68,9 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="0dp"
             android:layout_toLeftOf="@+id/of"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:text=""
-            android:textSize="25sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/of"
@@ -77,9 +78,9 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="0dp"
             android:layout_toLeftOf="@+id/total"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:text=" of "
-            android:textSize="25sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/total"
@@ -87,9 +88,9 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="0dp"
             android:layout_toLeftOf="@+id/previous"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:text=""
-            android:textSize="25sp" />
+            android:textSize="22sp" />
 
         <ImageButton
             android:id="@+id/previous"
@@ -111,6 +112,17 @@
             android:background="@null"
             android:clickable="true"
             android:src="@drawable/ic_chevron_right_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/add"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@null"
+            android:clickable="true"
+            android:src="@drawable/ic_add_black_24dp"
+            android:tint="#000000" />
 
     </RelativeLayout>
 
