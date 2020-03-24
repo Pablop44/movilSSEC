@@ -46,7 +46,7 @@
 
         <EditText
             android:id="@+id/editText_fechaConsulta"
-            android:hint="@string/fecha_de_nacimiento"
+            android:hint="@string/selecciones_una_fecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="27dp"

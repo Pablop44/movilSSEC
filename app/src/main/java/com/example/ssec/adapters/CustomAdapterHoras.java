@@ -52,7 +52,7 @@ public class CustomAdapterHoras extends BaseAdapter {
         return position;
     }
 
-        @Override
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.custom_listview_horas, parent, false);

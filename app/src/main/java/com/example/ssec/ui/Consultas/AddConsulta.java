@@ -3,6 +3,7 @@ package com.example.ssec.ui.Consultas;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,9 @@ public class AddConsulta extends AppCompatActivity {
     private CustomAdapterHoras mAdapter;
     private String idFicha = "1";
     private ListView listViewHoras;
+    private int positionClicked = -1;
+    private String horaSeleccionada = "";
+    private View viewAcambiar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,21 @@ public class AddConsulta extends AppCompatActivity {
         listViewHoras.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "ey", Toast.LENGTH_LONG).show();
+                if (positionClicked != position) {
+                    Hora hora = (Hora) parent.getItemAtPosition(position);
+                    if (hora.getDisponible().equals("false")) {
+                        horaSeleccionada = hora.getHora();
+                        view.setBackgroundColor(Color.rgb(210, 235, 235));
+                        if (viewAcambiar != null) {
+                            viewAcambiar.setBackgroundColor(Color.rgb(219, 255, 210));
+                        }
+                        viewAcambiar = view;
+                        positionClicked = position;
+                    } else {
+                        Toast.makeText(getApplicationContext(), "La hora ya está ocupada", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                Toast.makeText(getApplicationContext(), horaSeleccionada, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -156,11 +174,6 @@ public class AddConsulta extends AppCompatActivity {
 
             mAdapter = new CustomAdapterHoras(AddConsulta.this, listaHoras);
             listViewHoras.setAdapter(mAdapter);
-
-
-
-
-            Toast.makeText(getApplicationContext(), horas, Toast.LENGTH_LONG).show();
 
         }
     }

@@ -34,4 +34,5 @@
     <string name="informes_de_diabetes">Informes de Diabetes</string>
     <string name="perfil_del_usuario">Perfil del Usuario</string>
     <string name="motivo">Motivo</string>
+    <string name="selecciones_una_fecha">Seleccione una fecha</string>
 </resources>
