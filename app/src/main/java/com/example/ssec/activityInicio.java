@@ -109,11 +109,6 @@ public class activityInicio extends AppCompatActivity {
         AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(activityInicio.this);
 
         dlgAlert.setTitle("¿Quiere cerrar Sesión?");
-        dlgAlert.setPositiveButton("SI", null);
-        dlgAlert.setNegativeButton("NO", null);
-        dlgAlert.setCancelable(true);
-        dlgAlert.create().show();
-
         dlgAlert.setPositiveButton("SI",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -121,13 +116,9 @@ public class activityInicio extends AppCompatActivity {
                         activityInicio.this.finish();
                     }
                 });
-
-        dlgAlert.setNegativeButton("NO",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
+        dlgAlert.setNegativeButton("NO", null);
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
     }
 
     public void requestLogout(){

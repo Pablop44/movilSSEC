@@ -35,4 +35,8 @@
     <string name="perfil_del_usuario">Perfil del Usuario</string>
     <string name="motivo">Motivo</string>
     <string name="selecciones_una_fecha">Seleccione una fecha</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="volver">Volver</string>
+    <string name="register">Registro</string>
+    <string name="anadir_consulta">Añadir Consulta</string>
 </resources>

@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.example.ssec.R;
 import com.example.ssec.activityInicio;
 import com.example.ssec.models.Consulta;
+import com.example.ssec.models.Hora;
 import com.example.ssec.models.Numero;
 import com.example.ssec.registerActivity;
 import com.example.ssec.servicios.ApiAuthenticationClient;
@@ -108,6 +109,14 @@ public class ConsultasFragment extends Fragment {
             }
         });
 
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ViewConsulta.class);
+                startActivity(intent);
+            }
+        });
+
         getNumeroConsultas();
         getConsultas();
 
@@ -168,16 +177,23 @@ public class ConsultasFragment extends Fragment {
         i = (Integer.parseInt(currentPage)+1) * Integer.parseInt(pageSize);
         max.setText(Integer.toString(i));
 
+        int x = Integer.parseInt(totalNumero);
+
         Drawable drawableForward = forward.getDrawable();
         Drawable drawableForward2 = DrawableCompat.wrap(drawableForward);
 
         Drawable drawablePrevious = previous.getDrawable();
         Drawable drawablePrevious2 = DrawableCompat.wrap(drawablePrevious);
 
-        if( Integer.parseInt(totalNumero) < i+8){
-            DrawableCompat.setTint(drawableForward2, Color.rgb(203,203,203));
-            forward.setEnabled(false);
-            max.setText(totalNumero);
+        if( x <= i){
+            if(x <= i + 8){
+                DrawableCompat.setTint(drawableForward2, Color.rgb(203, 203, 203));
+                forward.setEnabled(false);
+                max.setText(totalNumero);
+            }else {
+                DrawableCompat.setTint(drawableForward2, Color.BLACK);
+                forward.setEnabled(true);
+            }
         }else{
             DrawableCompat.setTint(drawableForward2, Color.BLACK);
             forward.setEnabled(true);
