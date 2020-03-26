@@ -62,14 +62,15 @@
 
         <TextView
             android:id="@+id/valueMotivo"
-            android:layout_width="291dp"
-            android:layout_height="85dp"
+            android:layout_width="323dp"
+            android:layout_height="88dp"
             android:layout_below="@id/motivo"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
+            android:inputType="textMultiLine"
             android:maxLines="5"
             android:text="Last Name"
-            android:textSize="19dp"
-            android:inputType="textMultiLine"/>
+            android:textSize="19dp" />
 
         <TextView
             android:text="Fecha de la Consulta"
@@ -171,10 +172,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/estado"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="40dp"
             android:layout_below="@+id/valueObservaciones"
             android:text="Last Name"
             android:textSize="19dp" />
+
+        <Button
+            android:id="@+id/buttonCancelarConsulta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar Consulta"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/valueEstado"/>
+
+        <Button
+            android:id="@+id/buttonAplazarConsulta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/buttonCancelarConsulta"
+            android:text="Aplazar Consulta"
+            android:layout_below="@+id/valueEstado"/>
 
     </RelativeLayout>
 

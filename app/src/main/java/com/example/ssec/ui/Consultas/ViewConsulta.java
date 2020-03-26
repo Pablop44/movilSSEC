@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,8 @@ public class ViewConsulta extends AppCompatActivity {
     private TextView valueObservaciones;
     private TextView valueEstado;
     private Consulta consultaAver;
+    private Button aplazarConsulta;
+    private Button cancelarConsulta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +52,29 @@ public class ViewConsulta extends AppCompatActivity {
         valueObservaciones = (TextView) findViewById(R.id.valueObservaciones);
         valueEstado = (TextView) findViewById(R.id.valueEstado);
 
+        aplazarConsulta = (Button) findViewById(R.id.buttonAplazarConsulta);
+
+        aplazarConsulta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        cancelarConsulta = (Button) findViewById(R.id.buttonCancelarConsulta);
+
+        cancelarConsulta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
         idFicha = intent.getStringExtra("id");
-
         getDatosFicha();
 
     }

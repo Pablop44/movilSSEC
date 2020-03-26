@@ -42,13 +42,11 @@ import static android.app.Activity.RESULT_OK;
 
 public class ConsultasFragment extends Fragment {
 
-    private String baseUrl;
     private String pageSize = "8";
     private String currentPage = "0";
     private String idFicha = "1";
     private String totalNumero = "0";
     private ListView listview;
-    private ArrayList<String> names;
     private CustomAdapterConsulta mAdapter;
     private ImageButton previous;
     private ImageButton forward;
@@ -64,7 +62,6 @@ public class ConsultasFragment extends Fragment {
 
         gson = new Gson();
         View root = inflater.inflate(R.layout.fragment_consultas, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
         listview = (ListView) root.findViewById(R.id.listaConsultas);
 
         max = (TextView) root.findViewById(R.id.max);

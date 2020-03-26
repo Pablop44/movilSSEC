@@ -124,7 +124,6 @@ public class activityInicio extends AppCompatActivity {
     public void requestLogout(){
 
         try {
-
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/user/logout.json"
@@ -155,9 +154,6 @@ public class activityInicio extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            // Display the progress bar.
-            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -174,9 +170,7 @@ public class activityInicio extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-            Toast.makeText(getApplicationContext(), "Cierre de Sesión", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), isValidCredentials, Toast.LENGTH_LONG).show();
 
             // Hide the progress bar.
 
