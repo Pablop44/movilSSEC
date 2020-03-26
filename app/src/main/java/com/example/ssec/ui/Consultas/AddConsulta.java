@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -47,11 +48,14 @@ public class AddConsulta extends AppCompatActivity {
     private EditText editText_motivo;
     private String selectedDate;
     private String motivo;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_consulta);
+
+        intent = getIntent();
 
         getSupportActionBar().setTitle(R.string.anadir_consulta);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -300,6 +304,7 @@ public class AddConsulta extends AppCompatActivity {
             super.onPostExecute(result);
             if(exitoONo != ""){
                 Toast.makeText(getApplicationContext(), "Consulta creada correctamente", Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK, intent);
                 AddConsulta.this.finish();
             }else {
                 Toast.makeText(getApplicationContext(), "No se ha podido crear la consulta", Toast.LENGTH_SHORT).show();

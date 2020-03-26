@@ -104,4 +104,17 @@ public class Consulta {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public boolean observacionesNull(){
+        return this.observaciones == null;
+    }
+
+    public boolean diagnosticoNull(){
+        return this.diagnostico == null;
+    }
+
+    public String[] getFechaHora(){
+        String[] valores = fecha.split(" ");
+        return valores;
+    }
 }

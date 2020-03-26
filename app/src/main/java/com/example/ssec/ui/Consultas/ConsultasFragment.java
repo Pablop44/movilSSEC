@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -37,6 +38,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 public class ConsultasFragment extends Fragment {
 
     private String baseUrl;
@@ -54,7 +57,7 @@ public class ConsultasFragment extends Fragment {
     private TextView min;
     private TextView total;
     private Gson gson;
-
+    public static final int REQUEST_CODE = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -105,7 +108,7 @@ public class ConsultasFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddConsulta.class);
-                startActivity(intent);
+                startActivityForResult(intent , REQUEST_CODE);
             }
         });
 
@@ -113,14 +116,27 @@ public class ConsultasFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ViewConsulta.class);
+                Consulta consulta = (Consulta) parent.getItemAtPosition(position);
+                intent.putExtra("id", consulta.getId());
                 startActivity(intent);
             }
         });
+
 
         getNumeroConsultas();
         getConsultas();
 
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE  && resultCode  == RESULT_OK) {
+
+            getConsultas();
+            getNumeroConsultas();
+        }
     }
 
     public void getConsultas(){

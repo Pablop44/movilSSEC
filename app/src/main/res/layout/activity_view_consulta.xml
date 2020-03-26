@@ -1,9 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Consultas.ViewConsulta">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dimBackgroundColor"
+        android:elevation="2dp"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:elevation="10dp"
+            android:background="@drawable/rounded_corners"
+            android:indeterminate="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:gravity="center">
+
+        <TextView
+            android:text="Lugar de la Consulta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lugar"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:text="Last Name"
+            android:id="@+id/valueLugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="19dp"
+            android:layout_toRightOf="@id/lugar"/>
+
+        <TextView
+            android:text="Motivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/motivo"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/lugar"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/valueMotivo"
+            android:layout_width="291dp"
+            android:layout_height="85dp"
+            android:layout_below="@id/motivo"
+            android:layout_marginBottom="10dp"
+            android:maxLines="5"
+            android:text="Last Name"
+            android:textSize="19dp"
+            android:inputType="textMultiLine"/>
+
+        <TextView
+            android:text="Fecha de la Consulta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fecha"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/valueMotivo"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/valueFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/fecha"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/valueMotivo"
+            android:text="Last Name"
+            android:textSize="19dp" />
+
+        <TextView
+        android:text="Hora de la Consulta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hora"
+        android:textSize="19dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/fecha"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/valueHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/hora"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/valueFecha"
+            android:text="Last Name"
+            android:textSize="19dp" />
+
+        <TextView
+            android:text="Tiene Diagnóstico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/diagnostico"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/hora"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/valueDiagnostico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/diagnostico"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/valueHora"
+            android:text="Last Name"
+            android:textSize="19dp" />
+
+        <TextView
+            android:text="Tiene Observaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/observaciones"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/diagnostico"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/valueObservaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/observaciones"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/valueDiagnostico"
+            android:text="Last Name"
+            android:textSize="19dp" />
+
+        <TextView
+            android:text="Estado de la Consulta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/estado"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/observaciones"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/valueEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/estado"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/valueObservaciones"
+            android:text="Last Name"
+            android:textSize="19dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
