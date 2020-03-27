@@ -16,6 +16,7 @@ import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.example.ssec.ui.Consultas.ConsultasFragment;
 import com.example.ssec.ui.Consultas.ConsultasViewModel;
+import com.example.ssec.ui.Perfil.PerfilFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -25,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
@@ -43,6 +45,8 @@ public class activityInicio extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private String username;
     private String password;
+    private PerfilFragment perfilFragment;
+    private Bundle b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +54,15 @@ public class activityInicio extends AppCompatActivity {
 
         setContentView(R.layout.activity_inicio);
 
-        Bundle b = getIntent().getExtras();
+        b = getIntent().getExtras();
+
         username = b.getString("usuario");
         password = b.getString("password");
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -71,6 +78,7 @@ public class activityInicio extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController.setGraph(R.navigation.mobile_navigation, b);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
@@ -100,6 +108,7 @@ public class activityInicio extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();

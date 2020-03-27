@@ -38,7 +38,7 @@ import java.util.List;
 public class NotaFragment extends Fragment {
 
     private String baseUrl;
-    private String pageSize = "8";
+    private String pageSize = "4";
     private String currentPage = "0";
     private String idFicha = "1";
     private String totalNumero = "0";
@@ -167,7 +167,7 @@ public class NotaFragment extends Fragment {
         Drawable drawablePrevious2 = DrawableCompat.wrap(drawablePrevious);
 
         if( x <= i){
-            if(x <= i + 8){
+            if(x <= i + 4){
                 DrawableCompat.setTint(drawableForward2, Color.rgb(203, 203, 203));
                 forward.setEnabled(false);
                 max.setText(totalNumero);
@@ -184,7 +184,7 @@ public class NotaFragment extends Fragment {
         j = (Integer.parseInt(currentPage) * Integer.parseInt(pageSize))+1;
         min.setText(Integer.toString(j));
 
-        if( 0 > j-8){
+        if( 0 > j-4){
             DrawableCompat.setTint(drawablePrevious2, Color.rgb(203,203,203));
             previous.setEnabled(false);
         }else{

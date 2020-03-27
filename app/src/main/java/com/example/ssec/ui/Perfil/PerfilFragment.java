@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.ActivityNavigator;
 
 import com.example.ssec.R;
 import com.example.ssec.servicios.ApiAuthenticationClient;
@@ -26,6 +27,9 @@ public class PerfilFragment extends Fragment {
     private String pageSize = "15";
     private String currentPage = "0";
     private String idFicha = "1";
+    private Bundle datos;
+    private String username;
+    private TextView prueba;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

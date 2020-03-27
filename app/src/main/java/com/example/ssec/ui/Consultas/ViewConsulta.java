@@ -27,7 +27,7 @@ import java.util.List;
 
 public class ViewConsulta extends AppCompatActivity {
 
-    private String idFicha = "";
+    private String idConsulta = "";
     private TextView valueLugar;
     private TextView valueMotivo;
     private TextView valueFecha;
@@ -74,7 +74,7 @@ public class ViewConsulta extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
-        idFicha = intent.getStringExtra("id");
+        idConsulta = intent.getStringExtra("id");
         getDatosFicha();
 
     }
@@ -92,7 +92,7 @@ public class ViewConsulta extends AppCompatActivity {
 
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
-                            "http://10.0.2.2:8765/consulta/view/"+idFicha+".json"
+                            "http://10.0.2.2:8765/consulta/view/"+idConsulta+".json"
                             , "pablo"
                             , "pablo"
                     );
