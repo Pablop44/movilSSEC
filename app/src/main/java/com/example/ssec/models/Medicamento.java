@@ -1,37 +1,47 @@
 package com.example.ssec.models;
 
 public class Medicamento {
-    private String id;
-    private String medicamento;
-    private String tratamiento;
+    private String nombre;
+    private String viaAdministracion;
+    private String marca;
+    private String dosis;
 
-    public Medicamento(String id, String medicamento, String tratamiento) {
-        this.id = id;
-        this.medicamento = medicamento;
-        this.tratamiento = tratamiento;
+    public Medicamento(String nombre, String viaAdministracion, String marca, String dosis) {
+        this.nombre = nombre;
+        this.viaAdministracion = viaAdministracion;
+        this.marca = marca;
+        this.dosis = dosis;
     }
 
-    public String getId() {
-        return id;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getMedicamento() {
-        return medicamento;
+    public String getViaAdministracion() {
+        return viaAdministracion;
     }
 
-    public void setMedicamento(String medicamento) {
-        this.medicamento = medicamento;
+    public void setViaAdministracion(String viaAdministracion) {
+        this.viaAdministracion = viaAdministracion;
     }
 
-    public String getTratamiento() {
-        return tratamiento;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setTratamiento(String tratamiento) {
-        this.tratamiento = tratamiento;
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getDosis() {
+        return dosis;
+    }
+
+    public void setDosis(String dosis) {
+        this.dosis = dosis;
     }
 }

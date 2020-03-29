@@ -1,9 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Tratamiento.ViewTratamiento">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dimBackgroundColor"
+        android:elevation="2dp"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:elevation="10dp"
+            android:background="@drawable/rounded_corners"
+            android:indeterminate="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight=".5">
+
+        <TextView
+            android:text="Posología"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/posologia"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/valuePosologia"
+            android:layout_width="323dp"
+            android:layout_height="88dp"
+            android:layout_below="@id/posologia"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:text="Value Posologia"
+            android:textSize="19dp" />
+
+        <TextView
+            android:text="Fecha de Inicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fechaInicio"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/valuePosologia"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/valueFechaInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/fechaInicio"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/valuePosologia"
+            android:text="Last Name"
+            android:textSize="19dp" />
+
+        <TextView
+            android:text="Fecha de Fin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fechaFin"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/fechaInicio"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/valuefechaFin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/fechaFin"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/valueFechaInicio"
+            android:text="Last Name"
+            android:textSize="19dp" />
+
+        <TextView
+            android:text="Horario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/horario"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/fechaFin"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/valueHorario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/horario"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/fechaFin"
+            android:text="Last Name"
+            android:textSize="19dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight=".5">
+
+
+        <TextView
+            android:id="@+id/labelMedicamentos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medicamentos"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="17dp"/>
+
+        <ListView
+            android:id="@+id/listaMedicamentos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/labelMedicamentos" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+

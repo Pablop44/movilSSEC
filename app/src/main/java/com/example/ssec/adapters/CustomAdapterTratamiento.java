@@ -54,6 +54,7 @@ public class CustomAdapterTratamiento extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        String enfermedad = "";
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.custom_listview_tratamientos, parent, false);
             mViewHolder = new ViewHolder();
@@ -74,7 +75,15 @@ public class CustomAdapterTratamiento extends BaseAdapter {
         String[] valores1 = tratamiento.getFechaHoraInicio();
         String[] valores2 = tratamiento.getFechaHoraFin();
 
-        mViewHolder.id.setText("Tratamiento para " + tratamiento.getEnfermedad());
+        if(tratamiento.getEnfermedad().equals("asma")){
+            enfermedad = "Asma";
+        }else if(tratamiento.getEnfermedad().equals("migranas")){
+            enfermedad = "Migrañas";
+        }else{
+            enfermedad = "Diabetes";
+        }
+
+        mViewHolder.id.setText("Tratamiento para " + enfermedad);
         mViewHolder.fechaInicio.setText(valores1[0]);
         mViewHolder.fechaFin.setText(valores2[0]);
         mViewHolder.horario.setText(tratamiento.getHorario());
