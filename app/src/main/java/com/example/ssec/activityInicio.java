@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ssec.models.Enfermedad;
+import com.example.ssec.models.Ficha;
+import com.example.ssec.models.Tratamiento;
 import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.example.ssec.ui.Consultas.ConsultasFragment;
@@ -31,12 +34,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import java.util.List;
 
 import static android.graphics.BlendMode.COLOR;
 
@@ -45,8 +51,11 @@ public class activityInicio extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private String username;
     private String password;
+    private String idFicha;
     private PerfilFragment perfilFragment;
+    private Ficha ficha;
     private Bundle b;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +67,15 @@ public class activityInicio extends AppCompatActivity {
 
         username = b.getString("usuario");
         password = b.getString("password");
+        idFicha = b.getString("ficha");
 
+        getFicha();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.nombreUsuario);
@@ -78,9 +88,20 @@ public class activityInicio extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        navController.setGraph(R.navigation.mobile_navigation, b);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        Menu menu = navigationView.getMenu();
+        MenuItem perfil = menu.findItem(R.id.nav_perfiles);
+        perfil.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
+                navController.navigate(R.id.nav_perfiles, b);
+                drawer.closeDrawers();
+                return true;
+            }
+        });
 
     }
 
@@ -108,7 +129,6 @@ public class activityInicio extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
@@ -130,7 +150,7 @@ public class activityInicio extends AppCompatActivity {
         dlgAlert.create().show();
     }
 
-    public void requestLogout(){
+    public void requestLogout() {
 
         try {
             ApiAuthenticationClient apiAuthenticationClient =
@@ -179,9 +199,78 @@ public class activityInicio extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getApplicationContext(), isValidCredentials, Toast.LENGTH_LONG).show();
+        }
+    }
 
-            // Hide the progress bar.
+
+    public void getFicha(){
+        try {
+            ApiAuthenticationClient apiAuthenticationClient =
+                    new ApiAuthenticationClient(
+                            "http://10.0.2.2:8765/ficha/viewPaciente/"+idFicha+".json"
+                            , username
+                            , password
+                    );
+
+            AsyncTask<Void, Void, String> execute = new activityInicio.ExecuteNetworkOperationGetFicha(apiAuthenticationClient);
+            execute.execute();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), "Error en el acceso a datos", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    public class ExecuteNetworkOperationGetFicha extends AsyncTask<Void, Void, String> {
+
+        private ApiAuthenticationClient apiAuthenticationClient;
+        private String datosFicha;
+
+        /**
+         * Overload the constructor to pass objects to this class.
+         */
+        public ExecuteNetworkOperationGetFicha(ApiAuthenticationClient apiAuthenticationClient) {
+            this.apiAuthenticationClient = apiAuthenticationClient;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                datosFicha = apiAuthenticationClient.execute();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            ficha = new Gson().fromJson(datosFicha, Ficha.class);
+            Menu menu = navigationView.getMenu();
+            MenuItem diabetes = menu.findItem(R.id.report_diabetes);
+            MenuItem migranas = menu.findItem(R.id.report_migranas);
+            MenuItem asma = menu.findItem(R.id.report_asma);
+            migranas.setVisible(false);
+            diabetes.setVisible(false);
+            asma.setVisible(false);
+
+            for (Enfermedad enfermedad : ficha.getEnfermedad()) {
+                if(enfermedad.getEnfermedad().equals("migranas")){
+                    migranas.setVisible(true);
+                }
+                if(enfermedad.getEnfermedad().equals("diabetes")){
+                    diabetes.setVisible(true);
+                }
+                if(enfermedad.getEnfermedad().equals("asma")){
+                    asma.setVisible(true);
+                }
+            }
 
         }
     }

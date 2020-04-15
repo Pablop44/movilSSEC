@@ -10,23 +10,9 @@
         android:name="com.example.ssec.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
-
         <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/nav_home_second" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_home_second"
-        android:name="com.example.ssec.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
-        <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
-
-        <argument
-            android:name="myArg"
-            app:argType="string" />
+            android:id="@+id/action_nav_home_to_nav_perfiles2"
+            app:destination="@id/nav_perfiles" />
     </fragment>
 
     <fragment
@@ -40,11 +26,19 @@
         android:name="com.example.ssec.ui.Nota.NotaFragment"
         android:label="@string/menu_notas"
         tools:layout="@layout/fragment_notas" />
+
+
     <fragment
         android:id="@+id/nav_perfiles"
         android:name="com.example.ssec.ui.Perfil.PerfilFragment"
         android:label="@string/menu_perfil"
-        tools:layout="@layout/fragment_perfil"/>
+        tools:layout="@layout/fragment_perfil">
+
+        <action
+            android:id="@+id/action_nav_perfiles_to_nav_home2"
+            app:destination="@id/nav_home" />
+    </fragment>
+
     <fragment
         android:id="@+id/nav_tratamientos"
         android:name="com.example.ssec.ui.Tratamiento.TratamientoFragment"

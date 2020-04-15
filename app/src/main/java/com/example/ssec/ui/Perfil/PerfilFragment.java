@@ -38,6 +38,9 @@ public class PerfilFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_perfil, container, false);
 
+
+        datos = this.getArguments();
+
         HashMap<String, String> atributos = new HashMap<String, String>();
         atributos.put("idFicha", idFicha);
         atributos.put("page", currentPage);

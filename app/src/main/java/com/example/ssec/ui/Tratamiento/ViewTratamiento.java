@@ -84,7 +84,7 @@ public class ViewTratamiento extends AppCompatActivity {
 
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
-                            "http://10.0.2.2:8765/tratamiento/view/"+idTratamiento+".json"
+                            "http://10.0.2.2:8765/tratamiento/viewPaciente/"+idTratamiento+".json"
                             , "pablo"
                             , "pablo"
                     );
@@ -153,7 +153,7 @@ public class ViewTratamiento extends AppCompatActivity {
             }else{
                 labelMedicamentos.setText("Este tratamiento no tiene medicamentos asociados");
             }
-            
+
             actualizarDatos();
 
         }
