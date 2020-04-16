@@ -1,7 +1,6 @@
 package com.example.ssec;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -14,14 +13,8 @@ import android.widget.Toast;
 
 import com.example.ssec.models.Enfermedad;
 import com.example.ssec.models.Ficha;
-import com.example.ssec.models.Tratamiento;
-import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
-import com.example.ssec.ui.Consultas.ConsultasFragment;
-import com.example.ssec.ui.Consultas.ConsultasViewModel;
 import com.example.ssec.ui.Perfil.PerfilFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
@@ -29,22 +22,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
-import androidx.navigation.NavGraph;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import java.util.List;
-
-import static android.graphics.BlendMode.COLOR;
 
 public class activityInicio extends AppCompatActivity {
 
@@ -84,7 +68,7 @@ public class activityInicio extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_consultas, R.id.nav_tratamientos, R.id.nav_notas, R.id.nav_perfiles)
+                R.id.nav_home, R.id.nav_consultas, R.id.nav_tratamientos, R.id.nav_notas, R.id.nav_perfiles, R.id.nav_informeAsma, R.id.nav_informeDiabetes, R.id.nav_informeMigranas)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -143,7 +127,7 @@ public class activityInicio extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
-                navController.navigate(R.id.report_diabetes, b);
+                navController.navigate(R.id.nav_informeDiabetes, b);
                 drawer.closeDrawers();
                 return true;
             }
@@ -153,7 +137,7 @@ public class activityInicio extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
-                navController.navigate(R.id.report_asma, b);
+                navController.navigate(R.id.nav_informeAsma, b);
                 drawer.closeDrawers();
                 return true;
             }
@@ -163,7 +147,7 @@ public class activityInicio extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
-                navController.navigate(R.id.report_migranas, b);
+                navController.navigate(R.id.nav_informeMigranas, b);
                 drawer.closeDrawers();
                 return true;
             }

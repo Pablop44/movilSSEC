@@ -9,11 +9,7 @@
         android:id="@+id/nav_home"
         android:name="com.example.ssec.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_nav_home_to_nav_perfiles2"
-            app:destination="@id/nav_perfiles" />
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
 
     <fragment
         android:id="@+id/nav_consultas"
@@ -32,16 +28,27 @@
         android:id="@+id/nav_perfiles"
         android:name="com.example.ssec.ui.Perfil.PerfilFragment"
         android:label="@string/menu_perfil"
-        tools:layout="@layout/fragment_perfil">
-
-        <action
-            android:id="@+id/action_nav_perfiles_to_nav_home2"
-            app:destination="@id/nav_home" />
-    </fragment>
+        tools:layout="@layout/fragment_perfil"/>
 
     <fragment
         android:id="@+id/nav_tratamientos"
         android:name="com.example.ssec.ui.Tratamiento.TratamientoFragment"
         android:label="@string/menu_tratamientos"
         tools:layout="@layout/fragment_tratamiento" />
+
+    <fragment
+        android:id="@+id/nav_informeAsma"
+        android:name="com.example.ssec.ui.InformeAsma.InformeAsmaFragment"
+        android:label="@string/menu_informes_asma"
+        tools:layout="@layout/fragment_informe_asma" />
+    <fragment
+        android:id="@+id/nav_informeDiabetes"
+        android:name="com.example.ssec.ui.InformeDiabetes.InformeDiabetesFragment"
+        android:label="@string/menu_informes_diabetes"
+        tools:layout="@layout/fragment_informe_diabetes" />
+    <fragment
+        android:id="@+id/nav_informeMigranas"
+        android:name="com.example.ssec.ui.InformeMigranas.InformeMigranasFragment"
+        android:label="@string/menu_informe_migranas"
+        tools:layout="@layout/fragment_informe_migranas" />
 </navigation>

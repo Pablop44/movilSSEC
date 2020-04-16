@@ -66,6 +66,7 @@ public class ConsultasFragment extends Fragment {
         listview = (ListView) root.findViewById(R.id.listaConsultas);
 
         datos = this.getArguments();
+        idFicha = datos.getString("ficha");
 
         max = (TextView) root.findViewById(R.id.max);
 
@@ -150,8 +151,8 @@ public class ConsultasFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/consultaFicha.json"
-                            , "pablo"
-                            , "pablo"
+                            , ""
+                            , ""
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -173,8 +174,8 @@ public class ConsultasFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/numeroConsultas.json"
-                            , "pablo"
-                            , "pablo"
+                            , ""
+                            , ""
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");

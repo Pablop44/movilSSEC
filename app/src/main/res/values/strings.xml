@@ -39,4 +39,7 @@
     <string name="volver">Volver</string>
     <string name="register">Registro</string>
     <string name="anadir_consulta">Añadir Consulta</string>
+    <string name="menu_informes_asma">Informes de Asma</string>
+    <string name="menu_informes_diabetes">Informes de Diabetes</string>
+    <string name="menu_informe_migranas">Informes de Migrañas</string>
 </resources>
