@@ -53,6 +53,7 @@ public class TratamientoFragment extends Fragment {
     private TextView min;
     private TextView total;
     private Gson gson;
+    private Bundle datos;
     public static final int REQUEST_CODE = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -61,6 +62,9 @@ public class TratamientoFragment extends Fragment {
         gson = new Gson();
         View root = inflater.inflate(R.layout.fragment_tratamiento, container, false);
         listview = (ListView) root.findViewById(R.id.listaConsultas);
+
+        datos = this.getArguments();
+        idFicha = datos.getString("ficha");
 
         max = (TextView) root.findViewById(R.id.max);
 
@@ -125,8 +129,8 @@ public class TratamientoFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/tratamiento/tratramientosFicha.json"
-                            , "pablo"
-                            , "pablo"
+                            , ""
+                            , ""
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -148,8 +152,8 @@ public class TratamientoFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/tratamiento/numeroTratramientosFicha.json"
-                            , "pablo"
-                            , "pablo"
+                            , ""
+                            , ""
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");

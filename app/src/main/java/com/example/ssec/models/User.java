@@ -11,7 +11,6 @@ public class User {
     private String id;
     private String dni;
     private String username;
-    private String password;
     private String email;
     private String nombre;
     private String apellidos;
@@ -131,13 +130,5 @@ public class User {
 
     public void setFicha(String ficha) {
         this.ficha = ficha;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

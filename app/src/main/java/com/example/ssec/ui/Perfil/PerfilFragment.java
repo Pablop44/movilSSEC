@@ -40,6 +40,7 @@ public class PerfilFragment extends Fragment {
 
 
         datos = this.getArguments();
+        idFicha = datos.getString("ficha");
 
         HashMap<String, String> atributos = new HashMap<String, String>();
         atributos.put("idFicha", idFicha);
@@ -51,8 +52,8 @@ public class PerfilFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             baseUrl
-                            , "pablo"
-                            , "pablo"
+                            , ""
+                            , ""
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");

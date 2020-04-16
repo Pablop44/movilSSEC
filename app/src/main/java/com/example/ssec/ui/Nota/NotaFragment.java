@@ -40,7 +40,7 @@ public class NotaFragment extends Fragment {
     private String baseUrl;
     private String pageSize = "4";
     private String currentPage = "0";
-    private String idFicha = "1";
+    private String idFicha = "0";
     private String totalNumero = "0";
     private Gson gson;
     private CustomAdapterNota mAdapter;
@@ -51,6 +51,7 @@ public class NotaFragment extends Fragment {
     private TextView max;
     private TextView min;
     private TextView total;
+    private Bundle datos;
     public static final int REQUEST_CODE = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,6 +60,9 @@ public class NotaFragment extends Fragment {
         baseUrl = "http://10.0.2.2:8765/nota/notasFicha.json";
         gson = new Gson();
         View root = inflater.inflate(R.layout.fragment_notas, container, false);
+
+        datos = this.getArguments();
+        idFicha = datos.getString("ficha");
 
         listview = (ListView) root.findViewById(R.id.listaNotas);
 
@@ -113,8 +117,8 @@ public class NotaFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/nota/numeroNotas.json"
-                            , "pablo"
-                            , "pablo"
+                            , ""
+                            , ""
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -138,8 +142,8 @@ public class NotaFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             baseUrl
-                            , "pablo"
-                            , "pablo"
+                            , ""
+                            , ""
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");

@@ -55,6 +55,7 @@ public class ConsultasFragment extends Fragment {
     private TextView min;
     private TextView total;
     private Gson gson;
+    private Bundle datos;
     public static final int REQUEST_CODE = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -63,6 +64,8 @@ public class ConsultasFragment extends Fragment {
         gson = new Gson();
         View root = inflater.inflate(R.layout.fragment_consultas, container, false);
         listview = (ListView) root.findViewById(R.id.listaConsultas);
+
+        datos = this.getArguments();
 
         max = (TextView) root.findViewById(R.id.max);
 

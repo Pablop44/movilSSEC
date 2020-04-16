@@ -93,11 +93,77 @@ public class activityInicio extends AppCompatActivity {
 
         Menu menu = navigationView.getMenu();
         MenuItem perfil = menu.findItem(R.id.nav_perfiles);
+        MenuItem consultas = menu.findItem(R.id.nav_consultas);
+        MenuItem tratamientos = menu.findItem(R.id.nav_tratamientos);
+        MenuItem notas = menu.findItem(R.id.nav_notas);
+        MenuItem diabetes = menu.findItem(R.id.report_diabetes);
+        MenuItem asma = menu.findItem(R.id.report_asma);
+        MenuItem migranas = menu.findItem(R.id.report_migranas);
         perfil.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
                 navController.navigate(R.id.nav_perfiles, b);
+                drawer.closeDrawers();
+                return true;
+            }
+        });
+
+        consultas.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
+                navController.navigate(R.id.nav_consultas, b);
+                drawer.closeDrawers();
+                return true;
+            }
+        });
+
+        tratamientos.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
+                navController.navigate(R.id.nav_tratamientos, b);
+                drawer.closeDrawers();
+                return true;
+            }
+        });
+
+        notas.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
+                navController.navigate(R.id.nav_notas, b);
+                drawer.closeDrawers();
+                return true;
+            }
+        });
+
+        diabetes.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
+                navController.navigate(R.id.report_diabetes, b);
+                drawer.closeDrawers();
+                return true;
+            }
+        });
+
+        asma.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
+                navController.navigate(R.id.report_asma, b);
+                drawer.closeDrawers();
+                return true;
+            }
+        });
+
+        migranas.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                NavController navController = Navigation.findNavController(activityInicio.this, R.id.nav_host_fragment);
+                navController.navigate(R.id.report_migranas, b);
                 drawer.closeDrawers();
                 return true;
             }
