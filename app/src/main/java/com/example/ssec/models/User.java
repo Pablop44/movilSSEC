@@ -5,8 +5,6 @@
 
 package com.example.ssec.models;
 
-import java.util.Date;
-
 public class User {
     private String id;
     private String dni;
@@ -17,11 +15,11 @@ public class User {
     private String telefono;
     private String poblacion;
     private String genero;
-    private String fechaNacimiento;
+    private String nacimiento;
     private String rol;
     private String ficha;
 
-    public User(String id, String dni, String username, String email, String nombre, String apellidos, String telefono, String poblacion, String genero, String fechaNacimiento, String rol, String ficha) {
+    public User(String id, String dni, String username, String email, String nombre, String apellidos, String telefono, String poblacion, String genero, String nacimiento, String rol, String ficha) {
         this.id = id;
         this.dni = dni;
         this.username = username;
@@ -31,7 +29,7 @@ public class User {
         this.telefono = telefono;
         this.poblacion = poblacion;
         this.genero = genero;
-        this.fechaNacimiento = fechaNacimiento;
+        this.nacimiento = nacimiento;
         this.rol = rol;
         this.ficha = ficha;
     }
@@ -108,12 +106,12 @@ public class User {
         this.genero = genero;
     }
 
-    public String getFechaNacimiento() {
-        return this.fechaNacimiento;
+    public String getNacimiento() {
+        return this.nacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setNacimiento(String nacimiento) {
+        this.nacimiento = nacimiento;
     }
 
     public String getRol() {

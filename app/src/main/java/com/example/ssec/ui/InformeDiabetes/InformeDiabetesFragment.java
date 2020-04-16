@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.ssec.R;
+import com.example.ssec.adapters.CustomAdapterInforme;
 import com.example.ssec.models.InformeDiabetes;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
@@ -24,12 +26,12 @@ import java.util.List;
 
 public class InformeDiabetesFragment extends Fragment {
 
-    private String baseUrl;
     private String pageSize = "8";
     private String currentPage = "0";
     private String idFicha = "0";
     private Bundle datos;
-    private TextView prueba;
+    private ListView listview;
+    private CustomAdapterInforme mAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class InformeDiabetesFragment extends Fragment {
         datos = this.getArguments();
 
         idFicha = datos.getString("ficha");
+
+        listview = (ListView) root.findViewById(R.id.listaInformesDiabetes);
 
         getInformeDiabetes();
 
@@ -104,7 +108,8 @@ public class InformeDiabetesFragment extends Fragment {
 
             Type listType = new TypeToken<ArrayList<InformeDiabetes>>(){}.getType();
             List<InformeDiabetes> listaInformeDiabetes = new Gson().fromJson(datosInformes, listType);
-            Toast.makeText(getActivity(), datosInformes, Toast.LENGTH_LONG).show();
+            mAdapter = new CustomAdapterInforme(getActivity(), null, listaInformeDiabetes, null);
+            listview.setAdapter(mAdapter);
         }
     }
 }

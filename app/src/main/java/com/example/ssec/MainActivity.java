@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 
@@ -151,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("telefono", userRegistered.getTelefono());
         bundle.putString("poblacion", userRegistered.getPoblacion());
         bundle.putString("genero", userRegistered.getGenero());
-        bundle.putString("naciemiento", userRegistered.getFechaNacimiento());
+        bundle.putString("naciemiento", userRegistered.getNacimiento());
         bundle.putString("rol", userRegistered.getRol());
         bundle.putString("ficha", userRegistered.getFicha());
 

@@ -16,61 +16,52 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.ActivityNavigator;
 
 import com.example.ssec.R;
+import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.example.ssec.ui.Consultas.ConsultasFragment;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 
 public class PerfilFragment extends Fragment {
 
-    private String baseUrl;
-    private String pageSize = "15";
-    private String currentPage = "0";
-    private String idFicha = "1";
     private Bundle datos;
-    private String username;
-    private TextView prueba;
+    private String idUser = "0";
+    private User usuario;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        baseUrl = "http://10.0.2.2:8765/nota/notasFicha.json";
-
         View root = inflater.inflate(R.layout.fragment_perfil, container, false);
 
-
         datos = this.getArguments();
-        idFicha = datos.getString("ficha");
+        idUser = datos.getString("id");
 
-        HashMap<String, String> atributos = new HashMap<String, String>();
-        atributos.put("idFicha", idFicha);
-        atributos.put("page", currentPage);
-        atributos.put("limit", pageSize);
+        getDatosUser();
 
+        return root;
+    }
+
+    public void getDatosUser() {
         try {
 
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
-                            baseUrl
+                            "http://10.0.2.2:8765/user/view/"+idUser+".json"
                             , ""
                             , ""
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
-
             AsyncTask<Void, Void, String> execute = new PerfilFragment.ExecuteNetworkOperation(apiAuthenticationClient);
             execute.execute();
-
         } catch (Exception ex) {
         }
-        return root;
     }
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
         private ApiAuthenticationClient apiAuthenticationClient;
-        private String isValidCredentials;
+        private String datosUser;
 
         /**
          * Overload the constructor to pass objects to this class.
@@ -87,7 +78,7 @@ public class PerfilFragment extends Fragment {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                isValidCredentials = apiAuthenticationClient.execute();
+                datosUser = apiAuthenticationClient.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -98,7 +89,8 @@ public class PerfilFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getActivity(), isValidCredentials, Toast.LENGTH_LONG).show();
+            usuario = new Gson().fromJson(datosUser, User.class);
+            Toast.makeText(getActivity(), datosUser, Toast.LENGTH_LONG).show();
         }
     }
 }
