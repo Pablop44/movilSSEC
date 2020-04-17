@@ -86,19 +86,17 @@ public class ViewConsulta extends AppCompatActivity {
     }
 
     public void getDatosFicha(){
-        HashMap<String, String> atributos = new HashMap<String, String>();
 
         try {
 
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/view/"+idConsulta+".json"
-                            , "pablo"
-                            , "pablo"
+                            , ""
+                            , ""
                     );
 
             apiAuthenticationClient.setHttpMethod("GET");
-            apiAuthenticationClient.setParameters(atributos);
 
             AsyncTask<Void, Void, String> execute = new ViewConsulta.ExecuteNetworkOperation(apiAuthenticationClient);
             execute.execute();

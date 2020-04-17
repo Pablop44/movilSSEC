@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.Tratamiento.ViewTratamiento"></activity>
+        <activity android:name=".ui.InformeMigranas.ViewInformeMigranas"></activity>
+        <activity android:name=".ui.InformeDiabetes.ViewInformeDiabetes" />
+        <activity android:name=".ui.InformeAsma.ViewInformeAsma" />
+        <activity android:name=".ui.Tratamiento.ViewTratamiento" />
         <activity android:name=".ui.Consultas.ViewConsulta" />
         <activity android:name=".ui.Consultas.AddConsulta" />
         <activity android:name=".registerActivity" />

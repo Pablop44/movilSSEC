@@ -123,7 +123,6 @@ public class ConsultasFragment extends Fragment {
             }
         });
 
-
         getNumeroConsultas();
         getConsultas();
 
