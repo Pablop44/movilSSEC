@@ -321,7 +321,6 @@ public class activityInicio extends AppCompatActivity {
                     asma.setVisible(true);
                 }
             }
-
         }
     }
 }

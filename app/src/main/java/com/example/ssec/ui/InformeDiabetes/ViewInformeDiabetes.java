@@ -4,19 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.TestLooperManager;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ssec.R;
 import com.example.ssec.models.InformeDiabetes;
+import com.example.ssec.models.Momento;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
+
+import org.w3c.dom.Text;
+
+import java.util.Iterator;
 
 public class ViewInformeDiabetes extends AppCompatActivity {
 
@@ -98,6 +109,7 @@ public class ViewInformeDiabetes extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("ResourceType")
     public void actualizarDatos(){
 
         numeroControles.setText(informeAVer.getNumeroControles());
@@ -131,9 +143,52 @@ public class ViewInformeDiabetes extends AppCompatActivity {
             horarioAlto.setText(informeAVer.getHorarioAlto());
         }
 
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayoutDiabetes);
+
+        Iterator<Momento> iterador = informeAVer.getMomentos().iterator();
+
+        if(iterador.hasNext()){
+            TextView textView = new TextView(this);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.BELOW, R.id.momentos);
+            params.setMargins(0,0,0,5);
+            textView.setLayoutParams(params);
+            textView.setId(View.generateViewId());
+
+            StringBuilder str = new StringBuilder();
+
+            while(iterador.hasNext()){
+                Momento momento = iterador.next();
+                if(momento.getMomento().equals("Levantarse")){
+                    str.append("Al levantarse\n");
+                } else if (momento.getMomento().equals("PadecerEpisodio")) {
+                    str.append("Al padecer un episodio\n");
+                } else if (momento.getMomento().equals("DespuesComida")) {
+                    str.append("Después de la comida\n");
+                } else if (momento.getMomento().equals("AntesComida")) {
+                    str.append("Antes de la comida\n");
+                }else{
+                    str.append("Al irse a dormir\n");
+                }
+            }
+
+            textView.setText(str.toString());
+            relativeLayout.addView(textView);
+
+            TextView texto = (TextView) findViewById(R.id.nivelBajo);
+            RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params2.addRule(RelativeLayout.BELOW, textView.getId());
+            texto.setLayoutParams(params2);
+        }else{
+            TextView texto = (TextView) findViewById(R.id.momentos);
+            texto.setText("");
+        }
+
         actividadFisica.setText(informeAVer.getActividadFisica());
         problemaDieta.setText(informeAVer.getProblemaDieta());
         estadoGeneral.setText(informeAVer.getEstadoGeneral());
+
     }
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {

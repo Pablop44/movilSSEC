@@ -15,6 +15,7 @@
         android:paddingBottom="@dimen/activity_vertical_margin">
 
         <RelativeLayout
+            android:id="@+id/relativeLayoutMigranas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
@@ -26,7 +27,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Frecuencia de las crisis"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -36,7 +37,7 @@
                 android:layout_below="@id/frecuencia"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
 
             <TextView
@@ -46,7 +47,7 @@
                 android:layout_below="@+id/valueFrecuencia"
                 android:layout_marginBottom="5dp"
                 android:text="Duración de los episodios"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -56,7 +57,7 @@
                 android:layout_below="@id/duracion"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/horario"
@@ -66,7 +67,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Horario del episodio"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -76,7 +77,7 @@
                 android:layout_below="@+id/horario"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/finalizacion"
@@ -86,7 +87,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Tipo de finalización del episodio"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -96,7 +97,7 @@
                 android:layout_below="@+id/finalizacion"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
 
             <TextView
@@ -107,7 +108,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Tipo de episodio"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -117,7 +118,7 @@
                 android:layout_below="@+id/tipoEpisodio"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/intensidad"
@@ -127,7 +128,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Intensidad del episodio"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -137,7 +138,7 @@
                 android:layout_below="@+id/intensidad"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/limitaciones"
@@ -147,7 +148,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Limitaciones en la vida diaria"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -157,7 +158,7 @@
                 android:layout_below="@+id/limitaciones"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/despiertoNoche"
@@ -166,7 +167,7 @@
                 android:layout_below="@+id/valueLimitaciones"
                 android:layout_marginBottom="5dp"
                 android:text="Se ha despertado por la noche"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -176,7 +177,7 @@
                 android:layout_below="@+id/despiertoNoche"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
 
             <TextView
@@ -187,7 +188,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_below="@+id/valueDespiertoNoche"
                 android:text="Síntomas de los episodios"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -198,7 +199,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_below="@+id/sintomas"
                 android:text="Factores que propiciaron los episodios"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
 
@@ -209,7 +210,7 @@
                 android:layout_below="@+id/factores"
                 android:layout_marginBottom="5dp"
                 android:text="Estado General"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
 
@@ -222,7 +223,7 @@
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
 
 

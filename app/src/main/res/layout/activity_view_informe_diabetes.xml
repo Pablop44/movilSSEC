@@ -15,6 +15,7 @@
         android:paddingBottom="@dimen/activity_vertical_margin">
 
         <RelativeLayout
+            android:id="@+id/relativeLayoutDiabetes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
@@ -26,7 +27,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Número de controles al día"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -36,7 +37,7 @@
                 android:layout_below="@id/numeroControles"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/momentos"
@@ -46,7 +47,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_below="@+id/valueNumeroControles"
                 android:text="Horario de los controles"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -56,7 +57,7 @@
                 android:layout_below="@+id/momentos"
                 android:layout_marginBottom="5dp"
                 android:text="Nivel bajo de azúcar en sangre"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -66,7 +67,7 @@
                 android:layout_below="@id/nivelBajo"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/frecuenciaBajo"
@@ -76,7 +77,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Frecuencia de nivel bajo de azúcar"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -86,7 +87,7 @@
                 android:layout_below="@+id/frecuenciaBajo"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/horarioBajo"
@@ -96,7 +97,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Horario del nivel bajo"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -106,7 +107,7 @@
                 android:layout_below="@+id/horarioBajo"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
 
             <TextView
@@ -117,7 +118,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Pérdida de Conocimiento"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -127,7 +128,7 @@
                 android:layout_below="@+id/perdidaConocimiento"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/nivelAlto"
@@ -137,7 +138,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Nivel alto de azúcar en sangre"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -147,7 +148,7 @@
                 android:layout_below="@+id/nivelAlto"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/frecuenciaAlto"
@@ -157,7 +158,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Frecuencia de nivel alto de azúcar"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -167,7 +168,7 @@
                 android:layout_below="@+id/frecuenciaAlto"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/horarioAlto"
@@ -176,7 +177,7 @@
                 android:layout_below="@+id/valueFrecuenciaAlto"
                 android:layout_marginBottom="5dp"
                 android:text="Horario del nivel alto"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -186,7 +187,7 @@
                 android:layout_below="@+id/horarioAlto"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/actividadFisica"
@@ -195,7 +196,7 @@
                 android:layout_below="@+id/valueHorarioAlto"
                 android:layout_marginBottom="5dp"
                 android:text="Actividad física"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -205,7 +206,7 @@
                 android:layout_below="@+id/actividadFisica"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/problemaDieta"
@@ -214,7 +215,7 @@
                 android:layout_below="@+id/valueActividadFisica"
                 android:layout_marginBottom="5dp"
                 android:text="Problema con la dieta diabética"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -224,7 +225,7 @@
                 android:layout_below="@+id/problemaDieta"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/estadoGeneral"
@@ -233,7 +234,7 @@
                 android:layout_below="@+id/valueProblemaDieta"
                 android:layout_marginBottom="5dp"
                 android:text="Estado General"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
 
@@ -246,9 +247,7 @@
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:text="Last Name"
-                android:textSize="19dp" />
-
-
+                android:textSize="20sp" />
 
         </RelativeLayout>
     </ScrollView>

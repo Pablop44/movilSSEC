@@ -27,7 +27,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Calidad del sueño"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -37,7 +37,7 @@
                 android:layout_below="@id/calidadSueno"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/dificultadRespirar"
@@ -46,7 +46,7 @@
                 android:layout_below="@+id/valueCalidadSueno"
                 android:layout_marginBottom="5dp"
                 android:text="Dificultad para respirar"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_below="@id/dificultadRespirar"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tos"
@@ -66,7 +66,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Ha presentado tos"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_below="@+id/tos"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/gravedadTos"
@@ -86,7 +86,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Gravedad de la tos"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -96,7 +96,7 @@
                 android:layout_below="@+id/gravedadTos"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
 
             <TextView
@@ -107,7 +107,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Limitaciones en la vida Diaria"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -117,7 +117,7 @@
                 android:layout_below="@+id/limitaciones"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/silbidos"
@@ -127,7 +127,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Silbidos"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -137,7 +137,7 @@
                 android:layout_below="@+id/silbidos"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/medicacion"
@@ -147,7 +147,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="Uso de medicación de rescate"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -157,7 +157,7 @@
                 android:layout_below="@+id/medicacion"
                 android:layout_marginBottom="15dp"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/despiertoNoche"
@@ -166,7 +166,7 @@
                 android:layout_below="@+id/valueMedicacion"
                 android:layout_marginBottom="5dp"
                 android:text="Información sobre la Espirometría"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -178,7 +178,7 @@
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/factores"
@@ -187,7 +187,7 @@
                 android:layout_below="@+id/valueEspirometria"
                 android:layout_marginBottom="5dp"
                 android:text="Factores que han favorecido una crisis"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -199,7 +199,7 @@
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/estadoGeneral"
@@ -208,7 +208,7 @@
                 android:layout_below="@+id/valueFactores"
                 android:layout_marginBottom="5dp"
                 android:text="Estado General"
-                android:textSize="19dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -220,7 +220,7 @@
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:text="Last Name"
-                android:textSize="19dp" />
+                android:textSize="20sp" />
 
 
         </RelativeLayout>
