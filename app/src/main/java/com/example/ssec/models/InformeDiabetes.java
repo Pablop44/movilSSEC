@@ -156,4 +156,9 @@ public class InformeDiabetes {
     public void setMomentos(List<Momento> momentos) {
         this.momentos = momentos;
     }
+
+    public String[] getFechaHora(){
+        String[] valores = fecha.split(" ");
+        return valores;
+    }
 }

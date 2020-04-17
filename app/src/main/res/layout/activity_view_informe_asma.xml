@@ -1,9 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.InformeAsma.ViewInformeAsma">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/calidadSueno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Calidad del sueño"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueCalidadSueno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/calidadSueno"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/dificultadRespirar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueCalidadSueno"
+                android:layout_marginBottom="5dp"
+                android:text="Dificultad para respirar"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueDificultadRespirar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dificultadRespirar"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/tos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueDificultadRespirar"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Ha presentado tos"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueTos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tos"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/gravedadTos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueTos"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Gravedad de la tos"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueGravedadTos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gravedadTos"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+
+            <TextView
+                android:id="@+id/limitaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueGravedadTos"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Limitaciones en la vida Diaria"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueLimitaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/limitaciones"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/silbidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueLimitaciones"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Silbidos"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueSilbidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/silbidos"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/medicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueSilbidos"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Uso de medicación de rescate"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueMedicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/medicacion"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/despiertoNoche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueMedicacion"
+                android:layout_marginBottom="5dp"
+                android:text="Información sobre la Espirometría"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueEspirometria"
+                android:layout_width="323dp"
+                android:layout_height="88dp"
+                android:layout_below="@id/despiertoNoche"
+                android:layout_marginBottom="10dp"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/factores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueEspirometria"
+                android:layout_marginBottom="5dp"
+                android:text="Factores que han favorecido una crisis"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueFactores"
+                android:layout_width="323dp"
+                android:layout_height="88dp"
+                android:layout_below="@id/factores"
+                android:layout_marginBottom="10dp"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/estadoGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueFactores"
+                android:layout_marginBottom="5dp"
+                android:text="Estado General"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueEstadoGeneral"
+                android:layout_width="323dp"
+                android:layout_height="88dp"
+                android:layout_below="@id/estadoGeneral"
+                android:layout_marginBottom="10dp"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

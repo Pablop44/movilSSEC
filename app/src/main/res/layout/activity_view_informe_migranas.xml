@@ -1,9 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.InformeMigranas.ViewInformeMigranas">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/frecuencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Frecuencia de las crisis"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueFrecuencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/frecuencia"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+
+            <TextView
+                android:id="@+id/duracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueFrecuencia"
+                android:layout_marginBottom="5dp"
+                android:text="Duración de los episodios"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueDuracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/duracion"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/horario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueDuracion"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Horario del episodio"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueHorario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horario"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/finalizacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueHorario"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Tipo de finalización del episodio"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueFinalizacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/finalizacion"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+
+            <TextView
+                android:id="@+id/tipoEpisodio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueFinalizacion"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Tipo de episodio"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valuetipoEpisodio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tipoEpisodio"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/intensidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valuetipoEpisodio"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Intensidad del episodio"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueIntensidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/intensidad"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/limitaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueIntensidad"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Limitaciones en la vida diaria"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueLimitaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/limitaciones"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/despiertoNoche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueLimitaciones"
+                android:layout_marginBottom="5dp"
+                android:text="Se ha despertado por la noche"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueDespiertoNoche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/despiertoNoche"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+
+            <TextView
+                android:id="@+id/sintomas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@+id/valueDespiertoNoche"
+                android:text="Síntomas de los episodios"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/factores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@+id/sintomas"
+                android:text="Factores que propiciaron los episodios"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/estadoGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/factores"
+                android:layout_marginBottom="5dp"
+                android:text="Estado General"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/valueEstadoGeneral"
+                android:layout_width="323dp"
+                android:layout_height="88dp"
+                android:layout_below="@id/estadoGeneral"
+                android:layout_marginBottom="10dp"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:text="Last Name"
+                android:textSize="19dp" />
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

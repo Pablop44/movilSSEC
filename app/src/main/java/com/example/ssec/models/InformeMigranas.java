@@ -146,4 +146,9 @@ public class InformeMigranas {
     public void setFactores(List<Factor> factores) {
         this.factores = factores;
     }
+
+    public String[] getFechaHora(){
+        String[] valores = fecha.split(" ");
+        return valores;
+    }
 }

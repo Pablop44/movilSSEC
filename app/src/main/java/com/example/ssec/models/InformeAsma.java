@@ -124,4 +124,9 @@ public class InformeAsma {
     public void setEstadoGeneral(String estadoGeneral) {
         this.estadoGeneral = estadoGeneral;
     }
+
+    public String[] getFechaHora(){
+        String[] valores = fecha.split(" ");
+        return valores;
+    }
 }
