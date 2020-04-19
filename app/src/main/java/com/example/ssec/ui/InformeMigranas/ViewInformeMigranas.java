@@ -1,5 +1,6 @@
 package com.example.ssec.ui.InformeMigranas;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -11,8 +12,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ssec.R;
 import com.example.ssec.models.Factor;
@@ -79,6 +83,18 @@ public class ViewInformeMigranas extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.download:
+                Toast.makeText(this, "PDF Generated successfully!..", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
     public void getDatosInforme(){
 
         try {
@@ -115,76 +131,94 @@ public class ViewInformeMigranas extends AppCompatActivity {
 
         Iterator<Sintoma> iterador = informeAVer.getSintomas().iterator();
 
-        TextView textView = new TextView(this);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.BELOW, R.id.sintomas);
-        params.setMargins(0,0,0,5);
-        textView.setLayoutParams(params);
+        if(iterador.hasNext()){
+            TextView textView = new TextView(this);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.BELOW, R.id.sintomas);
+            params.setMargins(0,0,0,5);
+            textView.setLayoutParams(params);
+            textView.setId(View.generateViewId());
 
-        StringBuilder str = new StringBuilder();
+            StringBuilder str = new StringBuilder();
 
-        while(iterador.hasNext()){
-            Sintoma sintoma = iterador.next();
-            if(sintoma.getSintomas().equals("Fotopsias_escotomas_hemianopsia_diplopia")){
-                str.append("Fotopsias, escotomas, hemianopsia, diplopía\n");
-            } else if (sintoma.getSintomas().equals("Afasia")) {
-                str.append("Afasia\n");
-            } else if (sintoma.getSintomas().equals("Sono_foto_osmofobia")) {
-                str.append("Sono/foto/osmofobia\n");
-            } else if (sintoma.getSintomas().equals("SíntomasDisautonomicos")) {
-                str.append("Síntomas disautonómicos\n");
-            }else if (sintoma.getSintomas().equals("Nauseas_Vomitos")) {
-                str.append("Náuseas/vómitos\n");
-            }else if (sintoma.getSintomas().equals("Confusion_crisisComiciales_fiebre")) {
-                str.append("Confusión/crisis comiciales/fiebre\n");
-            }else if (sintoma.getSintomas().equals("Hemiparesia_hemidisestesia")) {
-                str.append("Hemiparesia/hemidisestesia\n");
-            }else{
-                str.append("Inestabilidad, vértigo\n");
+            while(iterador.hasNext()){
+                Sintoma sintoma = iterador.next();
+                if(sintoma.getSintomas().equals("Fotopsias_escotomas_hemianopsia_diplopia")){
+                    str.append("Fotopsias, escotomas, hemianopsia, diplopía\n");
+                } else if (sintoma.getSintomas().equals("Afasia")) {
+                    str.append("Afasia\n");
+                } else if (sintoma.getSintomas().equals("Sono_foto_osmofobia")) {
+                    str.append("Sono/foto/osmofobia\n");
+                } else if (sintoma.getSintomas().equals("SíntomasDisautonomicos")) {
+                    str.append("Síntomas disautonómicos\n");
+                }else if (sintoma.getSintomas().equals("Nauseas_Vomitos")) {
+                    str.append("Náuseas/vómitos\n");
+                }else if (sintoma.getSintomas().equals("Confusion_crisisComiciales_fiebre")) {
+                    str.append("Confusión/crisis comiciales/fiebre\n");
+                }else if (sintoma.getSintomas().equals("Hemiparesia_hemidisestesia")) {
+                    str.append("Hemiparesia/hemidisestesia\n");
+                }else{
+                    str.append("Inestabilidad, vértigo\n");
+                }
             }
-        }
 
-        textView.setText(str.toString());
-        relativeLayout.addView(textView);
+            textView.setText(str.toString());
+            relativeLayout.addView(textView);
+
+            TextView sintomas = (TextView) findViewById(R.id.factores);
+            RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params2.addRule(RelativeLayout.BELOW, textView.getId());
+            sintomas.setLayoutParams(params2);
+        }
 
 
         RelativeLayout relativeLayout2 = (RelativeLayout) findViewById(R.id.relativeLayoutMigranas);
 
         Iterator<Factor> iterador2 = informeAVer.getFactores().iterator();
 
-        TextView textView2 = new TextView(this);
-        textView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-        RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params2.addRule(RelativeLayout.BELOW, R.id.factores);
-        params2.setMargins(0,0,0,5);
-        textView2.setLayoutParams(params);
+        if(iterador2.hasNext()){
+            TextView textView2 = new TextView(this);
+            textView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params2.addRule(RelativeLayout.BELOW, R.id.factores);
+            params2.setMargins(0,0,0,5);
+            textView2.setLayoutParams(params2);
+            textView2.setId(View.generateViewId());
 
-        StringBuilder str2 = new StringBuilder();
+            StringBuilder str2 = new StringBuilder();
 
-        while(iterador2.hasNext()){
-            Factor factor = iterador2.next();
-            if(factor.getFactores().equals("Estres")){
-                str2.append("Estrés\n");
-            } else if (factor.getFactores().equals("FactoresHormonales")) {
-                str2.append("Factores hormonales (menstruación, anticonceptivos)\n");
-            } else if (factor.getFactores().equals("ManiobrasValsalva")) {
-                str2.append("Maniobras de Valsalva (tos, coito…)\n");
-            } else if (factor.getFactores().equals("EjercicioFisico")) {
-                str2.append("Ejercicio físico\n");
-            } else if (factor.getFactores().equals("CambiosAtmosferico")) {
-                str2.append("Cambios atmosféricos\n");
-            } else if (factor.getFactores().equals("MovimientoCefalicos")) {
-                str2.append("Movimientos cefálicos\n");
-            } else if (factor.getFactores().equals("Dietas_alcohol")) {
-                str2.append("Dietas, alcohol\n");
-            }else{
-                str2.append("CambiosPosturales\n");
+            while(iterador2.hasNext()){
+                Factor factor = iterador2.next();
+                if(factor.getFactores().equals("Estres")){
+                    str2.append("Estrés\n");
+                } else if (factor.getFactores().equals("FactoresHormonales")) {
+                    str2.append("Factores hormonales (menstruación, anticonceptivos)\n");
+                } else if (factor.getFactores().equals("ManiobrasValsalva")) {
+                    str2.append("Maniobras de Valsalva (tos, coito…)\n");
+                } else if (factor.getFactores().equals("EjercicioFisico")) {
+                    str2.append("Ejercicio físico\n");
+                } else if (factor.getFactores().equals("CambiosAtmosferico")) {
+                    str2.append("Cambios atmosféricos\n");
+                } else if (factor.getFactores().equals("MovimientoCefalicos")) {
+                    str2.append("Movimientos cefálicos\n");
+                } else if (factor.getFactores().equals("Dietas_alcohol")) {
+                    str2.append("Dietas, alcohol\n");
+                }else{
+                    str2.append("CambiosPosturales\n");
+                }
             }
+
+            textView2.setText(str2.toString());
+            relativeLayout2.addView(textView2);
+
+            TextView estadoGeneral = (TextView) findViewById(R.id.estadoGeneral);
+            RelativeLayout.LayoutParams params3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params3.addRule(RelativeLayout.BELOW, textView2.getId());
+            estadoGeneral.setLayoutParams(params3);
         }
 
-        textView2.setText(str2.toString());
-        relativeLayout2.addView(textView2);
+
     }
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {

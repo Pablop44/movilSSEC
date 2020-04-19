@@ -1,23 +1,23 @@
 package com.example.ssec.ui.InformeAsma;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.example.ssec.R;
 import com.example.ssec.models.InformeAsma;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
-
-import java.util.HashMap;
 
 public class ViewInformeAsma extends AppCompatActivity {
 
@@ -41,6 +41,7 @@ public class ViewInformeAsma extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         calidadSueno = (TextView) findViewById(R.id.valueCalidadSueno);
         dificultadRespirar = (TextView) findViewById(R.id.valueDificultadRespirar);
@@ -74,6 +75,17 @@ public class ViewInformeAsma extends AppCompatActivity {
         Drawable unwrappedDrawable1 = AppCompatResources.getDrawable(ViewInformeAsma.this, R.drawable.ic_edit_black_24dp);
         Drawable wrappedDrawable1 = DrawableCompat.wrap(unwrappedDrawable1);
         DrawableCompat.setTint(wrappedDrawable1, Color.WHITE);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.download:
+                break;
+            default:
+                return false;
+        }
         return true;
     }
 
@@ -153,10 +165,10 @@ public class ViewInformeAsma extends AppCompatActivity {
 
             informeAVer = new Gson().fromJson(datos, InformeAsma.class);
             String[] fechaHora = informeAVer.getFechaHora();
-            getSupportActionBar().setTitle("Asma - "+fechaHora[0]);
+            getSupportActionBar().setTitle("Asma - " + fechaHora[0]);
 
             actualizarDatos();
-
         }
     }
 }
+

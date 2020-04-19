@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="calidadSueno">
+        <item>Excelente</item>
+        <item>Buena</item>
+        <item>Media</item>
+        <item>Mala</item>
+    </string-array>
+</resources>

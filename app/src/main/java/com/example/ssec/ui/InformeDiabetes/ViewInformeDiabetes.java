@@ -1,5 +1,6 @@
 package com.example.ssec.ui.InformeDiabetes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -13,11 +14,13 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ssec.R;
 import com.example.ssec.models.InformeDiabetes;
@@ -86,6 +89,18 @@ public class ViewInformeDiabetes extends AppCompatActivity {
         Drawable unwrappedDrawable1 = AppCompatResources.getDrawable(ViewInformeDiabetes.this, R.drawable.ic_edit_black_24dp);
         Drawable wrappedDrawable1 = DrawableCompat.wrap(unwrappedDrawable1);
         DrawableCompat.setTint(wrappedDrawable1, Color.WHITE);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.download:
+                Toast.makeText(this, "PDF Generated successfully!..", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                return false;
+        }
         return true;
     }
 
@@ -184,6 +199,7 @@ public class ViewInformeDiabetes extends AppCompatActivity {
             TextView texto = (TextView) findViewById(R.id.momentos);
             texto.setText("");
         }
+
 
         actividadFisica.setText(informeAVer.getActividadFisica());
         problemaDieta.setText(informeAVer.getProblemaDieta());

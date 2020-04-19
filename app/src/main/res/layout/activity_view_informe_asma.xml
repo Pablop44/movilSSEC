@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.InformeAsma.ViewInformeAsma">
+    tools:context=".ui.InformeAsma.ViewInformeAsma"
+    android:id="@+id/relativeLayoutAsma">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
+        android:paddingLeft="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -172,13 +170,12 @@
             <TextView
                 android:id="@+id/valueEspirometria"
                 android:layout_width="323dp"
-                android:layout_height="88dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/despiertoNoche"
                 android:layout_marginBottom="10dp"
                 android:inputType="textMultiLine"
-                android:maxLines="5"
                 android:text="Last Name"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/factores"
@@ -193,13 +190,12 @@
             <TextView
                 android:id="@+id/valueFactores"
                 android:layout_width="323dp"
-                android:layout_height="88dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/factores"
                 android:layout_marginBottom="10dp"
                 android:inputType="textMultiLine"
-                android:maxLines="5"
                 android:text="Last Name"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/estadoGeneral"
@@ -214,13 +210,12 @@
             <TextView
                 android:id="@+id/valueEstadoGeneral"
                 android:layout_width="323dp"
-                android:layout_height="88dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/estadoGeneral"
                 android:layout_marginBottom="10dp"
                 android:inputType="textMultiLine"
-                android:maxLines="5"
                 android:text="Last Name"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
 
         </RelativeLayout>

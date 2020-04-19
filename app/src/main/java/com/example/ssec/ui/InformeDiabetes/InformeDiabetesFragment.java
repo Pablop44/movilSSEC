@@ -1,5 +1,6 @@
 package com.example.ssec.ui.InformeDiabetes;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -14,11 +15,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.ssec.R;
 import com.example.ssec.adapters.CustomAdapterInforme;
+import com.example.ssec.models.Cubierto;
 import com.example.ssec.models.InformeDiabetes;
 import com.example.ssec.models.Numero;
 import com.example.ssec.servicios.ApiAuthenticationClient;
@@ -47,6 +50,7 @@ public class InformeDiabetesFragment extends Fragment {
     private TextView max;
     private TextView min;
     public static final int REQUEST_CODE = 1;
+    private Cubierto cubierto;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -99,8 +103,12 @@ public class InformeDiabetesFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddConsulta.class);
-                startActivityForResult(intent , REQUEST_CODE);
+                if(cubierto.getCubierto().equals("true")){
+                    abrirDialogo();
+                }else{
+                    Intent intent = new Intent(getActivity(), AddInformeDiabetes.class);
+                    startActivityForResult(intent , REQUEST_CODE);
+                }
             }
         });
 
@@ -116,8 +124,8 @@ public class InformeDiabetesFragment extends Fragment {
 
 
         getInformeDiabetes();
-
         getNumeroInformes();
+        getCubierto();
 
         return root;
     }
@@ -166,6 +174,39 @@ public class InformeDiabetesFragment extends Fragment {
             AsyncTask<Void, Void, String> execute = new InformeDiabetesFragment.ExecuteNetworkOperationNumeros(apiAuthenticationClient);
             execute.execute();
 
+        } catch (Exception ex) {
+        }
+    }
+
+    public void abrirDialogo(){
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this.getContext());
+
+        dlgAlert.setMessage("Ya se ha enviado el Informe Diario");
+        dlgAlert.setTitle("Ya lo has hecho...");
+        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+
+        dlgAlert.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+    }
+
+    public void getCubierto(){
+        try {
+
+            ApiAuthenticationClient apiAuthenticationClient =
+                    new ApiAuthenticationClient(
+                            "http://10.0.2.2:8765/diabetes/getCubierto/"+idFicha+".json"
+                            , ""
+                            , ""
+                    );
+
+            AsyncTask<Void, Void, String> execute = new InformeDiabetesFragment.ExecuteNetworkOperationGetCubierto(apiAuthenticationClient);
+            execute.execute();
         } catch (Exception ex) {
         }
     }
@@ -288,6 +329,51 @@ public class InformeDiabetesFragment extends Fragment {
             totalNumero = numero.getNumero();
             total.setText(totalNumero);
             actualizarIndices();
+        }
+    }
+
+    public class ExecuteNetworkOperationGetCubierto extends AsyncTask<Void, Void, String> {
+
+        private ApiAuthenticationClient apiAuthenticationClient;
+        private String datosCubierto;
+
+        /**
+         * Overload the constructor to pass objects to this class.
+         */
+        public ExecuteNetworkOperationGetCubierto(ApiAuthenticationClient apiAuthenticationClient) {
+            this.apiAuthenticationClient = apiAuthenticationClient;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+
+                datosCubierto = apiAuthenticationClient.execute();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            cubierto = new Gson().fromJson(datosCubierto, Cubierto.class);
+            Drawable drawableAdd = add.getDrawable();
+            Drawable drawableForward2 = DrawableCompat.wrap(drawableAdd);
+            if(cubierto.getCubierto().equals("true")){
+                DrawableCompat.setTint(drawableForward2, Color.rgb(203, 203, 203));
+            }else{
+                DrawableCompat.setTint(drawableForward2, Color.BLACK);
+            }
         }
     }
 }
