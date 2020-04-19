@@ -4,70 +4,269 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.InformeAsma.AddInformeAsma">
+    tools:context=".ui.InformeAsma.AddInformeAsma"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <RelativeLayout
-        android:id="@+id/loadingPanel"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/dimBackgroundColor"
-        android:elevation="2dp"
-        android:visibility="gone"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
 
-            android:elevation="10dp"
-            android:background="@drawable/rounded_corners"
-            android:indeterminate="true" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/calidadSueno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Calidad del sueño"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:id="@+id/calidadSueno"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:text="Calidad del sueño"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-
-        <Spinner
-            android:id="@+id/spinner_genero"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/calidadSueno"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:ems="10"
-            android:hint="Género"
-            android:entries="@array/calidadSueno" />
+            <Spinner
+                android:id="@+id/spinner_calidadSueno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/calidadSueno"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/calidadSueno"
+                android:hint="Género" />
 
 
-        <Button
-            android:id="@+id/button_register"
-            android:layout_width="359dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/spinner_genero"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="20dp"
-            android:text="@string/registrarse" />
+            <TextView
+                android:id="@+id/dificultadRespirar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_calidadSueno"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Ha tenido dificultad para respirar?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    </RelativeLayout>
+            <Spinner
+                android:id="@+id/spinner_dificultadRespirar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dificultadRespirar"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/tos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_dificultadRespirar"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Ha tenido tos?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_tos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tos"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/gravedadTos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_tos"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="En caso de respuesta afirmativa, ¿Gravedad de la misma?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_gravedadTos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gravedadTos"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/gravedadTos"
+                android:hint="Género" />
+
+
+            <TextView
+                android:id="@+id/limitaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_gravedadTos"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Ha presentado limitaciones para las actividades de la vida diaria?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_limitaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/limitaciones"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/silbidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_limitaciones"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Ha presentado silbidos o pitidos en el pecho?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_silbidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/silbidos"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/medicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_silbidos"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Uso de medicación inhaladora de rescate?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_medicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/medicacion"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/espirometria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_medicacion"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Indicación del flujo respiratorio a través de espirometría"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_espirometria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/espirometria"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:hint="Espirometría"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="15dp"
+                android:lines="3" />
+
+            <TextView
+                android:id="@+id/factores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText_espirometria"
+                android:layout_marginRight="20dp"
+                android:text="Indicación de los factores que han desencaenado la crisis"
+                android:textSize="18sp"
+                android:textStyle="bold"
+               />
+
+            <EditText
+                android:id="@+id/editText_factores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/factores"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:hint="Factores"
+                android:inputType="textMultiLine"
+                android:lines="3" />
+
+            <TextView
+                android:id="@+id/estadoGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText_factores"
+                android:layout_marginRight="20dp"
+                android:text="Indique en una descripción cuál es su estado general"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/editText_estadoGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/estadoGeneral"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:hint="Estado General"
+                android:inputType="textMultiLine"
+                android:lines="5" />
+
+
+            <Button
+                android:id="@+id/button_register"
+                android:layout_width="359dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText_estadoGeneral"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:text="Enviar" />
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

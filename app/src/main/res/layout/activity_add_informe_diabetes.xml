@@ -1,9 +1,335 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.InformeDiabetes.AddInformeDiabetes">
+    tools:context=".ui.InformeDiabetes.AddInformeDiabetes"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:id="@+id/numeroControles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Número de controles de azúcar al día"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_numeroControles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/numeroControles"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/numeroControles"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/horarioControles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_numeroControles"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Momento del día en el que se hacen los controles"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/AntesComida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horarioControles"
+                android:text="Antes de cada comida" />
+            <CheckBox
+                android:id="@+id/DespuesComida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/AntesComida"
+                android:text="Después de cada comida" />
+            <CheckBox
+                android:id="@+id/PadecerEpisodio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/DespuesComida"
+                android:text="Al padecer un episodio" />
+            <CheckBox
+                android:id="@+id/Dormir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/PadecerEpisodio"
+                android:text="Antes de dormir" />
+
+            <CheckBox
+                android:id="@+id/Levantarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Dormir"
+                android:text="Al levantarse"
+                android:layout_marginBottom="15dp"/>
+
+
+            <TextView
+                android:id="@+id/nivelBajo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Levantarse"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Ha presentado niveles bajos de azúcar en sangre?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_nivelBajo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nivelBajo"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/frecuenciaBajo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_nivelBajo"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="En caso de respuesta afirmativa, ¿Frecuencia?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_frecuenciaBajo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/frecuenciaBajo"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/frecuencia"
+                />
+
+            <TextView
+                android:id="@+id/horarioBajo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_frecuenciaBajo"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="En caso de respuesta afirmativa, ¿A que hora del día?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_horarioBajo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horarioBajo"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/horario"
+                 />
+
+
+            <TextView
+                android:id="@+id/perdidaConocimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_horarioBajo"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Perdida de conocimiento en relación con el nivel bajo azúcar de sangre?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_perdidaConocimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/perdidaConocimiento"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan" />
+
+            <TextView
+                android:id="@+id/nivelAlto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_perdidaConocimiento"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Ha presentado niveles altos de azúcar en sangre?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_nivelAlto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nivelAlto"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan"
+                />
+
+            <TextView
+                android:id="@+id/frecuenciaAlto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_nivelAlto"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="En caso de respuesta afirmativa, ¿Frecuencia?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_frecuenciaAlto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/frecuenciaAlto"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/frecuencia" />
+
+            <TextView
+                android:id="@+id/horarioAlto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_frecuenciaAlto"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="En caso de respuesta afirmativa, ¿A que hora del día?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_horarioAlto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horarioAlto"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/horario" />
+
+            <TextView
+            android:id="@+id/actividadFisica"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner_horarioAlto"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="¿Ha realizado algún tipo de actividad física?"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_actividadFisica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/actividadFisica"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan" />
+
+
+            <TextView
+                android:id="@+id/problemaDieta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_actividadFisica"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Presenta algún tipo de problema con la dieta diabética?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_problemaDieta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/problemaDieta"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan" />
+
+
+            <TextView
+                android:id="@+id/estadoGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_problemaDieta"
+                android:layout_marginRight="20dp"
+                android:text="Indique en una descripción cuál es su estado general"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/editText_estadoGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/estadoGeneral"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:hint="Estado General"
+                android:inputType="textMultiLine"
+                android:lines="5" />
+
+
+            <Button
+                android:id="@+id/button_register"
+                android:layout_width="359dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText_estadoGeneral"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:text="Enviar" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

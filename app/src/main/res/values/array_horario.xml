@@ -1,0 +1,9 @@
+<resources>
+    <string-array name="horario">
+        <item>Manana</item>
+        <item>Mediodia</item>
+        <item>Tarde</item>
+        <item>Media Tarde</item>
+        <item>Noche</item>
+    </string-array>
+</resources>

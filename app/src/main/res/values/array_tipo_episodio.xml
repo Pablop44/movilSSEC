@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipoEpisodio">
+        <item>Pulsatil</item>
+        <item>Tenebrante</item>
+        <item>Urente</item>
+        <item>Lancinante</item>
+        <item>Opresivo</item>
+    </string-array>
+</resources>

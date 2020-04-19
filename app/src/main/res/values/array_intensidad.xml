@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="intensidad">
+        <item>Leve</item>
+        <item>Medio</item>
+        <item>Intenso</item>
+    </string-array>
+</resources>

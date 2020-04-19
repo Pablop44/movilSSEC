@@ -1,0 +1,7 @@
+<resources>
+    <string-array name="frecuencia">
+        <item>Diaria</item>
+        <item>Semanal</item>
+        <item>Mensual</item>
+    </string-array>
+</resources>

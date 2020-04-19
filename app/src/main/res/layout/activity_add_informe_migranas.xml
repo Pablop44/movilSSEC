@@ -1,9 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.InformeMigranas.AddInformeMigranas">
+    tools:context=".ui.InformeMigranas.AddInformeMigranas"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:id="@+id/frecuencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Frecuencia de los episodioas"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_frecuencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/frecuencia"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/frecuencia"
+                 />
+
+
+            <TextView
+                android:id="@+id/duracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_frecuencia"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Duración de los episodios"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_duracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/duracion"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/duracion"
+                />
+
+            <TextView
+                android:id="@+id/horario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_duracion"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Horario de los episodios"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_horario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horario"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/horario"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/finalizacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_horario"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Finalización del episodio"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_finalizacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/finalizacion"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/finalizacion"
+                android:hint="Género" />
+
+
+            <TextView
+                android:id="@+id/tipoEpisodio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_finalizacion"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Tipo de episodio"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_tipoEpisodio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tipoEpisodio"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/tipoEpisodio" />
+
+            <TextView
+                android:id="@+id/intensidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_tipoEpisodio"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Intensidad del episodio"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_intensidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/intensidad"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/intensidad"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/limitaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_intensidad"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Incompatibilidad con las actividades diarias?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_limitaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/limitaciones"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/despiertoNoche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_limitaciones"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="¿Se despierta por la noche?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_despiertoNoche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/despiertoNoche"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:ems="10"
+                android:entries="@array/array_boolan"
+                android:hint="Género" />
+
+            <TextView
+                android:id="@+id/sintomas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_despiertoNoche"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Síntomas que acompañan al episodio"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/Nauseas_Vomitos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sintomas"
+                android:text="Náuseas/vómitos" />
+            <CheckBox
+                android:id="@+id/Sono_foto_osmofobia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Nauseas_Vomitos"
+                android:text="Sono/foto/osmofobia" />
+            <CheckBox
+                android:id="@+id/Fotopsias_escotomas_hemianopsia_diplopia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Sono_foto_osmofobia"
+                android:text="Fotopsias, escotomas, hemianopsia, diplopía" />
+            <CheckBox
+                android:id="@+id/Hemiparesia_hemidisestesia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Fotopsias_escotomas_hemianopsia_diplopia"
+                android:text="Hemiparesia/hemidisestesia" />
+            <CheckBox
+                android:id="@+id/Inestabilidad_vertigo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Hemiparesia_hemidisestesia"
+                android:text="Inestabilidad, vértigo" />
+            <CheckBox
+                android:id="@+id/SíntomasDisautonomicos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Inestabilidad_vertigo"
+                android:text="Síntomas disautonómicos" />
+            <CheckBox
+                android:id="@+id/Afasia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/SíntomasDisautonomicos"
+                android:text="Afasia" />
+            <CheckBox
+                android:id="@+id/Confusion_crisisComiciales_fiebre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Afasia"
+                android:text="Confusión/crisis comiciales/fiebre"
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:id="@+id/factores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Confusion_crisisComiciales_fiebre"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Síntomas que acompañan al episodio"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/Estres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/factores"
+                android:text="Estrés" />
+            <CheckBox
+                android:id="@+id/EjercicioFisico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Estres"
+                android:text="Ejercicio físico" />
+            <CheckBox
+                android:id="@+id/FactoresHormonales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/EjercicioFisico"
+                android:text="Factores hormonales (menstruación, anticonceptivos)" />
+            <CheckBox
+                android:id="@+id/Dietas_alcohol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/FactoresHormonales"
+                android:text="Dietas, alcohol" />
+            <CheckBox
+                android:id="@+id/CambiosAtmosferico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Dietas_alcohol"
+                android:text="Cambios atmosférico" />
+            <CheckBox
+                android:id="@+id/CambiosPosturales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/CambiosAtmosferico"
+                android:text="Cambios posturales" />
+            <CheckBox
+                android:id="@+id/MovimientoCefalicos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/CambiosPosturales"
+                android:text="Movimientos cefálicos"
+               />
+
+            <CheckBox
+                android:id="@+id/ManiobrasValsalva"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/MovimientoCefalicos"
+                android:text="Maniobras de Valsalva (tos, coito…)"
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:id="@+id/estadoGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ManiobrasValsalva"
+                android:layout_marginRight="20dp"
+                android:text="Indique en una descripción cuál es su estado general"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/editText_estadoGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/estadoGeneral"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:hint="Estado General"
+                android:inputType="textMultiLine"
+                android:lines="5" />
+
+
+            <Button
+                android:id="@+id/button_register"
+                android:layout_width="359dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText_estadoGeneral"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:text="Enviar" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
