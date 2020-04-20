@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
-                android:text="Frecuencia de los episodioas"
+                android:text="Frecuencia de los episodios"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -275,7 +275,7 @@
                 android:layout_below="@+id/Confusion_crisisComiciales_fiebre"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
-                android:text="Síntomas que acompañan al episodio"
+                android:text="Factores que favorecen el episodio"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -356,7 +356,7 @@
 
 
             <Button
-                android:id="@+id/button_register"
+                android:id="@+id/button_send"
                 android:layout_width="359dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editText_estadoGeneral"

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ssec.R;
+import com.example.ssec.servicios.ApiAuthenticationClient;
 
 import java.util.HashMap;
 
@@ -153,7 +155,60 @@ public class AddInformeAsma extends AppCompatActivity {
 
     public void enviarDatosInforme(){
         if(validarDatos()){
-            //funcion de enviar datos al back;
+            try {
+
+                ApiAuthenticationClient apiAuthenticationClient =
+                        new ApiAuthenticationClient(
+                                "http://10.0.2.2:8765/asma/add.json"
+                                , ""
+                                , ""
+                        );
+
+                apiAuthenticationClient.setHttpMethod("POST");
+                apiAuthenticationClient.setParameters(atributos);
+
+                AsyncTask<Void, Void, String> execute = new AddInformeAsma.ExecuteNetworkOperationInforme(apiAuthenticationClient);
+                execute.execute();
+
+            } catch (Exception ex) {
+            }
+        }
+    }
+
+    public class ExecuteNetworkOperationInforme extends AsyncTask<Void, Void, String> {
+
+        private ApiAuthenticationClient apiAuthenticationClient;
+        private String datos;
+
+        /**
+         * Overload the constructor to pass objects to this class.
+         */
+        public ExecuteNetworkOperationInforme(ApiAuthenticationClient apiAuthenticationClient) {
+            this.apiAuthenticationClient = apiAuthenticationClient;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+
+                datos = apiAuthenticationClient.execute();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(getApplicationContext(), datos, Toast.LENGTH_LONG).show();
         }
     }
 }
