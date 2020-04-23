@@ -147,6 +147,10 @@ public class ViewTratamiento extends AppCompatActivity {
             if(tratamientoAVer.getMedicamentos() != null){
                 Type listType = new TypeToken<ArrayList<Medicamento>>(){}.getType();
                 List<Medicamento> listaMedicamentosList = tratamientoAVer.getMedicamentos();
+                if(listaMedicamentosList.size() <= 0){
+                    TextView labelMedicamentos = findViewById(R.id.labelMedicamentos);
+                    labelMedicamentos.setText("Aún no existen medicamentos asociados a este tratamiento");
+                }
                 mAdapter = new CustomAdapterMedicamento(ViewTratamiento.this, listaMedicamentosList);
 
                 listaMedicamentos.setAdapter(mAdapter);

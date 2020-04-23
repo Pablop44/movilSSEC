@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="0dp">
+        android:paddingLeft="10dp">
 
         <RelativeLayout
             android:id="@+id/relativeLayoutMigranas"

@@ -33,6 +33,8 @@ public class AddInformeAsma extends AppCompatActivity {
     private EditText editText_estadoGeneral;
     private Button button_send;
     HashMap<String, String> atributos;
+    private String idFicha;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,10 @@ public class AddInformeAsma extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Añadir Informe Asma");
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        intent = getIntent();
+        Bundle extras = intent.getExtras();
+        idFicha = extras.getString("id");
 
         spinner_calidadSueno = (Spinner) findViewById(R.id.spinner_calidadSueno);
         spinner_dificultadRespirar = (Spinner) findViewById(R.id.spinner_dificultadRespirar);
@@ -140,6 +146,7 @@ public class AddInformeAsma extends AppCompatActivity {
         }
 
         //la fecha se calcula en el back
+        atributos.put("ficha", idFicha);
         atributos.put("calidadSueno", calidaSueno);
         atributos.put("dificultadRespirar", dificultadRespirar);
         atributos.put("tos", tos);
@@ -150,6 +157,7 @@ public class AddInformeAsma extends AppCompatActivity {
         atributos.put("espirometria", espirometria);
         atributos.put("factoresCrisis", factores);
         atributos.put("estadoGeneral", estadoGeneral);
+
         return true;
     }
 
@@ -208,7 +216,13 @@ public class AddInformeAsma extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getApplicationContext(), datos, Toast.LENGTH_LONG).show();
+            if(datos != ""){
+                Toast.makeText(getApplicationContext(), "Se ha guardado con éxito el Informe", Toast.LENGTH_LONG).show();
+                setResult(RESULT_OK, intent);
+                AddInformeAsma.this.finish();
+            }else{
+                Toast.makeText(getApplicationContext(), "No se ha guardado con éxito el Informe", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

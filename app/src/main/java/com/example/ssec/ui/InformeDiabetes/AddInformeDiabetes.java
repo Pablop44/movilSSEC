@@ -3,6 +3,7 @@ package com.example.ssec.ui.InformeDiabetes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -19,10 +20,12 @@ import android.widget.Toast;
 
 import com.example.ssec.R;
 import com.example.ssec.models.Cubierto;
+import com.example.ssec.models.InformeDiabetes;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class AddInformeDiabetes extends AppCompatActivity {
 
@@ -44,6 +47,8 @@ public class AddInformeDiabetes extends AppCompatActivity {
     private EditText editText_estadoGeneral;
     private Button button_send;
     HashMap<String, String> atributos;
+    private String idFicha;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,10 @@ public class AddInformeDiabetes extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Añadir Informe Diabetes");
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        intent = getIntent();
+        Bundle extras = intent.getExtras();
+        idFicha = extras.getString("id");
 
         spinner_numeroControles = (Spinner) findViewById(R.id.spinner_numeroControles);
         spinner_nivelBajo = (Spinner) findViewById(R.id.spinner_nivelBajo);
@@ -171,6 +180,7 @@ public class AddInformeDiabetes extends AppCompatActivity {
         }
 
         //la fecha se calcula en back
+        atributos.put("ficha", idFicha);
         atributos.put("numeroControles", numeroControles);
         atributos.put("nivelBajo", nivelBajo);
         atributos.put("frecuenciaBajo", frecuenciaBajo);
@@ -290,6 +300,7 @@ public class AddInformeDiabetes extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+
         }
     }
 
@@ -326,8 +337,15 @@ public class AddInformeDiabetes extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getApplicationContext(), datos, Toast.LENGTH_LONG).show();
-            //checkMomentos(datosCubierto);
+            if(datos != ""){
+                Toast.makeText(getApplicationContext(), "Se ha guardado con éxito el Informe", Toast.LENGTH_LONG).show();
+                InformeDiabetes informeDiabetes = new Gson().fromJson(datos, InformeDiabetes.class);
+                checkMomentos(informeDiabetes.getId());
+            }else{
+                Toast.makeText(getApplicationContext(), "No se ha guardado con éxito el Informe", Toast.LENGTH_LONG).show();
+            }
+            setResult(RESULT_OK, intent);
+            AddInformeDiabetes.this.finish();
         }
     }
 }

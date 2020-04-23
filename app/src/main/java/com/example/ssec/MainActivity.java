@@ -17,6 +17,8 @@ import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,17 +49,26 @@ public class MainActivity extends AppCompatActivity {
         button_login_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                username = editText_login_username.getText().toString();
+                password = editText_login_password.getText().toString();
+
+                HashMap<String, String> atributos = new HashMap<String, String>();
+                atributos.put("username", username);
+                atributos.put("password", password);
+
                 try {
 
-                    username = editText_login_username.getText().toString();
-                    password = editText_login_password.getText().toString();
+
 
                     ApiAuthenticationClient apiAuthenticationClient =
                             new ApiAuthenticationClient(
                                     baseUrl
-                                    , username
-                                    , password
+                                    , ""
+                                    , ""
                             );
+
+                    apiAuthenticationClient.setHttpMethod("POST");
+                    apiAuthenticationClient.setParameters(atributos);
 
                     AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
                     execute.execute();

@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 public class InformeDiabetesFragment extends Fragment {
 
@@ -107,6 +110,9 @@ public class InformeDiabetesFragment extends Fragment {
                     abrirDialogo();
                 }else{
                     Intent intent = new Intent(getActivity(), AddInformeDiabetes.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", idFicha);
+                    intent.putExtras(bundle);
                     startActivityForResult(intent , REQUEST_CODE);
                 }
             }
@@ -128,6 +134,17 @@ public class InformeDiabetesFragment extends Fragment {
         getCubierto();
 
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE  && resultCode  == RESULT_OK) {
+
+            getInformeDiabetes();
+            getNumeroInformes();
+            getCubierto();
+        }
     }
 
     public void getInformeDiabetes() {

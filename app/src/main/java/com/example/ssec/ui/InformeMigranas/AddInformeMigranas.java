@@ -2,6 +2,7 @@ package com.example.ssec.ui.InformeMigranas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +15,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ssec.R;
+import com.example.ssec.models.InformeMigranas;
 import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 
@@ -47,6 +50,8 @@ public class AddInformeMigranas extends AppCompatActivity {
     private CheckBox ManiobrasValsalva;
     private Button button_send;
     HashMap<String, String> atributos;
+    private String idFicha;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,10 @@ public class AddInformeMigranas extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Añadir Informe Migrañas");
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        intent = getIntent();
+        Bundle extras = intent.getExtras();
+        idFicha = extras.getString("id");
 
         spinner_frecuencia = (Spinner) findViewById(R.id.spinner_frecuencia);
         spinner_duracion = (Spinner) findViewById(R.id.spinner_duracion);
@@ -101,6 +110,7 @@ public class AddInformeMigranas extends AppCompatActivity {
     }
 
     public boolean validarDatos(){
+        atributos =  new HashMap<String, String>();
         String frecuencia = spinner_frecuencia.getSelectedItem().toString();
         String duracion = spinner_duracion.getSelectedItem().toString();
         String horario = spinner_horario.getSelectedItem().toString();
@@ -123,6 +133,18 @@ public class AddInformeMigranas extends AppCompatActivity {
         }else{
             editText_estadoGeneral.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
+
+        atributos.put("ficha", idFicha);
+        atributos.put("frecuencia", frecuencia);
+        atributos.put("duracion", duracion);
+        atributos.put("horario", horario);
+        atributos.put("finalizacion", finalizacion);
+        atributos.put("tipoEpisodio", tipoEpisodio);
+        atributos.put("intensidad", intensidad);
+        atributos.put("limitaciones", limitaciones);
+        atributos.put("despiertoNoche", despiertoNoche);
+        atributos.put("estadoGeneral", estadoGeneral);
+
         return true;
     }
 
@@ -143,7 +165,7 @@ public class AddInformeMigranas extends AppCompatActivity {
             enviarSintoma(idInformeMigranas, "Inestabilidad_vertigo");
         }
         if(SíntomasDisautonomicos.isChecked()){
-            enviarSintoma(idInformeMigranas, "SíntomasDisautonomicos");
+            enviarSintoma(idInformeMigranas, "SintomasDisautonomicos");
         }
         if(Afasia.isChecked()){
             enviarSintoma(idInformeMigranas, "Afasia");
@@ -235,9 +257,16 @@ public class AddInformeMigranas extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getApplicationContext(), datos, Toast.LENGTH_LONG).show();
-            //checkFactores(datos);
-            //checkSintomas(datos);
+            if(datos != ""){
+                Toast.makeText(getApplicationContext(), "Se ha guardado con éxito el Informe", Toast.LENGTH_LONG).show();
+                InformeMigranas informeDiabetes = new Gson().fromJson(datos, InformeMigranas.class);
+                checkFactores(informeDiabetes.getId());
+                checkSintomas(informeDiabetes.getId());
+            }else{
+                Toast.makeText(getApplicationContext(), "No se ha guardado con éxito el Informe", Toast.LENGTH_LONG).show();
+            }
+            setResult(RESULT_OK, intent);
+            AddInformeMigranas.this.finish();
         }
     }
 
@@ -310,7 +339,7 @@ public class AddInformeMigranas extends AppCompatActivity {
 
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
-                            "http://10.0.2.2:8765/migranas/add.json"
+                            "http://10.0.2.2:8765/sintomas/add.json"
                             , ""
                             , ""
                     );
