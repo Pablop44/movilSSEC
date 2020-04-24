@@ -1,23 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Perfil.PerfilFragment">
 
-    <TextView
-        android:id="@+id/text_prueba"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:gravity="center"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
+
+
+            <TextView
+                android:id="@+id/dni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="DNI"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valuedni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dni"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valuedni"
+                android:layout_marginBottom="5dp"
+                android:text="Nombre de usuario"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueusername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueusername"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Email"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueemail"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Nombre del paciente"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valuenombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nombre"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/apellidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valuenombre"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Apellidos del paciente"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valueapellidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/apellidos"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/telefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valueapellidos"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Teléfono personal"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valuetelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/telefono"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/poblacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valuetelefono"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Población"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valuepoblacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/poblacion"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/genero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valuepoblacion"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Género"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valuegenero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/genero"
+                android:layout_marginBottom="15dp"
+                android:text="Last Name"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/fechaNacimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valuegenero"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Fecha de Nacimiento"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valuefechaNacimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fechaNacimiento"
+                android:layout_marginBottom="10dp"
+                android:text="Last Name"
+                android:textSize="20sp" />
+
+
+            <Button
+                android:id="@+id/button_editar"
+                android:layout_width="359dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valuefechaNacimiento"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:text="Editar" />
+
+            <Button
+                android:id="@+id/button_desactivarCuenta"
+                android:layout_width="359dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_editar"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:text="Desactivar Cuenta" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

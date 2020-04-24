@@ -1,42 +1,34 @@
-package com.example.ssec;
+package com.example.ssec.ui.Perfil;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
+import com.example.ssec.R;
 import com.example.ssec.aux.DatePickerFragment;
+import com.example.ssec.models.Cubierto;
 import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class registerActivity extends AppCompatActivity {
+public class EditUser extends AppCompatActivity {
 
-    private Button button_register;
+    private User usuario;
+    private String idUser;
     private EditText editText_dni;
     private EditText editText_username;
     private EditText editText_password;
@@ -46,22 +38,23 @@ public class registerActivity extends AppCompatActivity {
     private EditText editText_telefono;
     private EditText editText_poblacion;
     private EditText editText_nacimiento;
-    private Spinner spGenero;
+    private Spinner spinner_genero;
+    private Button button_editar;
     HashMap<String, String> atributos;
-    private String baseUrl;
-
-    private final static String[] genero = {"Género", "Hombre", "Mujer"};
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_edit_user);
 
-        getSupportActionBar().setTitle(R.string.register);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        baseUrl = "http://10.0.2.2:8765/user/registerPaciente.json";
+        getSupportActionBar().setTitle("Editar usuario");
+
+        intent = getIntent();
+        idUser = intent.getStringExtra("id");
 
         editText_dni = (EditText) findViewById(R.id.editText_dni);
         editText_username = (EditText) findViewById(R.id.editText_username);
@@ -72,12 +65,8 @@ public class registerActivity extends AppCompatActivity {
         editText_telefono = (EditText) findViewById(R.id.editText_telefono);
         editText_poblacion = (EditText) findViewById(R.id.editText_poblacion);
         editText_nacimiento = (EditText) findViewById(R.id.editText_nacimiento);
-        spGenero = (Spinner) findViewById(R.id.spinner_genero);
-
-        button_register = (Button) findViewById(R.id.button_register);
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, genero);
-        spGenero.setAdapter(adapter);
+        spinner_genero = (Spinner) findViewById(R.id.spinner_genero);
+        button_editar = (Button) findViewById(R.id.button_editar);
 
         editText_nacimiento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,40 +75,22 @@ public class registerActivity extends AppCompatActivity {
             }
         });
 
-        button_register.setOnClickListener(new View.OnClickListener() {
+        button_editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validarDatos()) {
-                    try {
-
-                        ApiAuthenticationClient apiAuthenticationClient =
-                                new ApiAuthenticationClient(
-                                        baseUrl
-                                        , ""
-                                        , ""
-                                );
-
-                        apiAuthenticationClient.setHttpMethod("POST");
-                        apiAuthenticationClient.setParameters(atributos);
-
-                        AsyncTask<Void, Void, String> execute = new registerActivity.ExecuteNetworkOperation(apiAuthenticationClient);
-                        execute.execute();
-                    } catch (Exception ex) {
-                        Toast.makeText(getApplicationContext(), "Fallo al registrarse", Toast.LENGTH_LONG).show();
-                    }
-                }
+                editarUser();
             }
         });
-    }
 
+
+        getDatosUser();
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
-
-
 
     public boolean validarDatos(){
         atributos =  new HashMap<String, String>();
@@ -133,11 +104,9 @@ public class registerActivity extends AppCompatActivity {
         String telefono = editText_telefono.getText().toString();
         String poblacion = editText_poblacion.getText().toString();
         String nacimiento = editText_nacimiento.getText().toString();
-
         String[] valores = nacimiento.split("-");
         String nacimientoFinal = valores[2] + "-" + valores[1] + "-" + valores[0];
-
-        String genero = spGenero.getSelectedItem().toString();
+        String genero = spinner_genero.getSelectedItem().toString();
 
         if(!validarNIF(dni) || dni.equals("")){
             Toast.makeText(getApplicationContext(), "El NIF es incorrecto o es vacío", Toast.LENGTH_LONG).show();
@@ -192,10 +161,10 @@ public class registerActivity extends AppCompatActivity {
 
         if(genero.equals("Género")){
             Toast.makeText(getApplicationContext(), "Selecciona un género", Toast.LENGTH_LONG).show();
-            spGenero.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            spinner_genero.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             return false;
         }else{
-            spGenero.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
+            spinner_genero.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
 
         if(!telefono.matches("^([9,7,6]{1})+([0-9]{8})$") || telefono.equals("")){
@@ -220,6 +189,7 @@ public class registerActivity extends AppCompatActivity {
             genero = "Female";
         }
 
+        atributos.put("id", idUser);
         atributos.put("dni", dni);
         atributos.put("username", username);
         atributos.put("email", email);
@@ -254,6 +224,43 @@ public class registerActivity extends AppCompatActivity {
         return correcto;
     }
 
+    public void editarUser(){
+        if(validarDatos()){
+            try {
+
+                ApiAuthenticationClient apiAuthenticationClient =
+                        new ApiAuthenticationClient(
+                                "http://10.0.2.2:8765/user/editarUser.json"
+                                , ""
+                                , ""
+                        );
+
+                apiAuthenticationClient.setHttpMethod("POST");
+                apiAuthenticationClient.setParameters(atributos);
+
+                AsyncTask<Void, Void, String> execute = new EditUser.ExecuteNetworkOperationEditar(apiAuthenticationClient);
+                execute.execute();
+
+            } catch (Exception ex) {
+            }
+        }
+    }
+
+    public void actualizarDatos(){
+        editText_dni.setText(usuario.getDni());
+        editText_username.setText(usuario.getUsername());
+        editText_email.setText(usuario.getEmail());
+        editText_nombre.setText(usuario.getNombre());
+        editText_apellidos.setText(usuario.getApellidos());
+        editText_telefono.setText(usuario.getTelefono());
+        editText_poblacion.setText(usuario.getPoblacion());
+        editText_nacimiento.setText(usuario.getNacimiento());
+        if(usuario.getGenero().equals("Male")){
+            spinner_genero.setSelection(1);
+        }else{
+            spinner_genero.setSelection(2);;
+        }
+    }
 
     private void showDatePickerDialog() {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
@@ -278,16 +285,35 @@ public class registerActivity extends AppCompatActivity {
                 // +1 because January is zero
                 final String selectedDate = separador + day + separador1 + (month + 1) + "-" + year;
                 editText_nacimiento.setText(selectedDate);
+
+
             }
         });
 
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    public void getDatosUser() {
+        try {
+
+            ApiAuthenticationClient apiAuthenticationClient =
+                    new ApiAuthenticationClient(
+                            "http://10.0.2.2:8765/user/view/"+idUser+".json"
+                            , ""
+                            , ""
+                    );
+
+            AsyncTask<Void, Void, String> execute = new EditUser.ExecuteNetworkOperation(apiAuthenticationClient);
+            execute.execute();
+        } catch (Exception ex) {
+        }
+    }
+
+
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
         private ApiAuthenticationClient apiAuthenticationClient;
-        private String isValidCredentials;
+        private String datosUser;
 
         /**
          * Overload the constructor to pass objects to this class.
@@ -299,15 +325,48 @@ public class registerActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            // Display the progress bar.
-            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         }
 
         @Override
         protected String doInBackground(Void... params) {
             try {
-                isValidCredentials = apiAuthenticationClient.execute();
+                datosUser = apiAuthenticationClient.execute();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            usuario = new Gson().fromJson(datosUser, User.class);
+            actualizarDatos();
+        }
+    }
+
+    public class ExecuteNetworkOperationEditar extends AsyncTask<Void, Void, String> {
+
+        private ApiAuthenticationClient apiAuthenticationClient;
+        private String datos;
+
+        /**
+         * Overload the constructor to pass objects to this class.
+         */
+        public ExecuteNetworkOperationEditar(ApiAuthenticationClient apiAuthenticationClient) {
+            this.apiAuthenticationClient = apiAuthenticationClient;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                datos = apiAuthenticationClient.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -317,34 +376,13 @@ public class registerActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            if(isValidCredentials != ""){
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(registerActivity.this);
-
-                dlgAlert.setMessage("Vaya a su correo electrónico y active su cuenta");
-                dlgAlert.setTitle("Éxito");
-                dlgAlert.setPositiveButton("OK", null);
-                dlgAlert.setCancelable(true);
-                dlgAlert.create().show();
-
-                dlgAlert.setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                finalizarActividad();
-                            }
-                        });
-            }else {
-                Toast.makeText(getApplicationContext(), "Error al crear el usuario", Toast.LENGTH_LONG).show();
-                findViewById(R.id.loadingPanel).setVisibility(View.INVISIBLE);
+            if(datos != ""){
+                Toast.makeText(getApplicationContext(), "Se ha editado con éxito", Toast.LENGTH_LONG).show();
+                setResult(RESULT_OK, intent);
+                EditUser.this.finish();
+            }else{
+                Toast.makeText(getApplicationContext(), "Fallo al editar", Toast.LENGTH_LONG).show();
             }
         }
     }
-
-    public void finalizarActividad(){
-        finish();
-    }
-
 }
-
-

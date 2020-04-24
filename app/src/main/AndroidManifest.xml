@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.InformeMigranas.AddInformeMigranas"></activity>
+        <activity android:name=".ui.Perfil.EditUser"></activity>
+        <activity android:name=".ui.InformeMigranas.AddInformeMigranas" />
         <activity android:name=".ui.InformeDiabetes.AddInformeDiabetes" />
         <activity android:name=".ui.InformeAsma.AddInformeAsma" />
         <activity android:name=".ui.InformeMigranas.ViewInformeMigranas" />
