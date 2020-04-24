@@ -116,7 +116,7 @@ public class EditUser extends AppCompatActivity {
             editText_dni.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
 
-        if(!username.matches("[A-Za-z0-9]+") || username.equals("")){
+        if(!username.matches("[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]+") || username.equals("")){
             Toast.makeText(getApplicationContext(), "El nombre de usuario es incorrecto o vacío", Toast.LENGTH_LONG).show();
             editText_username.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             return false;
@@ -124,7 +124,7 @@ public class EditUser extends AppCompatActivity {
             editText_username.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
 
-        if(!nombre.matches("[a-zA-Z\\s]+") || nombre.equals("")){
+        if(!nombre.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+") || nombre.equals("")){
             Toast.makeText(getApplicationContext(), "El nombre es incorrecto", Toast.LENGTH_LONG).show();
             editText_nombre.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             return false;
@@ -132,7 +132,7 @@ public class EditUser extends AppCompatActivity {
             editText_nombre.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
 
-        if(!apellidos.matches("[a-zA-Z\\s]+") || apellidos.equals("")){
+        if(!apellidos.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+") || apellidos.equals("")){
             Toast.makeText(getApplicationContext(), "Los apellidos son incorrectos", Toast.LENGTH_LONG).show();
             editText_apellidos.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             return false;
@@ -285,7 +285,6 @@ public class EditUser extends AppCompatActivity {
                 // +1 because January is zero
                 final String selectedDate = separador + day + separador1 + (month + 1) + "-" + year;
                 editText_nacimiento.setText(selectedDate);
-
 
             }
         });

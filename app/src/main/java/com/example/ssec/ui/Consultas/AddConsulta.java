@@ -49,6 +49,7 @@ public class AddConsulta extends AppCompatActivity {
     private String selectedDate;
     private String motivo;
     private Intent intent;
+    private String idConsulta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,14 @@ public class AddConsulta extends AppCompatActivity {
         setContentView(R.layout.activity_add_consulta);
 
         intent = getIntent();
+        idConsulta = intent.getStringExtra("id");
 
-        getSupportActionBar().setTitle(R.string.anadir_consulta);
+        if(idConsulta == null){
+            getSupportActionBar().setTitle(R.string.anadir_consulta);
+        }else {
+            getSupportActionBar().setTitle("Aplazar Consulta");
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -168,6 +175,30 @@ public class AddConsulta extends AppCompatActivity {
         });
 
         newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void aplazarConsulta(){
+        HashMap<String, String> atributos = new HashMap<String, String>();
+        atributos.put("id", idConsulta);
+        atributos.put("estado", "aplazada");
+        try {
+
+
+            ApiAuthenticationClient apiAuthenticationClient =
+                    new ApiAuthenticationClient(
+                            "http://10.0.2.2:8765/consulta/editarConsulta/.json"
+                            , ""
+                            , ""
+                    );
+
+            apiAuthenticationClient.setHttpMethod("POST");
+            apiAuthenticationClient.setParameters(atributos);
+
+            AsyncTask<Void, Void, String> execute = new AddConsulta.ExecuteNetworkOperationAplazar(apiAuthenticationClient);
+            execute.execute();
+
+        } catch (Exception ex) {
+        }
     }
 
 
@@ -304,11 +335,54 @@ public class AddConsulta extends AppCompatActivity {
             super.onPostExecute(result);
             if(exitoONo != ""){
                 Toast.makeText(getApplicationContext(), "Consulta creada correctamente", Toast.LENGTH_SHORT).show();
-                setResult(RESULT_OK, intent);
-                AddConsulta.this.finish();
+                if(idConsulta == null){
+                    setResult(RESULT_OK, intent);
+                    AddConsulta.this.finish();
+                }else {
+                    aplazarConsulta();
+                }
             }else {
                 Toast.makeText(getApplicationContext(), "No se ha podido crear la consulta", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public class ExecuteNetworkOperationAplazar extends AsyncTask<Void, Void, String> {
+
+        private ApiAuthenticationClient apiAuthenticationClient;
+        private String datos;
+
+        /**
+         * Overload the constructor to pass objects to this class.
+         */
+        public ExecuteNetworkOperationAplazar(ApiAuthenticationClient apiAuthenticationClient) {
+            this.apiAuthenticationClient = apiAuthenticationClient;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+
+                datos = apiAuthenticationClient.execute();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(getApplicationContext(), "Se ha aplazado con éxito", Toast.LENGTH_LONG).show();
+            setResult(RESULT_OK, intent);
+            AddConsulta.this.finish();
         }
     }
 

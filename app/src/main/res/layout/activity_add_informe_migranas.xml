@@ -249,7 +249,7 @@
                 android:layout_below="@+id/Hemiparesia_hemidisestesia"
                 android:text="Inestabilidad, vértigo" />
             <CheckBox
-                android:id="@+id/SíntomasDisautonomicos"
+                android:id="@+id/SintomasDisautonomicos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Inestabilidad_vertigo"

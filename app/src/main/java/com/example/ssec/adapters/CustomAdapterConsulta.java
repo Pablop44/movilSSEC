@@ -70,7 +70,12 @@ public class CustomAdapterConsulta extends BaseAdapter {
 
         consulta = (Consulta) consultas.get(position);
 
-        mViewHolder.author.setText(consulta.getLugar());
+        if(consulta.getLugar() == null){
+            mViewHolder.author.setText("No definido");
+        }else{
+            mViewHolder.author.setText(consulta.getLugar());
+        }
+
         mViewHolder.title.setText(consulta.getMotivo());
         mViewHolder.date.setText(consulta.getFecha());
 

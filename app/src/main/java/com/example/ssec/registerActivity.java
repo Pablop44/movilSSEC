@@ -89,25 +89,7 @@ public class registerActivity extends AppCompatActivity {
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validarDatos()) {
-                    try {
-
-                        ApiAuthenticationClient apiAuthenticationClient =
-                                new ApiAuthenticationClient(
-                                        baseUrl
-                                        , ""
-                                        , ""
-                                );
-
-                        apiAuthenticationClient.setHttpMethod("POST");
-                        apiAuthenticationClient.setParameters(atributos);
-
-                        AsyncTask<Void, Void, String> execute = new registerActivity.ExecuteNetworkOperation(apiAuthenticationClient);
-                        execute.execute();
-                    } catch (Exception ex) {
-                        Toast.makeText(getApplicationContext(), "Fallo al registrarse", Toast.LENGTH_LONG).show();
-                    }
-                }
+               registrarUser();
             }
         });
     }
@@ -118,8 +100,6 @@ public class registerActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
-
 
     public boolean validarDatos(){
         atributos =  new HashMap<String, String>();
@@ -134,9 +114,6 @@ public class registerActivity extends AppCompatActivity {
         String poblacion = editText_poblacion.getText().toString();
         String nacimiento = editText_nacimiento.getText().toString();
 
-        String[] valores = nacimiento.split("-");
-        String nacimientoFinal = valores[2] + "-" + valores[1] + "-" + valores[0];
-
         String genero = spGenero.getSelectedItem().toString();
 
         if(!validarNIF(dni) || dni.equals("")){
@@ -147,7 +124,7 @@ public class registerActivity extends AppCompatActivity {
             editText_dni.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
 
-        if(!username.matches("[A-Za-z0-9]+") || username.equals("")){
+        if(!username.matches("[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]+") || username.equals("")){
             Toast.makeText(getApplicationContext(), "El nombre de usuario es incorrecto o vacío", Toast.LENGTH_LONG).show();
             editText_username.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             return false;
@@ -155,7 +132,7 @@ public class registerActivity extends AppCompatActivity {
             editText_username.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
 
-        if(!nombre.matches("[a-zA-Z\\s]+") || nombre.equals("")){
+        if(!nombre.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+") || nombre.equals("")){
             Toast.makeText(getApplicationContext(), "El nombre es incorrecto", Toast.LENGTH_LONG).show();
             editText_nombre.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             return false;
@@ -163,7 +140,7 @@ public class registerActivity extends AppCompatActivity {
             editText_nombre.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
 
-        if(!apellidos.matches("[a-zA-Z\\s]+") || apellidos.equals("")){
+        if(!apellidos.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+") || apellidos.equals("")){
             Toast.makeText(getApplicationContext(), "Los apellidos son incorrectos", Toast.LENGTH_LONG).show();
             editText_apellidos.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             return false;
@@ -179,15 +156,13 @@ public class registerActivity extends AppCompatActivity {
             editText_email.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
 
-        if(!password.equals("")){
-            if(!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[#$^+=!*()@%&])(?=\\S+$).{8,}$")){
-                Toast.makeText(getApplicationContext(), "La contraseña es incorrecta", Toast.LENGTH_LONG).show();
-                editText_password.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
-                return false;
-            }else{
-                atributos.put("password", password);
-                editText_password.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
-            }
+        if(!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[#$^+=!*()@%&])(?=\\S+$).{8,}$") || password.equals("")){
+            Toast.makeText(getApplicationContext(), "La contraseña es incorrecta", Toast.LENGTH_LONG).show();
+            editText_password.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            return false;
+        }else{
+            atributos.put("password", password);
+            editText_password.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
         }
 
         if(genero.equals("Género")){
@@ -207,11 +182,20 @@ public class registerActivity extends AppCompatActivity {
         }
 
         if(!poblacion.matches("[a-zA-Z\\s]+") || poblacion.equals("")){
-            Toast.makeText(getApplicationContext(), "Los apellidos son incorrectos", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "La poblacion son incorrectos", Toast.LENGTH_LONG).show();
             editText_poblacion.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             return false;
         }else{
             editText_poblacion.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
+        }
+
+        if(nacimiento.equals("")){
+            Toast.makeText(getApplicationContext(), "La fecha de nacimiento es incorrecta", Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            String[] valores = nacimiento.split("-");
+            String nacimientoFinal = valores[2] + "-" + valores[1] + "-" + valores[0];
+            atributos.put("nacimiento", nacimientoFinal);
         }
 
         if(genero == "Hombre"){
@@ -227,10 +211,31 @@ public class registerActivity extends AppCompatActivity {
         atributos.put("apellidos", apellidos);
         atributos.put("telefono", telefono);
         atributos.put("poblacion", poblacion);
-        atributos.put("nacimiento", nacimientoFinal);
         atributos.put("genero", genero);
 
         return true;
+    }
+
+    public void registrarUser(){
+        if(validarDatos()) {
+            try {
+
+                ApiAuthenticationClient apiAuthenticationClient =
+                        new ApiAuthenticationClient(
+                                baseUrl
+                                , ""
+                                , ""
+                        );
+
+                apiAuthenticationClient.setHttpMethod("POST");
+                apiAuthenticationClient.setParameters(atributos);
+
+                AsyncTask<Void, Void, String> execute = new registerActivity.ExecuteNetworkOperation(apiAuthenticationClient);
+                execute.execute();
+            } catch (Exception ex) {
+                Toast.makeText(getApplicationContext(), "Fallo al registrarse", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private static boolean validarNIF(String nif) {
@@ -318,25 +323,28 @@ public class registerActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
+
             if(isValidCredentials != ""){
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(registerActivity.this);
 
-                dlgAlert.setMessage("Vaya a su correo electrónico y active su cuenta");
+                dlgAlert.setMessage("Vaya a su correo para activar su cuenta");
                 dlgAlert.setTitle("Éxito");
-                dlgAlert.setPositiveButton("OK", null);
-                dlgAlert.setCancelable(true);
-                dlgAlert.create().show();
-
                 dlgAlert.setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finalizarActividad();
                             }
                         });
+                dlgAlert.setCancelable(true);
+                dlgAlert.create().show();
+
+
             }else {
-                Toast.makeText(getApplicationContext(), "Error al crear el usuario", Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getApplicationContext(), isValidCredentials, Toast.LENGTH_LONG).show();
                 findViewById(R.id.loadingPanel).setVisibility(View.INVISIBLE);
+
             }
         }
     }

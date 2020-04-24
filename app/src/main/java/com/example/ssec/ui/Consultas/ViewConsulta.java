@@ -1,8 +1,12 @@
 package com.example.ssec.ui.Consultas;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +42,7 @@ public class ViewConsulta extends AppCompatActivity {
     private Consulta consultaAver;
     private Button aplazarConsulta;
     private Button cancelarConsulta;
+    public static final int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,11 @@ public class ViewConsulta extends AppCompatActivity {
         aplazarConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ViewConsulta.this, AddConsulta.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", idConsulta);
+                intent.putExtras(bundle);
+                startActivityForResult(intent , REQUEST_CODE);
             }
         });
 
@@ -66,7 +75,7 @@ public class ViewConsulta extends AppCompatActivity {
         cancelarConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                abrirDialogo();
             }
         });
 
@@ -85,10 +94,32 @@ public class ViewConsulta extends AppCompatActivity {
         return true;
     }
 
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE  && resultCode  == RESULT_OK) {
+           getDatosFicha();
+        }
+    }
+
+    public void abrirDialogo(){
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+
+        dlgAlert.setMessage("¿Estás seguro de que quieres cancelar la cita?");
+        dlgAlert.setTitle("Cancelar cita");
+        dlgAlert.setNegativeButton("Cerrar", null);
+        dlgAlert.setPositiveButton("Cancelar Consulta",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        cancelarConsultaMethod();
+                    }
+                });
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+    }
+
     public void getDatosFicha(){
-
         try {
-
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/view/"+idConsulta+".json"
@@ -105,11 +136,40 @@ public class ViewConsulta extends AppCompatActivity {
         }
     }
 
+
+    public void cancelarConsultaMethod(){
+        HashMap<String, String> atributos = new HashMap<String, String>();
+        atributos.put("id", idConsulta);
+        atributos.put("estado", "cancelada");
+        try {
+
+
+            ApiAuthenticationClient apiAuthenticationClient =
+                    new ApiAuthenticationClient(
+                            "http://10.0.2.2:8765/consulta/editarConsulta/.json"
+                            , ""
+                            , ""
+                    );
+
+            apiAuthenticationClient.setHttpMethod("POST");
+            apiAuthenticationClient.setParameters(atributos);
+
+            AsyncTask<Void, Void, String> execute = new ViewConsulta.ExecuteNetworkOperationCancelar(apiAuthenticationClient);
+            execute.execute();
+
+        } catch (Exception ex) {
+        }
+    }
+
     public void actualizarDatos(){
 
         String[] fechaHora = consultaAver.getFechaHora();
 
-        valueLugar.setText(consultaAver.getLugar());
+        if(consultaAver.getLugar() == null){
+            valueLugar.setText("Lugar no definido");
+        }else{
+            valueLugar.setText(consultaAver.getLugar());
+        }
         valueMotivo.setText(consultaAver.getMotivo());
         valueFecha.setText(fechaHora[0]);
         valueHora.setText(fechaHora[1]);
@@ -126,7 +186,22 @@ public class ViewConsulta extends AppCompatActivity {
             valueObservaciones.setText("Si tiene");
         }
 
-        valueEstado.setText(consultaAver.getEstado());
+        if(consultaAver.getEstado().equals("en tiempo")){
+            valueEstado.setText("En tiempo");
+        }else if(consultaAver.getEstado().equals("realizada")){
+            valueEstado.setText("Realizada");
+            cancelarConsulta.setEnabled(false);
+            aplazarConsulta.setEnabled(false);
+        }else if(consultaAver.getEstado().equals("cancelada")){
+            valueEstado.setText("Cancelada");
+            cancelarConsulta.setEnabled(false);
+            aplazarConsulta.setEnabled(false);
+        }else if(consultaAver.getEstado().equals("aplazada")){
+            valueEstado.setText("Aplazada");
+            cancelarConsulta.setEnabled(false);
+            aplazarConsulta.setEnabled(false);
+        }
+
     }
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
@@ -165,9 +240,47 @@ public class ViewConsulta extends AppCompatActivity {
 
             consultaAver = new Gson().fromJson(datos, Consulta.class);
             getSupportActionBar().setTitle("Consulta "+consultaAver.getId());
-
             actualizarDatos();
+        }
+    }
 
+
+    public class ExecuteNetworkOperationCancelar extends AsyncTask<Void, Void, String> {
+
+        private ApiAuthenticationClient apiAuthenticationClient;
+        private String datos;
+
+        /**
+         * Overload the constructor to pass objects to this class.
+         */
+        public ExecuteNetworkOperationCancelar(ApiAuthenticationClient apiAuthenticationClient) {
+            this.apiAuthenticationClient = apiAuthenticationClient;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+
+                datos = apiAuthenticationClient.execute();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            consultaAver = new Gson().fromJson(datos, Consulta.class);
+            Toast.makeText(getApplicationContext(), "Se ha cancelado con éxito", Toast.LENGTH_LONG).show();
+            actualizarDatos();
         }
     }
 }

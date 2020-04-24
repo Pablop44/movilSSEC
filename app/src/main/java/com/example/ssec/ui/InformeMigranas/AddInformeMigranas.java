@@ -37,7 +37,7 @@ public class AddInformeMigranas extends AppCompatActivity {
     private CheckBox Fotopsias_escotomas_hemianopsia_diplopia;
     private CheckBox Hemiparesia_hemidisestesia;
     private CheckBox Inestabilidad_vertigo;
-    private CheckBox SíntomasDisautonomicos;
+    private CheckBox SintomasDisautonomicos;
     private CheckBox Afasia;
     private CheckBox Confusion_crisisComiciales_fiebre;
     private CheckBox Estres;
@@ -82,7 +82,7 @@ public class AddInformeMigranas extends AppCompatActivity {
         Fotopsias_escotomas_hemianopsia_diplopia = (CheckBox) findViewById(R.id.Fotopsias_escotomas_hemianopsia_diplopia);
         Hemiparesia_hemidisestesia = (CheckBox) findViewById(R.id.Hemiparesia_hemidisestesia);
         Inestabilidad_vertigo = (CheckBox) findViewById(R.id.Inestabilidad_vertigo);
-        SíntomasDisautonomicos = (CheckBox) findViewById(R.id.SíntomasDisautonomicos);
+        SintomasDisautonomicos = (CheckBox) findViewById(R.id.SintomasDisautonomicos);
         Afasia = (CheckBox) findViewById(R.id.Afasia);
         Confusion_crisisComiciales_fiebre = (CheckBox) findViewById(R.id.Confusion_crisisComiciales_fiebre);
         Estres = (CheckBox) findViewById(R.id.Estres);
@@ -164,7 +164,7 @@ public class AddInformeMigranas extends AppCompatActivity {
         if(Inestabilidad_vertigo.isChecked()){
             enviarSintoma(idInformeMigranas, "Inestabilidad_vertigo");
         }
-        if(SíntomasDisautonomicos.isChecked()){
+        if(SintomasDisautonomicos.isChecked()){
             enviarSintoma(idInformeMigranas, "SintomasDisautonomicos");
         }
         if(Afasia.isChecked()){

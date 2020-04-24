@@ -8,6 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -199,7 +201,7 @@ import java.util.Map;
          * Get the payload as a string from the existing parameters.
          * @return String
          */
-        private String getPayloadAsString() throws JSONException {
+        private String getPayloadAsString() throws JSONException, UnsupportedEncodingException {
             // Cycle through the parameters.
             JSONObject jsonParam = new JSONObject();
             Iterator it = parameters.entrySet().iterator();
@@ -210,7 +212,7 @@ import java.util.Map;
 
                 it.remove(); // avoids a ConcurrentModificationException
             }
-            return jsonParam.toString();
+            return new String(jsonParam.toString().getBytes(), "UTF-8");
         }
 
         /**
@@ -230,7 +232,7 @@ import java.util.Map;
 
                 if (parameters.size() > 0 && httpMethod.equals("GET")) {
                     payload = getPayloadAsString();
-                    urlString.append("?" + payload);
+                    urlString.append("?" + URLEncoder.encode(payload,"UTF-8"));
                 }
 
 
@@ -251,7 +253,7 @@ import java.util.Map;
                 // Make the network connection and retrieve the output from the server.
                 if (httpMethod.equals("POST") || httpMethod.equals("PUT")) {
 
-                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
 
                     payload = getPayloadAsString();
 
