@@ -49,6 +49,7 @@ public class AddInformeDiabetes extends AppCompatActivity {
     HashMap<String, String> atributos;
     private String idFicha;
     private Intent intent;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class AddInformeDiabetes extends AppCompatActivity {
         intent = getIntent();
         Bundle extras = intent.getExtras();
         idFicha = extras.getString("id");
+        token = extras.getString("token");
 
         spinner_numeroControles = (Spinner) findViewById(R.id.spinner_numeroControles);
         spinner_nivelBajo = (Spinner) findViewById(R.id.spinner_nivelBajo);
@@ -228,8 +230,7 @@ public class AddInformeDiabetes extends AppCompatActivity {
                 ApiAuthenticationClient apiAuthenticationClient =
                         new ApiAuthenticationClient(
                                 "http://10.0.2.2:8765/diabetes/add.json"
-                                , ""
-                                , ""
+                                , token
                         );
 
                 apiAuthenticationClient.setHttpMethod("POST");
@@ -253,8 +254,7 @@ public class AddInformeDiabetes extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/momentos/add.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");

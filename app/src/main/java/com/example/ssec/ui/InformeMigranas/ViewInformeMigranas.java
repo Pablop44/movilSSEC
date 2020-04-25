@@ -40,6 +40,7 @@ public class ViewInformeMigranas extends AppCompatActivity {
     private TextView limitaciones;
     private TextView despiertoNoche;
     private TextView estadoGeneral;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,8 @@ public class ViewInformeMigranas extends AppCompatActivity {
 
         Intent intent = getIntent();
         idInforme = intent.getStringExtra("id");
+        token = intent.getStringExtra("token");
+
         getDatosInforme();
     }
 
@@ -102,8 +105,7 @@ public class ViewInformeMigranas extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/migranas/view/"+idInforme+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("GET");

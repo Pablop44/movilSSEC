@@ -12,12 +12,9 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +24,6 @@ import com.example.ssec.models.InformeDiabetes;
 import com.example.ssec.models.Momento;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
 
 import java.util.Iterator;
 
@@ -47,6 +42,7 @@ public class ViewInformeDiabetes extends AppCompatActivity {
     private TextView actividadFisica;
     private TextView problemaDieta;
     private TextView estadoGeneral;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +66,8 @@ public class ViewInformeDiabetes extends AppCompatActivity {
 
         Intent intent = getIntent();
         idInforme = intent.getStringExtra("id");
+        token = intent.getStringExtra("token");
+
         getDatosInforme();
     }
 
@@ -111,8 +109,7 @@ public class ViewInformeDiabetes extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/diabetes/view/"+idInforme+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("GET");

@@ -33,6 +33,7 @@ public class ViewInformeAsma extends AppCompatActivity {
     private TextView espirometria;
     private TextView factores;
     private TextView estadoGeneral;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class ViewInformeAsma extends AppCompatActivity {
 
         Intent intent = getIntent();
         idInforme = intent.getStringExtra("id");
+        token = intent.getStringExtra("token");
         getDatosInforme();
     }
 
@@ -96,8 +98,7 @@ public class ViewInformeAsma extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/asma/view/"+idInforme+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("GET");

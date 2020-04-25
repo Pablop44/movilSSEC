@@ -18,8 +18,9 @@ public class User {
     private String nacimiento;
     private String rol;
     private String ficha;
+    private String token;
 
-    public User(String id, String dni, String username, String email, String nombre, String apellidos, String telefono, String poblacion, String genero, String nacimiento, String rol, String ficha) {
+    public User(String id, String dni, String username, String email, String nombre, String apellidos, String telefono, String poblacion, String genero, String nacimiento, String rol, String ficha, String token) {
         this.id = id;
         this.dni = dni;
         this.username = username;
@@ -32,6 +33,7 @@ public class User {
         this.nacimiento = nacimiento;
         this.rol = rol;
         this.ficha = ficha;
+        this.token = token;
     }
 
     public String getId() {
@@ -128,5 +130,13 @@ public class User {
 
     public void setFicha(String ficha) {
         this.ficha = ficha;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

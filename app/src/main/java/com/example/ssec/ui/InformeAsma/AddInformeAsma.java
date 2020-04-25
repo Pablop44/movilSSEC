@@ -35,6 +35,7 @@ public class AddInformeAsma extends AppCompatActivity {
     HashMap<String, String> atributos;
     private String idFicha;
     private Intent intent;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class AddInformeAsma extends AppCompatActivity {
         intent = getIntent();
         Bundle extras = intent.getExtras();
         idFicha = extras.getString("id");
+        token = extras.getString("token");
 
         spinner_calidadSueno = (Spinner) findViewById(R.id.spinner_calidadSueno);
         spinner_dificultadRespirar = (Spinner) findViewById(R.id.spinner_dificultadRespirar);
@@ -168,8 +170,7 @@ public class AddInformeAsma extends AppCompatActivity {
                 ApiAuthenticationClient apiAuthenticationClient =
                         new ApiAuthenticationClient(
                                 "http://10.0.2.2:8765/asma/add.json"
-                                , ""
-                                , ""
+                                , token
                         );
 
                 apiAuthenticationClient.setHttpMethod("POST");

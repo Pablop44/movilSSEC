@@ -39,6 +39,7 @@ public class ViewTratamiento extends AppCompatActivity {
     private ListView listaMedicamentos;
     private TextView labelMedicamentos;
     private CustomAdapterMedicamento mAdapter;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class ViewTratamiento extends AppCompatActivity {
 
         Intent intent = getIntent();
         idTratamiento = intent.getStringExtra("id");
+        token = intent.getStringExtra("token");
         getDatosTratamiento();
     }
 
@@ -85,8 +87,7 @@ public class ViewTratamiento extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/tratamiento/viewPaciente/"+idTratamiento+".json"
-                            , "pablo"
-                            , "pablo"
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("GET");

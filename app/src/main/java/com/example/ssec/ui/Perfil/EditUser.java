@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.ssec.R;
 import com.example.ssec.aux.DatePickerFragment;
-import com.example.ssec.models.Cubierto;
 import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
 import com.google.gson.Gson;
@@ -42,6 +41,7 @@ public class EditUser extends AppCompatActivity {
     private Button button_editar;
     HashMap<String, String> atributos;
     private Intent intent;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class EditUser extends AppCompatActivity {
 
         intent = getIntent();
         idUser = intent.getStringExtra("id");
+        token = intent.getStringExtra("token");
 
         editText_dni = (EditText) findViewById(R.id.editText_dni);
         editText_username = (EditText) findViewById(R.id.editText_username);
@@ -231,8 +232,7 @@ public class EditUser extends AppCompatActivity {
                 ApiAuthenticationClient apiAuthenticationClient =
                         new ApiAuthenticationClient(
                                 "http://10.0.2.2:8765/user/editarUser.json"
-                                , ""
-                                , ""
+                                , token
                         );
 
                 apiAuthenticationClient.setHttpMethod("POST");
@@ -298,8 +298,7 @@ public class EditUser extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/user/view/"+idUser+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             AsyncTask<Void, Void, String> execute = new EditUser.ExecuteNetworkOperation(apiAuthenticationClient);

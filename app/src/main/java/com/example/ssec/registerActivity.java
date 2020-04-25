@@ -224,7 +224,6 @@ public class registerActivity extends AppCompatActivity {
                         new ApiAuthenticationClient(
                                 baseUrl
                                 , ""
-                                , ""
                         );
 
                 apiAuthenticationClient.setHttpMethod("POST");

@@ -52,7 +52,7 @@ public class NotaFragment extends Fragment {
     private TextView min;
     private TextView total;
     private Bundle datos;
-    public static final int REQUEST_CODE = 1;
+    private String token;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +63,7 @@ public class NotaFragment extends Fragment {
 
         datos = this.getArguments();
         idFicha = datos.getString("ficha");
+        token = datos.getString("token");
 
         listview = (ListView) root.findViewById(R.id.listaNotas);
 
@@ -117,8 +118,7 @@ public class NotaFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/nota/numeroNotas.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -142,8 +142,7 @@ public class NotaFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             baseUrl
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");

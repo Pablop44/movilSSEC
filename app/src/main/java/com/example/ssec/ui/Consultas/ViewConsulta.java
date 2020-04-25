@@ -43,6 +43,7 @@ public class ViewConsulta extends AppCompatActivity {
     private Button aplazarConsulta;
     private Button cancelarConsulta;
     public static final int REQUEST_CODE = 1;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class ViewConsulta extends AppCompatActivity {
 
         Intent intent = getIntent();
         idConsulta = intent.getStringExtra("id");
+        token = intent.getStringExtra("token");
         getDatosFicha();
 
     }
@@ -123,8 +125,7 @@ public class ViewConsulta extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/view/"+idConsulta+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("GET");
@@ -147,8 +148,7 @@ public class ViewConsulta extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/editarConsulta/.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");

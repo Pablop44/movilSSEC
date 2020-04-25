@@ -34,7 +34,7 @@ public class activityInicio extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private String username;
-    private String password;
+    private String token;
     private String idFicha;
     private PerfilFragment perfilFragment;
     private Ficha ficha;
@@ -50,7 +50,7 @@ public class activityInicio extends AppCompatActivity {
         b = getIntent().getExtras();
 
         username = b.getString("usuario");
-        password = b.getString("password");
+        token = b.getString("token");
         idFicha = b.getString("ficha");
 
         getFicha();
@@ -206,8 +206,7 @@ public class activityInicio extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/user/logout.json"
-                            , username
-                            , password
+                            , token
                     );
 
             AsyncTask<Void, Void, String> execute = new activityInicio.ExecuteNetworkOperation(apiAuthenticationClient);
@@ -258,8 +257,7 @@ public class activityInicio extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/ficha/viewPaciente/"+idFicha+".json"
-                            , username
-                            , password
+                            , token
                     );
 
             AsyncTask<Void, Void, String> execute = new activityInicio.ExecuteNetworkOperationGetFicha(apiAuthenticationClient);

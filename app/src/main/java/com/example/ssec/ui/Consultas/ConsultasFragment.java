@@ -56,6 +56,7 @@ public class ConsultasFragment extends Fragment {
     private TextView total;
     private Gson gson;
     private Bundle datos;
+    private String token;
     public static final int REQUEST_CODE = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -67,6 +68,7 @@ public class ConsultasFragment extends Fragment {
 
         datos = this.getArguments();
         idFicha = datos.getString("ficha");
+        token = datos.getString("token");
 
         max = (TextView) root.findViewById(R.id.max);
 
@@ -109,6 +111,7 @@ public class ConsultasFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddConsulta.class);
+                intent.putExtra("token", token);
                 startActivityForResult(intent , REQUEST_CODE);
             }
         });
@@ -119,6 +122,7 @@ public class ConsultasFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ViewConsulta.class);
                 Consulta consulta = (Consulta) parent.getItemAtPosition(position);
                 intent.putExtra("id", consulta.getId());
+                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
@@ -150,8 +154,7 @@ public class ConsultasFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/consultaFicha.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -173,8 +176,7 @@ public class ConsultasFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/numeroConsultas.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");

@@ -52,6 +52,7 @@ public class AddInformeMigranas extends AppCompatActivity {
     HashMap<String, String> atributos;
     private String idFicha;
     private Intent intent;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class AddInformeMigranas extends AppCompatActivity {
         intent = getIntent();
         Bundle extras = intent.getExtras();
         idFicha = extras.getString("id");
+        token = extras.getString("token");
 
         spinner_frecuencia = (Spinner) findViewById(R.id.spinner_frecuencia);
         spinner_duracion = (Spinner) findViewById(R.id.spinner_duracion);
@@ -209,8 +211,7 @@ public class AddInformeMigranas extends AppCompatActivity {
                 ApiAuthenticationClient apiAuthenticationClient =
                         new ApiAuthenticationClient(
                                 "http://10.0.2.2:8765/migranas/add.json"
-                                , ""
-                                , ""
+                                , token
                         );
 
                 apiAuthenticationClient.setHttpMethod("POST");
@@ -280,8 +281,7 @@ public class AddInformeMigranas extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/factores/add.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -340,8 +340,7 @@ public class AddInformeMigranas extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/sintomas/add.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");

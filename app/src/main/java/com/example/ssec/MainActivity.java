@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                             new ApiAuthenticationClient(
                                     baseUrl
                                     , ""
-                                    , ""
                             );
 
                     apiAuthenticationClient.setHttpMethod("POST");
@@ -164,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("naciemiento", userRegistered.getNacimiento());
         bundle.putString("rol", userRegistered.getRol());
         bundle.putString("ficha", userRegistered.getFicha());
+        bundle.putString("token", userRegistered.getToken());
 
         Intent intent = new Intent(this, activityInicio.class);
         intent.putExtras(bundle);

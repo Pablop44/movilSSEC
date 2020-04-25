@@ -53,6 +53,7 @@ public class InformeAsmaFragment extends Fragment {
     private TextView min;
     public static final int REQUEST_CODE = 1;
     private Cubierto cubierto;
+    private String token;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class InformeAsmaFragment extends Fragment {
         total = (TextView) root.findViewById(R.id.total);
 
         idFicha = datos.getString("ficha");
+        token = datos.getString("token");
 
         max = (TextView) root.findViewById(R.id.max);
 
@@ -113,6 +115,7 @@ public class InformeAsmaFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), AddInformeAsma.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("id", idFicha);
+                    bundle.putString("token", token);
                     intent.putExtras(bundle);
                     startActivityForResult(intent , REQUEST_CODE);
                 }
@@ -125,6 +128,7 @@ public class InformeAsmaFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ViewInformeAsma.class);
                 InformeAsma informeAsma = (InformeAsma) parent.getItemAtPosition(position);
                 intent.putExtra("id", informeAsma.getId());
+                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
@@ -158,8 +162,7 @@ public class InformeAsmaFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/asma/asmaFichas.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -198,8 +201,7 @@ public class InformeAsmaFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/asma/numeroInformesAsma.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -218,8 +220,7 @@ public class InformeAsmaFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/asma/getCubierto/"+idFicha+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             AsyncTask<Void, Void, String> execute = new InformeAsmaFragment.ExecuteNetworkOperationGetCubierto(apiAuthenticationClient);

@@ -54,6 +54,7 @@ public class InformeDiabetesFragment extends Fragment {
     private TextView min;
     public static final int REQUEST_CODE = 1;
     private Cubierto cubierto;
+    private String token;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class InformeDiabetesFragment extends Fragment {
         datos = this.getArguments();
 
         idFicha = datos.getString("ficha");
+        token = datos.getString("token");
 
         listview = (ListView) root.findViewById(R.id.listaInformesDiabetes);
 
@@ -112,6 +114,7 @@ public class InformeDiabetesFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), AddInformeDiabetes.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("id", idFicha);
+                    bundle.putString("token", token);
                     intent.putExtras(bundle);
                     startActivityForResult(intent , REQUEST_CODE);
                 }
@@ -124,6 +127,7 @@ public class InformeDiabetesFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ViewInformeDiabetes.class);
                 InformeDiabetes informeDiabetes = (InformeDiabetes) parent.getItemAtPosition(position);
                 intent.putExtra("id", informeDiabetes.getId());
+                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
@@ -158,8 +162,7 @@ public class InformeDiabetesFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/diabetes/diabetesFichas.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -181,8 +184,7 @@ public class InformeDiabetesFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/diabetes/numeroInformesDiabetes.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -218,8 +220,7 @@ public class InformeDiabetesFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/diabetes/getCubierto/"+idFicha+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             AsyncTask<Void, Void, String> execute = new InformeDiabetesFragment.ExecuteNetworkOperationGetCubierto(apiAuthenticationClient);

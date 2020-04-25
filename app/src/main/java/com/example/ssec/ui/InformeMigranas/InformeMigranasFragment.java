@@ -55,6 +55,7 @@ public class InformeMigranasFragment extends Fragment {
     private TextView min;
     public static final int REQUEST_CODE = 1;
     private Cubierto cubierto;
+    private String token;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class InformeMigranasFragment extends Fragment {
         datos = this.getArguments();
 
         idFicha = datos.getString("ficha");
+        token = datos.getString("token");
 
         listview = (ListView) root.findViewById(R.id.listaInformesMigranas);
 
@@ -115,6 +117,7 @@ public class InformeMigranasFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), AddInformeMigranas.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("id", idFicha);
+                    bundle.putString("token", token);
                     intent.putExtras(bundle);
                     startActivityForResult(intent , REQUEST_CODE);
                 }
@@ -127,6 +130,7 @@ public class InformeMigranasFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ViewInformeMigranas.class);
                 InformeMigranas informeMigranas = (InformeMigranas) parent.getItemAtPosition(position);
                 intent.putExtra("id", informeMigranas.getId());
+                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
@@ -162,8 +166,7 @@ public class InformeMigranasFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/migranas/migranasFichas.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -185,8 +188,7 @@ public class InformeMigranasFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/migranas/numeroInformesMigranas.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -263,8 +265,7 @@ public class InformeMigranasFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/migranas/getCubierto/"+idFicha+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             AsyncTask<Void, Void, String> execute = new InformeMigranasFragment.ExecuteNetworkOperationGetCubierto(apiAuthenticationClient);

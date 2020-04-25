@@ -40,6 +40,7 @@ public class PerfilFragment extends Fragment {
     private TextView valuefechaNacimiento;
     private Button button_editar;
     private Button button_desactivarCuenta;
+    private String token;
     public static final int REQUEST_CODE = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,6 +50,7 @@ public class PerfilFragment extends Fragment {
 
         datos = this.getArguments();
         idUser = datos.getString("id");
+        token = datos.getString("token");
 
         valuedni =(TextView) root.findViewById(R.id.valuedni);
         valueusername =(TextView) root.findViewById(R.id.valueusername);
@@ -68,6 +70,7 @@ public class PerfilFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), EditUser.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("id", idUser);
+                bundle.putString("token", token);
                 intent.putExtras(bundle);
                 startActivityForResult(intent , REQUEST_CODE);
             }
@@ -132,8 +135,7 @@ public class PerfilFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/user/view/"+idUser+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             AsyncTask<Void, Void, String> execute = new PerfilFragment.ExecuteNetworkOperation(apiAuthenticationClient);
@@ -185,8 +187,7 @@ public class PerfilFragment extends Fragment {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/cuenta/desactivar/"+idUser+".json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             AsyncTask<Void, Void, String> execute = new PerfilFragment.ExecuteNetworkOperationDesactivar(apiAuthenticationClient);

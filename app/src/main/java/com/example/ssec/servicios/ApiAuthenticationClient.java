@@ -26,8 +26,7 @@ import java.util.Map;
     public class ApiAuthenticationClient {
 
         private String baseUrl;
-        private String username;
-        private String password;
+        private String token;
         private String urlResource;
         private String httpMethod; // GET, POST, PUT, DELETE
         private String urlPath;
@@ -36,16 +35,9 @@ import java.util.Map;
         private HashMap<String, String> parameters;
         private Map<String, List<String>> headerFields;
 
-        /**
-         *
-         * @param baseUrl String
-         * @param username String
-         * @param password String
-         */
-        public ApiAuthenticationClient(String  baseUrl, String username, String password) {
+        public ApiAuthenticationClient(String  baseUrl, String token) {
             setBaseUrl(baseUrl);
-            this.username = username;
-            this.password = password;
+            this.token = token;
             this.urlResource = "";
             this.urlPath = "";
             this.httpMethod = "GET";
@@ -160,8 +152,7 @@ import java.util.Map;
         public ApiAuthenticationClient clearAll() {
             parameters.clear();
             baseUrl = "";
-            this.username = "";
-            this.password = "";
+            this.token = "";
             this.urlResource = "";
             this.urlPath = "";
             this.httpMethod = "";
@@ -238,15 +229,10 @@ import java.util.Map;
 
                 URL url = new URL(urlString.toString());
 
-                String text = username + ":" + password;
-
-                byte[] data = text.getBytes("UTF-8");
-
-                String encoding = Base64.encodeToString(data, Base64.DEFAULT);
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod(httpMethod);
-                connection.setRequestProperty("Authorization", "Basic " + encoding);
+                connection.setRequestProperty("Authorization", "Bearer " + token);
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setRequestProperty("Content-Type", "text/plain");
 

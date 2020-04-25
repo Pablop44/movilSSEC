@@ -50,6 +50,7 @@ public class AddConsulta extends AppCompatActivity {
     private String motivo;
     private Intent intent;
     private String idConsulta;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,9 @@ public class AddConsulta extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        Intent intent = getIntent();
+        token = intent.getStringExtra("token");
 
 
         editText_fechaConsulta = (EditText) findViewById(R.id.editText_fechaConsulta);
@@ -187,8 +191,7 @@ public class AddConsulta extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/editarConsulta/.json"
-                            , ""
-                            , ""
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -214,8 +217,7 @@ public class AddConsulta extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/getHorasPaciente.json"
-                            , "pablo"
-                            , "pablo"
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
@@ -242,8 +244,7 @@ public class AddConsulta extends AppCompatActivity {
             ApiAuthenticationClient apiAuthenticationClient =
                     new ApiAuthenticationClient(
                             "http://10.0.2.2:8765/consulta/add.json"
-                            , "pablo"
-                            , "pablo"
+                            , token
                     );
 
             apiAuthenticationClient.setHttpMethod("POST");
