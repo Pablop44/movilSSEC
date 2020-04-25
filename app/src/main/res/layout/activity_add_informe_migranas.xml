@@ -258,7 +258,7 @@
                 android:id="@+id/Afasia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/SíntomasDisautonomicos"
+                android:layout_below="@+id/SintomasDisautonomicos"
                 android:text="Afasia" />
             <CheckBox
                 android:id="@+id/Confusion_crisisComiciales_fiebre"
