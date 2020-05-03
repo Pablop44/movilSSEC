@@ -66,6 +66,7 @@ public class ViewConsulta extends AppCompatActivity {
                 Intent intent = new Intent(ViewConsulta.this, AddConsulta.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("id", idConsulta);
+                bundle.putString("token", token);
                 intent.putExtras(bundle);
                 startActivityForResult(intent , REQUEST_CODE);
             }
@@ -278,9 +279,8 @@ public class ViewConsulta extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            consultaAver = new Gson().fromJson(datos, Consulta.class);
+            getDatosFicha();
             Toast.makeText(getApplicationContext(), "Se ha cancelado con éxito", Toast.LENGTH_LONG).show();
-            actualizarDatos();
         }
     }
 }

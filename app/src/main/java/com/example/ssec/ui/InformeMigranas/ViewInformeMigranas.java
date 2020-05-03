@@ -54,7 +54,7 @@ public class ViewInformeMigranas extends AppCompatActivity {
         duracion = (TextView) findViewById(R.id.valueDuracion);
         horario = (TextView) findViewById(R.id.valueHorario);
         finalizacion = (TextView) findViewById(R.id.valueFinalizacion);
-        tipoEpisodio = (TextView) findViewById(R.id.tipoEpisodio);
+        tipoEpisodio = (TextView) findViewById(R.id.valuetipoEpisodio);
         intensidad = (TextView) findViewById(R.id.valueIntensidad);
         limitaciones = (TextView) findViewById(R.id.valueLimitaciones);
         despiertoNoche = (TextView) findViewById(R.id.valueDespiertoNoche);

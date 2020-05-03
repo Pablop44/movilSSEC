@@ -296,7 +296,6 @@ public class AddConsulta extends AppCompatActivity {
 
             mAdapter = new CustomAdapterHoras(AddConsulta.this, listaHoras);
             listViewHoras.setAdapter(mAdapter);
-
         }
     }
 
