@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,20 +15,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.ssec.aux.DatePickerFragment;
-import com.example.ssec.models.User;
 import com.example.ssec.servicios.ApiAuthenticationClient;
-import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -193,6 +186,24 @@ public class registerActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "La fecha de nacimiento es incorrecta", Toast.LENGTH_LONG).show();
             return false;
         }else{
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+            Calendar c = Calendar.getInstance();
+
+            Date date = null;
+            try {
+                date = sdf.parse(nacimiento);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if(c.getTime().compareTo(date) < 0){
+                Toast.makeText(getApplicationContext(), "La fecha es incorrecta", Toast.LENGTH_LONG).show();
+                editText_nacimiento.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+                return false;
+            }else{
+                editText_nacimiento.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
+            }
             String[] valores = nacimiento.split("-");
             String nacimientoFinal = valores[2] + "-" + valores[1] + "-" + valores[0];
             atributos.put("nacimiento", nacimientoFinal);
@@ -281,7 +292,27 @@ public class registerActivity extends AppCompatActivity {
 
                 // +1 because January is zero
                 final String selectedDate = separador + day + separador1 + (month + 1) + "-" + year;
-                editText_nacimiento.setText(selectedDate);
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+                Calendar c = Calendar.getInstance();
+
+                Date date = null;
+                try {
+                    date = sdf.parse(selectedDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                if(c.getTime().compareTo(date) < 0){
+                    editText_nacimiento.setText(selectedDate);
+                    editText_nacimiento.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+                }else{
+                    editText_nacimiento.setText(selectedDate);
+                    editText_nacimiento.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_ATOP);
+                }
+
             }
         });
 
@@ -341,7 +372,7 @@ public class registerActivity extends AppCompatActivity {
 
             }else {
 
-                Toast.makeText(getApplicationContext(), isValidCredentials, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error al crear el usuario, comprueba los datos", Toast.LENGTH_LONG).show();
                 findViewById(R.id.loadingPanel).setVisibility(View.INVISIBLE);
 
             }
