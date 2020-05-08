@@ -7,9 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -203,7 +205,7 @@ import java.util.Map;
 
                 it.remove(); // avoids a ConcurrentModificationException
             }
-            return new String(jsonParam.toString().getBytes(), "UTF-8");
+            return jsonParam.toString();
         }
 
         /**
@@ -248,7 +250,11 @@ import java.util.Map;
 
                     try {
                         DataOutputStream writer = new DataOutputStream(connection.getOutputStream());
-                        writer.writeBytes(payload);
+                        //writer.writeBytes(payload);
+
+                        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(writer, "UTF-8"));
+                        bufferedWriter.write(payload);
+                        bufferedWriter.close();
 
                         headerFields = connection.getHeaderFields();
 
