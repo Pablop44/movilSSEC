@@ -6,28 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.ssec.R;
-import com.example.ssec.adapters.CustomAdapterConsulta;
 import com.example.ssec.models.Consulta;
-import com.example.ssec.models.User;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class ViewConsulta extends AppCompatActivity {
 
@@ -123,15 +114,15 @@ public class ViewConsulta extends AppCompatActivity {
 
     public void getDatosFicha(){
         try {
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/consulta/view/"+idConsulta+".json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("GET");
+            apiService.setHttpMethod("GET");
 
-            AsyncTask<Void, Void, String> execute = new ViewConsulta.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new ViewConsulta.ExecuteNetworkOperation(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -146,16 +137,16 @@ public class ViewConsulta extends AppCompatActivity {
         try {
 
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/consulta/editarConsulta/.json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("POST");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new ViewConsulta.ExecuteNetworkOperationCancelar(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new ViewConsulta.ExecuteNetworkOperationCancelar(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -207,14 +198,14 @@ public class ViewConsulta extends AppCompatActivity {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datos;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -226,7 +217,7 @@ public class ViewConsulta extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
 
-                datos = apiAuthenticationClient.execute();
+                datos = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -248,14 +239,14 @@ public class ViewConsulta extends AppCompatActivity {
 
     public class ExecuteNetworkOperationCancelar extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datos;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationCancelar(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationCancelar(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -267,7 +258,7 @@ public class ViewConsulta extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
 
-                datos = apiAuthenticationClient.execute();
+                datos = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();

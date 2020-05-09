@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.ssec.R;
 import com.example.ssec.models.InformeMigranas;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -208,16 +208,16 @@ public class AddInformeMigranas extends AppCompatActivity {
         if(validarDatos()){
             try {
 
-                ApiAuthenticationClient apiAuthenticationClient =
-                        new ApiAuthenticationClient(
+                ApiService apiService =
+                        new ApiService(
                                 "http://10.0.2.2:8765/migranas/add.json"
                                 , token
                         );
 
-                apiAuthenticationClient.setHttpMethod("POST");
-                apiAuthenticationClient.setParameters(atributos);
+                apiService.setHttpMethod("POST");
+                apiService.setParameters(atributos);
 
-                AsyncTask<Void, Void, String> execute = new AddInformeMigranas.ExecuteNetworkOperationInforme(apiAuthenticationClient);
+                AsyncTask<Void, Void, String> execute = new AddInformeMigranas.ExecuteNetworkOperationInforme(apiService);
                 execute.execute();
 
             } catch (Exception ex) {
@@ -227,14 +227,14 @@ public class AddInformeMigranas extends AppCompatActivity {
 
     public class ExecuteNetworkOperationInforme extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datos;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationInforme(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationInforme(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -246,7 +246,7 @@ public class AddInformeMigranas extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
 
-                datos = apiAuthenticationClient.execute();
+                datos = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -278,16 +278,16 @@ public class AddInformeMigranas extends AppCompatActivity {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/factores/add.json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("POST");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new AddInformeMigranas.ExecuteNetworkOperationFactor(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new AddInformeMigranas.ExecuteNetworkOperationFactor(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -296,14 +296,14 @@ public class AddInformeMigranas extends AppCompatActivity {
 
     public class ExecuteNetworkOperationFactor extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datosCubierto;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationFactor(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationFactor(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -315,7 +315,7 @@ public class AddInformeMigranas extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
 
-                datosCubierto = apiAuthenticationClient.execute();
+                datosCubierto = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -337,16 +337,16 @@ public class AddInformeMigranas extends AppCompatActivity {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/sintomas/add.json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("POST");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new AddInformeMigranas.ExecuteNetworkOperationSintoma(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new AddInformeMigranas.ExecuteNetworkOperationSintoma(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -355,14 +355,14 @@ public class AddInformeMigranas extends AppCompatActivity {
 
     public class ExecuteNetworkOperationSintoma extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datosCubierto;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationSintoma(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationSintoma(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -374,7 +374,7 @@ public class AddInformeMigranas extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
 
-                datosCubierto = apiAuthenticationClient.execute();
+                datosCubierto = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();

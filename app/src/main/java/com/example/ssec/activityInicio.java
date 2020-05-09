@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.ssec.models.Enfermedad;
 import com.example.ssec.models.Ficha;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 import com.example.ssec.ui.Perfil.PerfilFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
@@ -203,13 +203,13 @@ public class activityInicio extends AppCompatActivity {
     public void requestLogout() {
 
         try {
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/user/logout.json"
                             , token
                     );
 
-            AsyncTask<Void, Void, String> execute = new activityInicio.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new activityInicio.ExecuteNetworkOperation(apiService);
             execute.execute();
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "Error en el cierre de sesión", Toast.LENGTH_LONG).show();
@@ -219,14 +219,14 @@ public class activityInicio extends AppCompatActivity {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String isValidCredentials;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -237,7 +237,7 @@ public class activityInicio extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                isValidCredentials = apiAuthenticationClient.execute();
+                isValidCredentials = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -254,13 +254,13 @@ public class activityInicio extends AppCompatActivity {
 
     public void getFicha(){
         try {
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/ficha/viewPaciente/"+idFicha+".json"
                             , token
                     );
 
-            AsyncTask<Void, Void, String> execute = new activityInicio.ExecuteNetworkOperationGetFicha(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new activityInicio.ExecuteNetworkOperationGetFicha(apiService);
             execute.execute();
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "Error en el acceso a datos", Toast.LENGTH_LONG).show();
@@ -270,14 +270,14 @@ public class activityInicio extends AppCompatActivity {
 
     public class ExecuteNetworkOperationGetFicha extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datosFicha;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationGetFicha(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationGetFicha(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -288,7 +288,7 @@ public class activityInicio extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                datosFicha = apiAuthenticationClient.execute();
+                datosFicha = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }

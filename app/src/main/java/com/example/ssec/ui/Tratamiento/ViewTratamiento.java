@@ -5,19 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ssec.R;
 import com.example.ssec.adapters.CustomAdapterMedicamento;
-import com.example.ssec.adapters.CustomAdapterTratamiento;
-import com.example.ssec.models.Consulta;
 import com.example.ssec.models.Medicamento;
 import com.example.ssec.models.Tratamiento;
-import com.example.ssec.servicios.ApiAuthenticationClient;
-import com.example.ssec.ui.Consultas.ViewConsulta;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,8 +20,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class ViewTratamiento extends AppCompatActivity {
 
@@ -84,16 +77,16 @@ public class ViewTratamiento extends AppCompatActivity {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/tratamiento/viewPaciente/"+idTratamiento+".json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("GET");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("GET");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new ViewTratamiento.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new ViewTratamiento.ExecuteNetworkOperation(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -102,14 +95,14 @@ public class ViewTratamiento extends AppCompatActivity {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datos;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -121,7 +114,7 @@ public class ViewTratamiento extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
 
-                datos = apiAuthenticationClient.execute();
+                datos = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();

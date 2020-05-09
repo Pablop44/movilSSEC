@@ -22,7 +22,7 @@ import com.example.ssec.R;
 import com.example.ssec.models.Factor;
 import com.example.ssec.models.InformeMigranas;
 import com.example.ssec.models.Sintoma;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 
 import java.util.Iterator;
@@ -102,15 +102,15 @@ public class ViewInformeMigranas extends AppCompatActivity {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/migranas/view/"+idInforme+".json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("GET");
+            apiService.setHttpMethod("GET");
 
-            AsyncTask<Void, Void, String> execute = new ViewInformeMigranas.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new ViewInformeMigranas.ExecuteNetworkOperation(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -225,14 +225,14 @@ public class ViewInformeMigranas extends AppCompatActivity {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datos;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -244,7 +244,7 @@ public class ViewInformeMigranas extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
 
-                datos = apiAuthenticationClient.execute();
+                datos = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();

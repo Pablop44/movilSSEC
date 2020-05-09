@@ -15,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ssec.R;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 
 import java.util.HashMap;
 
@@ -167,16 +167,16 @@ public class AddInformeAsma extends AppCompatActivity {
         if(validarDatos()){
             try {
 
-                ApiAuthenticationClient apiAuthenticationClient =
-                        new ApiAuthenticationClient(
+                ApiService apiService =
+                        new ApiService(
                                 "http://10.0.2.2:8765/asma/add.json"
                                 , token
                         );
 
-                apiAuthenticationClient.setHttpMethod("POST");
-                apiAuthenticationClient.setParameters(atributos);
+                apiService.setHttpMethod("POST");
+                apiService.setParameters(atributos);
 
-                AsyncTask<Void, Void, String> execute = new AddInformeAsma.ExecuteNetworkOperationInforme(apiAuthenticationClient);
+                AsyncTask<Void, Void, String> execute = new AddInformeAsma.ExecuteNetworkOperationInforme(apiService);
                 execute.execute();
 
             } catch (Exception ex) {
@@ -186,14 +186,14 @@ public class AddInformeAsma extends AppCompatActivity {
 
     public class ExecuteNetworkOperationInforme extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datos;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationInforme(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationInforme(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -205,7 +205,7 @@ public class AddInformeAsma extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
 
-                datos = apiAuthenticationClient.execute();
+                datos = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();

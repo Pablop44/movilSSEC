@@ -17,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ssec.aux.DatePickerFragment;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -231,16 +231,16 @@ public class registerActivity extends AppCompatActivity {
         if(validarDatos()) {
             try {
 
-                ApiAuthenticationClient apiAuthenticationClient =
-                        new ApiAuthenticationClient(
+                ApiService apiService =
+                        new ApiService(
                                 baseUrl
                                 , ""
                         );
 
-                apiAuthenticationClient.setHttpMethod("POST");
-                apiAuthenticationClient.setParameters(atributos);
+                apiService.setHttpMethod("POST");
+                apiService.setParameters(atributos);
 
-                AsyncTask<Void, Void, String> execute = new registerActivity.ExecuteNetworkOperation(apiAuthenticationClient);
+                AsyncTask<Void, Void, String> execute = new registerActivity.ExecuteNetworkOperation(apiService);
                 execute.execute();
             } catch (Exception ex) {
                 Toast.makeText(getApplicationContext(), "Fallo al registrarse", Toast.LENGTH_LONG).show();
@@ -321,14 +321,14 @@ public class registerActivity extends AppCompatActivity {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String isValidCredentials;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -342,7 +342,7 @@ public class registerActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                isValidCredentials = apiAuthenticationClient.execute();
+                isValidCredentials = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }

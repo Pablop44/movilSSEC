@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.ssec.R;
 import com.example.ssec.aux.DatePickerFragment;
 import com.example.ssec.models.User;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -229,16 +229,16 @@ public class EditUser extends AppCompatActivity {
         if(validarDatos()){
             try {
 
-                ApiAuthenticationClient apiAuthenticationClient =
-                        new ApiAuthenticationClient(
+                ApiService apiService =
+                        new ApiService(
                                 "http://10.0.2.2:8765/user/editarUser.json"
                                 , token
                         );
 
-                apiAuthenticationClient.setHttpMethod("POST");
-                apiAuthenticationClient.setParameters(atributos);
+                apiService.setHttpMethod("POST");
+                apiService.setParameters(atributos);
 
-                AsyncTask<Void, Void, String> execute = new EditUser.ExecuteNetworkOperationEditar(apiAuthenticationClient);
+                AsyncTask<Void, Void, String> execute = new EditUser.ExecuteNetworkOperationEditar(apiService);
                 execute.execute();
 
             } catch (Exception ex) {
@@ -295,13 +295,13 @@ public class EditUser extends AppCompatActivity {
     public void getDatosUser() {
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/user/view/"+idUser+".json"
                             , token
                     );
 
-            AsyncTask<Void, Void, String> execute = new EditUser.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new EditUser.ExecuteNetworkOperation(apiService);
             execute.execute();
         } catch (Exception ex) {
         }
@@ -310,14 +310,14 @@ public class EditUser extends AppCompatActivity {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datosUser;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -328,7 +328,7 @@ public class EditUser extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                datosUser = apiAuthenticationClient.execute();
+                datosUser = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -346,14 +346,14 @@ public class EditUser extends AppCompatActivity {
 
     public class ExecuteNetworkOperationEditar extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datos;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationEditar(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationEditar(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -364,7 +364,7 @@ public class EditUser extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                datos = apiAuthenticationClient.execute();
+                datos = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }

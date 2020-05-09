@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 
 import com.example.ssec.models.User;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -60,16 +60,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    ApiAuthenticationClient apiAuthenticationClient =
-                            new ApiAuthenticationClient(
+                    ApiService apiService =
+                            new ApiService(
                                     baseUrl
                                     , ""
                             );
 
-                    apiAuthenticationClient.setHttpMethod("POST");
-                    apiAuthenticationClient.setParameters(atributos);
+                    apiService.setHttpMethod("POST");
+                    apiService.setParameters(atributos);
 
-                    AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
+                    AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiService);
                     execute.execute();
                 } catch (Exception ex) {
                     Toast.makeText(getApplicationContext(), "Error en el Login", Toast.LENGTH_LONG).show();
@@ -87,14 +87,14 @@ public class MainActivity extends AppCompatActivity {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String isValidCredentials;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                isValidCredentials = apiAuthenticationClient.execute();
+                isValidCredentials = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }

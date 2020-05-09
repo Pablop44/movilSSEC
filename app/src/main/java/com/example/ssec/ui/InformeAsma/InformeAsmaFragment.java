@@ -25,7 +25,7 @@ import com.example.ssec.adapters.CustomAdapterInforme;
 import com.example.ssec.models.Cubierto;
 import com.example.ssec.models.InformeAsma;
 import com.example.ssec.models.Numero;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -159,16 +159,16 @@ public class InformeAsmaFragment extends Fragment {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/asma/asmaFichas.json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("POST");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new InformeAsmaFragment.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new InformeAsmaFragment.ExecuteNetworkOperation(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -198,16 +198,16 @@ public class InformeAsmaFragment extends Fragment {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/asma/numeroInformesAsma.json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("POST");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new InformeAsmaFragment.ExecuteNetworkOperationNumeros(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new InformeAsmaFragment.ExecuteNetworkOperationNumeros(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -217,13 +217,13 @@ public class InformeAsmaFragment extends Fragment {
     public void getCubierto(){
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/asma/getCubierto/"+idFicha+".json"
                             , token
                     );
 
-            AsyncTask<Void, Void, String> execute = new InformeAsmaFragment.ExecuteNetworkOperationGetCubierto(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new InformeAsmaFragment.ExecuteNetworkOperationGetCubierto(apiService);
             execute.execute();
         } catch (Exception ex) {
         }
@@ -260,6 +260,9 @@ public class InformeAsmaFragment extends Fragment {
         int j = 0;
         j = (Integer.parseInt(currentPage) * Integer.parseInt(pageSize))+1;
         min.setText(Integer.toString(j));
+        if(totalNumero.equals("0")){
+            min.setText("0");
+        }
 
         if( 0 > j-8){
             DrawableCompat.setTint(drawablePrevious2, Color.rgb(203,203,203));
@@ -272,14 +275,14 @@ public class InformeAsmaFragment extends Fragment {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datosInformes;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -290,7 +293,7 @@ public class InformeAsmaFragment extends Fragment {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                datosInformes = apiAuthenticationClient.execute();
+                datosInformes = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -311,14 +314,14 @@ public class InformeAsmaFragment extends Fragment {
 
     public class ExecuteNetworkOperationNumeros extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String numeroInformesAsma;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationNumeros(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationNumeros(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -330,7 +333,7 @@ public class InformeAsmaFragment extends Fragment {
         protected String doInBackground(Void... params) {
             try {
 
-                numeroInformesAsma = apiAuthenticationClient.execute();
+                numeroInformesAsma = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -352,14 +355,14 @@ public class InformeAsmaFragment extends Fragment {
 
     public class ExecuteNetworkOperationGetCubierto extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datosCubierto;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationGetCubierto(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationGetCubierto(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -371,7 +374,7 @@ public class InformeAsmaFragment extends Fragment {
         protected String doInBackground(Void... params) {
             try {
 
-                datosCubierto = apiAuthenticationClient.execute();
+                datosCubierto = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();

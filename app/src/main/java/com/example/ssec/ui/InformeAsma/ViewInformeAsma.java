@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.example.ssec.R;
 import com.example.ssec.models.InformeAsma;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 
 public class ViewInformeAsma extends AppCompatActivity {
@@ -95,15 +94,15 @@ public class ViewInformeAsma extends AppCompatActivity {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/asma/view/"+idInforme+".json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("GET");
+            apiService.setHttpMethod("GET");
 
-            AsyncTask<Void, Void, String> execute = new ViewInformeAsma.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new ViewInformeAsma.ExecuteNetworkOperation(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -132,14 +131,14 @@ public class ViewInformeAsma extends AppCompatActivity {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datos;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -151,7 +150,7 @@ public class ViewInformeAsma extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
 
-                datos = apiAuthenticationClient.execute();
+                datos = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();

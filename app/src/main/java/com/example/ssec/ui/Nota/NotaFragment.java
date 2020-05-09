@@ -10,23 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.ssec.R;
-import com.example.ssec.adapters.CustomAdapterConsulta;
 import com.example.ssec.adapters.CustomAdapterNota;
-import com.example.ssec.models.Consulta;
 import com.example.ssec.models.Nota;
 import com.example.ssec.models.Numero;
-import com.example.ssec.servicios.ApiAuthenticationClient;
-import com.example.ssec.ui.Consultas.ConsultasFragment;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -115,16 +108,16 @@ public class NotaFragment extends Fragment {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/nota/numeroNotas.json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("POST");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new NotaFragment.ExecuteNetworkOperationNumeros(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new NotaFragment.ExecuteNetworkOperationNumeros(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -139,16 +132,16 @@ public class NotaFragment extends Fragment {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             baseUrl
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("POST");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new NotaFragment.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new NotaFragment.ExecuteNetworkOperation(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -186,6 +179,9 @@ public class NotaFragment extends Fragment {
         int j = 0;
         j = (Integer.parseInt(currentPage) * Integer.parseInt(pageSize))+1;
         min.setText(Integer.toString(j));
+        if(totalNumero.equals("0")){
+            min.setText("0");
+        }
 
         if( 0 > j-4){
             DrawableCompat.setTint(drawablePrevious2, Color.rgb(203,203,203));
@@ -199,14 +195,14 @@ public class NotaFragment extends Fragment {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String notas;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -217,7 +213,7 @@ public class NotaFragment extends Fragment {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                notas = apiAuthenticationClient.execute();
+                notas = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -238,14 +234,14 @@ public class NotaFragment extends Fragment {
 
     public class ExecuteNetworkOperationNumeros extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String numeroNotas;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationNumeros(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationNumeros(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -257,7 +253,7 @@ public class NotaFragment extends Fragment {
         protected String doInBackground(Void... params) {
             try {
 
-                numeroNotas = apiAuthenticationClient.execute();
+                numeroNotas = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();

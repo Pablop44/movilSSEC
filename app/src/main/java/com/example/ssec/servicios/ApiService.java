@@ -1,8 +1,6 @@
 package com.example.ssec.servicios;
 
 
-import android.util.Base64;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +9,6 @@ import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -25,7 +22,7 @@ import java.util.Map;
 
 
 
-    public class ApiAuthenticationClient {
+    public class ApiService {
 
         private String baseUrl;
         private String token;
@@ -37,7 +34,7 @@ import java.util.Map;
         private HashMap<String, String> parameters;
         private Map<String, List<String>> headerFields;
 
-        public ApiAuthenticationClient(String  baseUrl, String token) {
+        public ApiService(String  baseUrl, String token) {
             setBaseUrl(baseUrl);
             this.token = token;
             this.urlResource = "";
@@ -56,7 +53,7 @@ import java.util.Map;
          * @param baseUrl the root part of the URL
          * @return this
          */
-        public ApiAuthenticationClient setBaseUrl(String baseUrl) {
+        public ApiService setBaseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
             return this;
         }
@@ -66,7 +63,7 @@ import java.util.Map;
          * @param urlResource http://base_url.com/--&gt;URL_RESOURCE&lt;--/url_path
          * @return this
          */
-        public ApiAuthenticationClient setUrlResource(String urlResource) {
+        public ApiService setUrlResource(String urlResource) {
             this.urlResource = urlResource;
             return this;
         }
@@ -77,7 +74,7 @@ import java.util.Map;
          * @param urlPath http://base_url.com/resource/--&gt;URL_PATH&lt;--
          * @return this
          */
-        public final ApiAuthenticationClient setUrlPath(String urlPath) {
+        public final ApiService setUrlPath(String urlPath) {
             this.urlPath = urlPath;
             return this;
         }
@@ -87,7 +84,7 @@ import java.util.Map;
          * GET, PUT, POST, or DELETE
          * @return this
          */
-        public ApiAuthenticationClient setHttpMethod(String httpMethod) {
+        public ApiService setHttpMethod(String httpMethod) {
             this.httpMethod = httpMethod;
             return this;
         }
@@ -113,7 +110,7 @@ import java.util.Map;
          * @param parameters
          * @return this
          */
-        public ApiAuthenticationClient setParameters(HashMap<String, String> parameters) {
+        public ApiService setParameters(HashMap<String, String> parameters) {
             this.parameters = parameters;
             return this;
         }
@@ -124,7 +121,7 @@ import java.util.Map;
          * @param value the value of the parameter
          * @return this
          */
-        public ApiAuthenticationClient setParameter(String key, String value) {
+        public ApiService setParameter(String key, String value) {
             this.parameters.put(key, value);
             return this;
         }
@@ -133,7 +130,7 @@ import java.util.Map;
          * Delete all parameters that are set for the Rest API call.
          * @return this
          */
-        public ApiAuthenticationClient clearParameters() {
+        public ApiService clearParameters() {
             this.parameters.clear();
             return this;
         }
@@ -142,7 +139,7 @@ import java.util.Map;
          * Remove a specified parameter
          * @param key the name of the parameter to remove
          */
-        public ApiAuthenticationClient removeParameter(String key) {
+        public ApiService removeParameter(String key) {
             this.parameters.remove(key);
             return this;
         }
@@ -151,7 +148,7 @@ import java.util.Map;
          * Deletes all values used to make Rest API calls.
          * @return this
          */
-        public ApiAuthenticationClient clearAll() {
+        public ApiService clearAll() {
             parameters.clear();
             baseUrl = "";
             this.token = "";

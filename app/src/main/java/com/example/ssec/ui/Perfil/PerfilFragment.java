@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.example.ssec.MainActivity;
 import com.example.ssec.R;
 import com.example.ssec.models.User;
-import com.example.ssec.servicios.ApiAuthenticationClient;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 
 import static android.app.Activity.RESULT_OK;
@@ -132,13 +132,13 @@ public class PerfilFragment extends Fragment {
     public void getDatosUser() {
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/user/view/"+idUser+".json"
                             , token
                     );
 
-            AsyncTask<Void, Void, String> execute = new PerfilFragment.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new PerfilFragment.ExecuteNetworkOperation(apiService);
             execute.execute();
         } catch (Exception ex) {
         }
@@ -146,14 +146,14 @@ public class PerfilFragment extends Fragment {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datosUser;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -164,7 +164,7 @@ public class PerfilFragment extends Fragment {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                datosUser = apiAuthenticationClient.execute();
+                datosUser = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -184,13 +184,13 @@ public class PerfilFragment extends Fragment {
     public void desactivarCuenta() {
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/cuenta/desactivar/"+idUser+".json"
                             , token
                     );
 
-            AsyncTask<Void, Void, String> execute = new PerfilFragment.ExecuteNetworkOperationDesactivar(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new PerfilFragment.ExecuteNetworkOperationDesactivar(apiService);
             execute.execute();
         } catch (Exception ex) {
         }
@@ -198,14 +198,14 @@ public class PerfilFragment extends Fragment {
 
     public class ExecuteNetworkOperationDesactivar extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datos;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationDesactivar(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationDesactivar(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -216,7 +216,7 @@ public class PerfilFragment extends Fragment {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                datos = apiAuthenticationClient.execute();
+                datos = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }

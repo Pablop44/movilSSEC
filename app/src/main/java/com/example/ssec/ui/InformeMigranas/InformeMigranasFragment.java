@@ -25,8 +25,7 @@ import com.example.ssec.adapters.CustomAdapterInforme;
 import com.example.ssec.models.Cubierto;
 import com.example.ssec.models.InformeMigranas;
 import com.example.ssec.models.Numero;
-import com.example.ssec.servicios.ApiAuthenticationClient;
-import com.example.ssec.ui.Consultas.AddConsulta;
+import com.example.ssec.servicios.ApiService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -163,16 +162,16 @@ public class InformeMigranasFragment extends Fragment {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/migranas/migranasFichas.json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("POST");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new InformeMigranasFragment.ExecuteNetworkOperation(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new InformeMigranasFragment.ExecuteNetworkOperation(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -185,16 +184,16 @@ public class InformeMigranasFragment extends Fragment {
 
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/migranas/numeroInformesMigranas.json"
                             , token
                     );
 
-            apiAuthenticationClient.setHttpMethod("POST");
-            apiAuthenticationClient.setParameters(atributos);
+            apiService.setHttpMethod("POST");
+            apiService.setParameters(atributos);
 
-            AsyncTask<Void, Void, String> execute = new InformeMigranasFragment.ExecuteNetworkOperationNumeros(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new InformeMigranasFragment.ExecuteNetworkOperationNumeros(apiService);
             execute.execute();
 
         } catch (Exception ex) {
@@ -249,6 +248,9 @@ public class InformeMigranasFragment extends Fragment {
         int j = 0;
         j = (Integer.parseInt(currentPage) * Integer.parseInt(pageSize))+1;
         min.setText(Integer.toString(j));
+        if(totalNumero.equals("0")){
+            min.setText("0");
+        }
 
         if( 0 > j-8){
             DrawableCompat.setTint(drawablePrevious2, Color.rgb(203,203,203));
@@ -262,13 +264,13 @@ public class InformeMigranasFragment extends Fragment {
     public void getCubierto(){
         try {
 
-            ApiAuthenticationClient apiAuthenticationClient =
-                    new ApiAuthenticationClient(
+            ApiService apiService =
+                    new ApiService(
                             "http://10.0.2.2:8765/migranas/getCubierto/"+idFicha+".json"
                             , token
                     );
 
-            AsyncTask<Void, Void, String> execute = new InformeMigranasFragment.ExecuteNetworkOperationGetCubierto(apiAuthenticationClient);
+            AsyncTask<Void, Void, String> execute = new InformeMigranasFragment.ExecuteNetworkOperationGetCubierto(apiService);
             execute.execute();
         } catch (Exception ex) {
         }
@@ -276,14 +278,14 @@ public class InformeMigranasFragment extends Fragment {
 
     public class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datosInformes;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperation(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -294,7 +296,7 @@ public class InformeMigranasFragment extends Fragment {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                datosInformes = apiAuthenticationClient.execute();
+                datosInformes = apiService.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -315,14 +317,14 @@ public class InformeMigranasFragment extends Fragment {
 
     public class ExecuteNetworkOperationNumeros extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String numeroInformesAsma;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationNumeros(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationNumeros(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -334,7 +336,7 @@ public class InformeMigranasFragment extends Fragment {
         protected String doInBackground(Void... params) {
             try {
 
-                numeroInformesAsma = apiAuthenticationClient.execute();
+                numeroInformesAsma = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -356,14 +358,14 @@ public class InformeMigranasFragment extends Fragment {
 
     public class ExecuteNetworkOperationGetCubierto extends AsyncTask<Void, Void, String> {
 
-        private ApiAuthenticationClient apiAuthenticationClient;
+        private ApiService apiService;
         private String datosCubierto;
 
         /**
          * Overload the constructor to pass objects to this class.
          */
-        public ExecuteNetworkOperationGetCubierto(ApiAuthenticationClient apiAuthenticationClient) {
-            this.apiAuthenticationClient = apiAuthenticationClient;
+        public ExecuteNetworkOperationGetCubierto(ApiService apiService) {
+            this.apiService = apiService;
         }
 
         @Override
@@ -375,7 +377,7 @@ public class InformeMigranasFragment extends Fragment {
         protected String doInBackground(Void... params) {
             try {
 
-                datosCubierto = apiAuthenticationClient.execute();
+                datosCubierto = apiService.execute();
 
             } catch (Exception e) {
                 e.printStackTrace();
